@@ -14,7 +14,7 @@ from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBrea
 ROOT=Path(__file__).resolve().parents[1]; ASSETS=ROOT/"assets"
 ASSETS.mkdir(exist_ok=True)
 DATA=json.loads((ROOT/"data/guide.json").read_text("utf-8"))
-CAPITOL_SRC="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/United_States_Capitol_-_west_front_edit.jpg/1280px-United_States_Capitol_-_west_front_edit.jpg"
+CAPITOL_SRC="https://images.unsplash.com/photo-1730888515663-5058024f2e60?auto=format&fit=crop&w=1800&q=85"
 CAPITOL_ORIG="https://upload.wikimedia.org/wikipedia/commons/0/0e/United_States_Capitol_-_west_front_edit.jpg"
 SITE="https://ebcnewington.github.io/legacy-dc-guide/"
 TEAL=colors.HexColor("#044F56");INK=colors.HexColor("#232323");GOLD=colors.HexColor("#FFAE05")
@@ -33,6 +33,9 @@ def get_photo():
         except Exception as e:errors.append(str(e))
     raise RuntimeError("Unable to download public-domain Capitol photo: "+ "; ".join(errors))
 def write_images():
+    if all((ASSETS/name).exists() for name in ("capitol-hero.jpg","icon-192.png","icon-512.png")):
+        print("Using locally stored Capitol photo and icons")
+        return
     im=get_photo()
     # Keep the Capitol dome visible in all crops.
     hero=ImageOps.fit(im,(1680,900),method=PILImage.Resampling.LANCZOS,centering=(.5,.42))
