@@ -1,61 +1,582 @@
 {
   "meta": {
-    "name": "Legacy Group Washington, D.C. Guide",
+    "name": "Washington Legacy Tour",
     "title": "Washington, D.C.",
-    "subtitle": "Your travel companion",
-    "datesLabel": "November 2026",
-    "welcome": "Everything you need for the trip, right at your fingertips.",
-    "status": "PREVIEW — The detailed itinerary and group contact information have not been supplied yet. This is not the confirmed trip schedule.",
+    "subtitle": "November 9–12, 2026",
+    "datesLabel": "November 9–12, 2026",
+    "welcome": "Four days of history, fellowship, and unforgettable places. Keep the schedule, locations, and helpful details close at hand.",
     "timezone": "America/New_York",
     "updated": "2026-11-08",
     "heroImage": "assets/capitol-hero.jpg",
-    "heroFocus": "center 48%"
+    "heroFocus": "center 45%",
+    "status": "Schedule subject to changes. Check with Ashlee or Pastor Rob for the latest bus meeting instructions."
   },
-  "announcements": [],
-  "itinerary": [],
+  "announcements": [
+    {
+      "title": "Please read before departure",
+      "message": "Monday bus departure: 10:00 a.m. from Emmanuel Baptist Church; park in the rear lot. Dress in layers and carry a photo ID. Tuesday evening's monument tour may be chilly."
+    },
+    {
+      "title": "Wednesday pickup location not yet final",
+      "message": "The 300 block of L’Enfant Plaza SW has been identified as a possible pickup location. It is NOT confirmed. Follow Ashlee and Pastor Rob's day-of instructions."
+    }
+  ],
+  "itinerary": [
+    {
+      "date": "2026-11-09",
+      "label": "Mon · Nov 9",
+      "heading": "Travel & National Harbor",
+      "items": [
+        {
+          "time": "10:00 AM",
+          "title": "Depart Emmanuel Baptist Church",
+          "location": "Emmanuel Baptist Church, Newington, Connecticut",
+          "address": "Emmanuel Baptist Church, Newington, CT",
+          "description": "Meet for charter-bus departure. Travelers may leave cars in the rear parking lot.",
+          "type": "transport",
+          "important": true
+        },
+        {
+          "time": "En route",
+          "title": "Travel and comfort stops",
+          "description": "Two rest stops are planned. A restroom is available on the charter bus. Dinner arrangements are to be determined.",
+          "type": "transport"
+        },
+        {
+          "time": "7:00 PM (est.)",
+          "title": "National Harbor area arrival",
+          "location": "National Harbor, Maryland",
+          "address": "National Harbor, MD",
+          "description": "Estimated arrival only; traffic may affect timing.",
+          "type": "arrival",
+          "tentative": true
+        },
+        {
+          "time": "9:00 PM (est.)",
+          "title": "Hotel check-in",
+          "location": "National Harbor",
+          "description": "Check in at your assigned hotel: AC Hotel National Harbor or Residence Inn National Harbor. Dinner on your own or en route.",
+          "type": "hotel",
+          "tentative": true
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "label": "Tue · Nov 10",
+      "heading": "Mount Vernon & evening monuments",
+      "items": [
+        {
+          "time": "8:00 AM",
+          "title": "Breakfast on your own",
+          "description": "Breakfast arrangements are your choice.",
+          "type": "meal"
+        },
+        {
+          "time": "9:30 AM",
+          "title": "Depart for Mount Vernon",
+          "location": "National Harbor hotels",
+          "type": "transport"
+        },
+        {
+          "time": "10:00 AM",
+          "title": "Explore Mount Vernon",
+          "location": "George Washington's Mount Vernon",
+          "address": "3200 Mount Vernon Memorial Hwy, Mount Vernon, VA 22121",
+          "website": "https://www.mountvernon.org/plan-your-visit",
+          "description": "Visit the estate and historic grounds. Lunch on site at a restaurant or quick-service location. Allow time for restrooms at the orientation and museum facilities.",
+          "placeId": "mount-vernon"
+        },
+        {
+          "time": "12:10 / 12:15 / 12:20 PM",
+          "title": "Reserved mansion tour groups",
+          "location": "Mount Vernon Mansion",
+          "description": "Reserved tours are divided into groups of 20, 20, and 15 at 12:10, 12:15, and 12:20 p.m. Follow your leader's group assignment.",
+          "placeId": "mount-vernon",
+          "important": true
+        },
+        {
+          "time": "3:00 PM",
+          "title": "Return to hotels",
+          "description": "Depart Mount Vernon for National Harbor. Dinner on your own near the hotels.",
+          "type": "transport"
+        },
+        {
+          "time": "6:30 PM",
+          "title": "Depart for evening monument tour",
+          "description": "Scheduled sights: Washington Monument, World War II Memorial, Lincoln Memorial, Vietnam Veterans Memorial, Korean War Veterans Memorial, Jefferson Memorial, and Reflecting Pool. Specific stop order and time at each site are not given.",
+          "placeId": "national-mall",
+          "important": true
+        },
+        {
+          "time": "10:00 PM",
+          "title": "Return to hotels",
+          "description": "Scheduled return from the evening monument tour.",
+          "type": "transport"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "label": "Wed · Nov 11",
+      "heading": "Museum of the Bible & Capitol Hill",
+      "items": [
+        {
+          "time": "9:00 AM",
+          "title": "Depart for Museum of the Bible",
+          "type": "transport"
+        },
+        {
+          "time": "9:30 AM",
+          "title": "Museum of the Bible",
+          "location": "Museum of the Bible",
+          "address": "400 4th St SW, Washington, DC 20024",
+          "website": "https://www.museumofthebible.org/plan-your-visit",
+          "description": "Explore the museum. Lunch on your own. Toilets are located on visitor floors; family restrooms are on B1 and floors 2–6.",
+          "placeId": "museum-bible"
+        },
+        {
+          "time": "1:00 PM",
+          "title": "Self-guided National Mall & Capitol time",
+          "location": "National Mall / Capitol area",
+          "address": "National Mall, Washington, DC",
+          "description": "Independent exploration. Use the official map and plan ahead for walking, restrooms, and the group's next bus meeting instructions.",
+          "placeId": "national-mall"
+        },
+        {
+          "time": "3:00 PM",
+          "title": "Depart for hotel break",
+          "description": "Return to National Harbor for rest and dinner on your own.",
+          "type": "transport"
+        },
+        {
+          "time": "5:30 PM",
+          "title": "Depart for the Capitol",
+          "type": "transport"
+        },
+        {
+          "time": "6:00 PM",
+          "title": "Capitol security screening",
+          "location": "U.S. Capitol area",
+          "address": "First St SE, Washington, DC 20004",
+          "description": "Allow additional time for security. Follow the group leader's instructions.",
+          "placeId": "capitol"
+        },
+        {
+          "time": "7:00 PM",
+          "title": "Capitol Hill Worship Service",
+          "location": "Capitol Hill",
+          "description": "Group worship service as listed in the schedule.",
+          "placeId": "capitol",
+          "important": true
+        },
+        {
+          "time": "9:00 PM",
+          "title": "Depart Capitol for hotels",
+          "type": "transport"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "label": "Thu · Nov 12",
+      "heading": "Arlington & homeward travel",
+      "items": [
+        {
+          "time": "8:00 AM",
+          "title": "Hotel checkout & depart for Arlington",
+          "location": "National Harbor",
+          "description": "Be packed and ready for hotel checkout and bus departure.",
+          "type": "hotel",
+          "important": true
+        },
+        {
+          "time": "Morning",
+          "title": "Arlington National Cemetery",
+          "location": "Arlington National Cemetery",
+          "address": "1 Memorial Ave, Arlington, VA 22211",
+          "website": "https://www.arlingtoncemetery.mil/Visit",
+          "description": "Explore on foot or consider the narrated tram tour. The schedule estimates tram tickets at approximately $22; availability, group arrangements, and exact pricing remain unconfirmed. Restrooms and tram tickets are at the Welcome Center.",
+          "placeId": "arlington"
+        },
+        {
+          "time": "11:00 AM",
+          "title": "Depart for Connecticut",
+          "description": "Return trip with two planned rest stops. Lunch and dinner stops are to be determined; evening arrival is expected.",
+          "type": "transport",
+          "important": true
+        }
+      ]
+    }
+  ],
   "places": [
+    {
+      "id": "national-harbor",
+      "name": "National Harbor",
+      "tag": "Hotels · dining · waterfront",
+      "summary": "Our home base across the Potomac, with walkable dining and waterfront attractions.",
+      "detail": "Both hotels are on Waterfront Street. Use the official waterfront directory to find restaurants, public restrooms, and walking routes.",
+      "address": "Waterfront St, National Harbor, MD 20745",
+      "website": "https://www.nationalharbor.com/",
+      "mapUrl": "https://www.nationalharbor.com/about/maps/",
+      "dining": "Options in the supplied companion include Silver Diner, Succotash, McCormick & Schmick's, and Grace's Mandarin. Check each restaurant's hours before visiting.",
+      "restrooms": "Hotel guest facilities and public restrooms around the waterfront (verify access)."
+    },
+    {
+      "id": "mount-vernon",
+      "name": "George Washington's Mount Vernon",
+      "tag": "Tuesday · estate & mansion",
+      "summary": "Explore George Washington's estate, its mansion, gardens, and the lives of people who worked there.",
+      "detail": "Reserved mansion tours begin at 12:10, 12:15, and 12:20 p.m. with assigned groups. The estate includes exhibits about enslaved people and its working farms.",
+      "address": "3200 Mount Vernon Memorial Hwy, Mount Vernon, VA 22121",
+      "website": "https://www.mountvernon.org/plan-your-visit",
+      "mapUrl": "https://www.mountvernon.org/plan-your-visit",
+      "dining": "Mount Vernon Inn Restaurant and The General's Canteen. Confirm opening hours.",
+      "restrooms": "Ford Orientation Center, museum/education center, historic area, Mount Vernon Inn Restaurant.",
+      "accessibility": "The grounds include varied terrain; contact the trip leader about mobility assistance.",
+      "audio": [
+        {
+          "title": "Official Mount Vernon Audio Tour",
+          "url": "https://www.mountvernon.org/plan-your-visit/audio-tour",
+          "cost": "Included with admission",
+          "description": "29 narrated stops; the estate also offers a mobile listening option.",
+          "type": "official"
+        }
+      ]
+    },
+    {
+      "id": "washington-monument",
+      "name": "Washington Monument",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "A marble obelisk honoring George Washington, completed in 1884.",
+      "detail": "The monument's stone changes color partway up because construction resumed years later with marble from other quarries.",
+      "address": "2 15th St NW, Washington, DC 20024",
+      "website": "https://www.nps.gov/wamo/",
+      "restrooms": "Washington Monument Lodge / Sylvan Theater area; hours may vary."
+    },
+    {
+      "id": "wwii",
+      "name": "World War II Memorial",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "A memorial honoring more than 16 million Americans who served during World War II.",
+      "detail": "The Freedom Wall contains 4,048 gold stars, each representing approximately 100 Americans who died in military service.",
+      "address": "1750 Independence Ave SW, Washington, DC 20024",
+      "website": "https://www.nps.gov/wwii/"
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln Memorial",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "A solemn memorial to Abraham Lincoln, with grand columns and engraved speeches.",
+      "detail": "Its 36 exterior columns represent the states at the time of Lincoln's death. The steps were the setting of historic civil-rights events.",
+      "address": "2 Lincoln Memorial Cir NW, Washington, DC 20002",
+      "website": "https://www.nps.gov/linc/",
+      "restrooms": "Use the public facilities near the memorial when open; evening access may be limited.",
+      "audio": [
+        {
+          "title": "Official Lincoln Memorial Audio-Described Guide",
+          "url": "https://www.nps.gov/linc/learn/publications.htm",
+          "cost": "Free",
+          "description": "National Park Service audio guide to the memorial and its history, divided into sections.",
+          "type": "official"
+        }
+      ]
+    },
+    {
+      "id": "vietnam",
+      "name": "Vietnam Veterans Memorial",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "A black granite wall inscribed with the names of Americans who died or remain missing.",
+      "detail": "Names are arranged in the order of casualties, with the chronology beginning and ending near the middle of the memorial.",
+      "address": "5 Henry Bacon Dr NW, Washington, DC 20002",
+      "website": "https://www.nps.gov/vive/"
+    },
+    {
+      "id": "korea",
+      "name": "Korean War Veterans Memorial",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "Nineteen figures of soldiers on patrol honor those who served in the Korean War.",
+      "detail": "Their reflection in the polished wall creates the visual effect of 38 figures, a reference to the 38th parallel.",
+      "address": "900 Ohio Dr SW, Washington, DC 20024",
+      "website": "https://www.nps.gov/kowa/"
+    },
+    {
+      "id": "jefferson",
+      "name": "Thomas Jefferson Memorial",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "A domed memorial overlooking the Tidal Basin, honoring the third president.",
+      "detail": "The original statue was plaster; the present bronze statue replaced it in 1947.",
+      "address": "16 E Basin Dr SW, Washington, DC 20242",
+      "website": "https://www.nps.gov/thje/",
+      "restrooms": "Public facilities at the memorial may have limited hours."
+    },
+    {
+      "id": "reflecting-pool",
+      "name": "Lincoln Memorial Reflecting Pool",
+      "tag": "Tuesday evening · scheduled sight",
+      "summary": "The long reflecting pool provides an iconic view toward the Washington Monument.",
+      "detail": "Construction of the pool was not complete when the Lincoln Memorial was dedicated in 1922.",
+      "address": "Lincoln Memorial Reflecting Pool, Washington, DC",
+      "website": "https://www.nps.gov/places/000/lincoln-memorial-reflecting-pool.htm"
+    },
+    {
+      "id": "museum-bible",
+      "name": "Museum of the Bible",
+      "tag": "Wednesday · morning visit",
+      "summary": "An immersive museum examining the Bible's history, stories, and cultural influence.",
+      "detail": "The museum is at 400 4th Street SW. The current general-admission offering includes regular galleries and selected experiences; group arrangements may differ.",
+      "address": "400 4th St SW, Washington, DC 20024",
+      "website": "https://www.museumofthebible.org/plan-your-visit",
+      "dining": "The museum's Manna restaurant and Milk + Honey café are options listed in the supplied companion; also see L’Enfant Plaza.",
+      "restrooms": "Restrooms on all visitor floors; family restrooms on B1 and floors 2–6.",
+      "accessibility": "Wheelchairs may be available at Coat Check on a first-come, first-served basis."
+    },
+    {
+      "id": "national-mall",
+      "name": "National Mall & Memorial Parks",
+      "tag": "Tuesday and Wednesday · sightseeing",
+      "summary": "The city's monumental landscape, from Lincoln Memorial to Capitol Hill.",
+      "detail": "Distances between major sites are significant; plan restrooms and short breaks. For navigation use the official National Park Service map.",
+      "address": "National Mall, Washington, DC",
+      "website": "https://www.nps.gov/nama/",
+      "mapUrl": "https://www.nps.gov/nama/planyourvisit/maps.htm",
+      "restrooms": "Smithsonian museums during their operating hours and designated public comfort stations.",
+      "audio": [
+        {
+          "title": "NPS App · Interpretive Audio & Accessibility",
+          "url": "https://www.nps.gov/nama/planyourvisit/get-the-app.htm",
+          "cost": "Free app",
+          "description": "Official National Park Service app with park details, offline content, and some audio descriptions. Not a single continuous narrated tour.",
+          "type": "official"
+        },
+        {
+          "title": "Washington DC Monuments Narrated Walk",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "Free app with in-app purchase",
+          "description": "GPS audio stories; App Store listing shows 4.6/5 from 75 ratings at research time. iPhone/iPad.",
+          "type": "rated"
+        },
+        {
+          "title": "Action Tour Guide — Monument Audio Walk",
+          "url": "https://washington.org/find-dc-listings/action-tour-guide",
+          "cost": "Paid tour",
+          "description": "GPS-triggered narrated tour, offline support; separate app required. TripAdvisor listing has a 4.8/5 rating from nine reviews at research time.",
+          "type": "rated"
+        }
+      ]
+    },
     {
       "id": "capitol",
       "name": "United States Capitol",
-      "tag": "Featured landmark · Not a confirmed trip stop",
-      "summary": "The home of the United States Congress, crowned by its familiar dome.",
-      "detail": "Visit the official Capitol Visitor Center website for current visitor information. Only activities listed in the itinerary are confirmed group stops.",
-      "address": "First Street SE, Washington, DC 20515",
+      "tag": "Wednesday · worship service",
+      "summary": "The meeting place of Congress, crowned by its cast-iron dome and Statue of Freedom.",
+      "detail": "The dome was completed in January 1866. The bronze Statue of Freedom on top is 19 feet, 6 inches tall.",
+      "address": "First St SE, Washington, DC 20004",
       "website": "https://www.visitthecapitol.gov/",
-      "phone": "",
-      "accessibility": "See the official Capitol Visitor Center site for accessibility details.",
-      "walking": "Walking requirements will be added if this is a scheduled stop.",
-      "image": "assets/capitol-hero.jpg",
-      "imageFocus": "center 45%"
+      "accessibility": "Security screening is scheduled for 6:00 p.m. Wednesday; specific entrance instructions must come from trip leaders."
+    },
+    {
+      "id": "arlington",
+      "name": "Arlington National Cemetery",
+      "tag": "Thursday · morning visit",
+      "summary": "A place of remembrance and military honors overlooking Washington.",
+      "detail": "The Tomb of the Unknown Soldier has been guarded continuously since 1937. The cemetery is hilly and expansive; the authorized, live-narrated tram is an alternative to longer walks.",
+      "address": "1 Memorial Ave, Arlington, VA 22211",
+      "website": "https://www.arlingtoncemetery.mil/Visit",
+      "restrooms": "Welcome Center and near the Tomb of the Unknown Soldier; use facilities before a tram tour.",
+      "dining": "Food is not permitted in the cemetery or Welcome Center. Plan meals afterward.",
+      "accessibility": "The cemetery covers extensive terrain with hills. Ask about the authorized interpretive tram.",
+      "audio": [
+        {
+          "title": "Arlington Interpretive Tram (live narration)",
+          "url": "https://www.arlingtoncemetery.mil/Visit/Tours-and-Groups",
+          "cost": "Paid tram · trip estimate approximately $22",
+          "description": "Live-narrated, hop-on/hop-off tram, not a voice recording. Price and arrangements should be confirmed.",
+          "type": "live"
+        }
+      ]
     }
   ],
   "essentials": {
-    "contacts": [],
-    "hotel": null,
-    "bus": null,
-    "tips": [
+    "contacts": [
       {
-        "title": "Comfortable shoes",
-        "description": "Washington landmarks can involve more walking than they first appear."
+        "name": "Ashlee Dickerson",
+        "role": "Trip coordination and accessibility",
+        "phone": "661-433-5631"
       },
       {
-        "title": "Stay informed",
-        "description": "Check the itinerary and updates during the trip for verified information."
+        "name": "Pastor Rob Brown",
+        "role": "Trip leader",
+        "phone": "317-385-6006"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "AC Hotel National Harbor",
+        "address": "156 Waterfront St, National Harbor, MD 20745",
+        "website": "https://www.marriott.com/en-us/hotels/wasar-ac-hotel-national-harbor-washington-dc-area/overview/",
+        "notes": "Hotel assignment for travelers requiring two beds (per the trip FAQ)."
+      },
+      {
+        "name": "Residence Inn National Harbor",
+        "address": "192 Waterfront St, National Harbor, MD 20745",
+        "website": "https://www.marriott.com/en-us/hotels/wasnh-residence-inn-national-harbor-washington-dc-area/overview/",
+        "notes": "Hotel assignment for travelers requiring one king bed (per the trip FAQ)."
+      }
+    ],
+    "hotel": {
+      "name": "AC Hotel National Harbor",
+      "address": "156 Waterfront St, National Harbor, MD 20745",
+      "website": "https://www.marriott.com/en-us/hotels/wasar-ac-hotel-national-harbor-washington-dc-area/overview/",
+      "notes": "Hotel assignment for travelers requiring two beds (per the trip FAQ)."
+    },
+    "bus": {
+      "name": "Charter motorcoach",
+      "address": "Emmanuel Baptist Church, Newington, CT",
+      "notes": "Monday 10:00 a.m. departure; two rest stops each way. Rear parking lot available. A restroom is on the bus."
+    },
+    "possiblePickup": {
+      "title": "Possible Wednesday bus pickup",
+      "name": "L’Enfant Plaza SW — 300 block",
+      "address": "300 block L’Enfant Plaza SW, Washington, DC",
+      "notes": "POSSIBLE LOCATION ONLY; not confirmed by the bus company. South of Independence Avenue SW and north of Frontage Road SW. Do not use this as a meeting location unless trip leaders confirm."
+    },
+    "tips": [
+      {
+        "title": "Comfortable footwear",
+        "description": "Expect walking and standing on varied surfaces. Break in shoes before departure."
+      },
+      {
+        "title": "November layers",
+        "description": "Evenings near the monuments can be cold and windy. Bring warm layers and a rain option."
+      },
+      {
+        "title": "Photo identification",
+        "description": "Carry photo ID for security screenings. Arlington may require REAL ID-compliant identification for adults."
+      },
+      {
+        "title": "Travel light",
+        "description": "Bag restrictions apply at some venues. Mount Vernon lists a 16 × 16 × 8-inch bag limit in the supplied FAQ."
       },
       {
         "title": "Emergencies",
-        "description": "For an immediate emergency, call 911."
+        "description": "For an immediate emergency, call 911. For group logistics, contact Ashlee or Pastor Rob."
       }
     ]
   },
-  "resources": [
+  "faq": [
     {
-      "label": "Washington, D.C. official visitor guide",
-      "url": "https://washington.org/"
+      "topic": "Packing and comfort",
+      "items": [
+        {
+          "q": "What should I pack?",
+          "a": "Comfortable broken-in walking shoes, layers and a jacket, a compact umbrella or poncho, day bag, phone and power bank, photo ID, medications, water bottle, and payment for meals."
+        },
+        {
+          "q": "What weather should I expect?",
+          "a": "November historical averages are around 58°F by day and 41°F overnight. These are not the actual forecast. Expect chilly, breezy evenings near monuments; check current weather before departure."
+        },
+        {
+          "q": "How much walking is involved?",
+          "a": "Walking and standing are expected at Mount Vernon, monuments, Museum of the Bible, National Mall, and Arlington. Some routes are hilly or uneven. Discuss mobility concerns with Ashlee."
+        }
+      ]
     },
     {
-      "label": "National Mall and Memorial Parks",
-      "url": "https://www.nps.gov/nama/index.htm"
+      "topic": "Travel and hotels",
+      "items": [
+        {
+          "q": "When and where does the bus depart?",
+          "a": "10:00 a.m. Monday, November 9, from Emmanuel Baptist Church. Travelers may leave cars in the rear parking lot. Two rest stops are planned."
+        },
+        {
+          "q": "Where am I staying?",
+          "a": "AC Hotel National Harbor is listed for travelers requiring double beds; Residence Inn National Harbor is listed for travelers requiring a king bed. Confirm your individual assignment with the leaders."
+        },
+        {
+          "q": "Where is the Wednesday bus pickup?",
+          "a": "The 300 block of L’Enfant Plaza SW is a likely location, south of Independence Avenue SW and north of Frontage Road SW, but it is NOT confirmed. Follow the leader's day-of instructions."
+        },
+        {
+          "q": "Are meals included?",
+          "a": "The schedule lists most meals on your own. Several travel-day meal stops remain to be determined."
+        }
+      ]
+    },
+    {
+      "topic": "Restrooms, security and access",
+      "items": [
+        {
+          "q": "Where are restrooms available?",
+          "a": "Charter bus and planned rest stops en route. At Mount Vernon: Ford Orientation Center, museum and visitor facilities. Museum of the Bible: restrooms on visitor floors. At the Mall, use open museums and designated facilities. Arlington: Welcome Center and near the Tomb of the Unknown Soldier."
+        },
+        {
+          "q": "Will there be security screening?",
+          "a": "Yes, at several sites. Travel light, allow extra time, and follow each venue's current bag and ID rules. Mount Vernon limits larger bags; Arlington prohibits food, with bottled water permitted."
+        },
+        {
+          "q": "What if I get separated from the group?",
+          "a": "Call Ashlee or Pastor Rob, follow the announced bus meeting place and time, and stay with your assigned smaller group when applicable. Do not assume a possible pickup location is confirmed."
+        }
+      ]
     }
-  ]
+  ],
+  "maps": [
+    {
+      "label": "National Harbor Waterfront District",
+      "url": "https://www.nationalharbor.com/about/maps/",
+      "description": "Hotel locations, dining, restrooms, and waterfront streets."
+    },
+    {
+      "label": "Mount Vernon visitor map",
+      "url": "https://www.mountvernon.org/plan-your-visit",
+      "description": "Mansion, orientation center, exhibits, restaurants, paths, and amenities."
+    },
+    {
+      "label": "National Mall & monuments",
+      "url": "https://www.nps.gov/nama/planyourvisit/maps.htm",
+      "description": "Official National Park Service maps for Washington landmarks."
+    },
+    {
+      "label": "Arlington National Cemetery",
+      "url": "https://www.arlingtoncemetery.mil/Explore/Welcome-Center",
+      "description": "Visitor center, official tools, tours, and accessible information."
+    },
+    {
+      "label": "Possible Wednesday bus pickup",
+      "url": "https://www.google.com/maps/search/?api=1&query=300%20block%20L%27Enfant%20Plaza%20SW%20Washington%20DC",
+      "description": "300 block of L’Enfant Plaza SW; not confirmed as a pickup location."
+    }
+  ],
+  "resources": [
+    {
+      "label": "National Harbor visitor map",
+      "url": "https://www.nationalharbor.com/about/maps/"
+    },
+    {
+      "label": "Mount Vernon visitor planning",
+      "url": "https://www.mountvernon.org/plan-your-visit"
+    },
+    {
+      "label": "National Park Service — Mall maps",
+      "url": "https://www.nps.gov/nama/planyourvisit/maps.htm"
+    },
+    {
+      "label": "Museum of the Bible — visit information",
+      "url": "https://www.museumofthebible.org/plan-your-visit"
+    },
+    {
+      "label": "Arlington Cemetery — visit information",
+      "url": "https://www.arlingtoncemetery.mil/Visit"
+    },
+    {
+      "label": "Washington DC tourism",
+      "url": "https://washington.org/"
+    }
+  ],
+  "trivia": {
+    "questionsUrl": "data/trivia.json",
+    "statsEndpoint": "",
+    "disclaimer": "This optional game is provided for general education and enjoyment. Sources reflect historical research and do not imply that Emmanuel Baptist Church endorses any organization or viewpoint. All answers link to primary-source information."
+  }
 }
