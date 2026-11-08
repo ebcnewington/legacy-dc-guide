@@ -1,5 +1,7 @@
 # Photography and image sources
 
-**United States Capitol (hero and home-screen icons)** — Architect of the Capitol (source photograph), public-domain work of the United States federal government, derived/edited by O.J. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:United_States_Capitol_-_west_front_edit.jpg (Public Domain Mark). The image is cropped and resized for use as a wide hero and app icon.
+**United States Capitol Building (website hero and home-screen icons)** — Photograph by **Benjamin Ashton**, available under the [Unsplash License](https://unsplash.com/license): https://unsplash.com/photos/a-view-of-the-united-states-capitol-building-prnhSkUDVJk. Cropped/resized for wide hero and square home-screen images. Source image: https://images.unsplash.com/photo-1730888515663-5058024f2e60.
 
-The official Emmanuel Baptist Church logo is provided by the church for ministry use; it is not licensed for unrelated redistribution. No font archives are included in the public website repository. Do not use stock imagery to portray church members or activities.
+**Fallback source** — Architect of the Capitol, Wikimedia Commons [public-domain Capitol image](https://commons.wikimedia.org/wiki/File:United_States_Capitol_-_west_front_edit.jpg). This fallback is used only if the Unsplash image is unavailable.
+
+Official Emmanuel Baptist Church logos are supplied by the church for its ministry use, not separately licensed for unrelated redistribution. No proprietary font archive is included in this public repository.
