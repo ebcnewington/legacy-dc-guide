@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "name": "Legacy Group Washington, D.C. Guide",
+    "title": "Washington, D.C.",
+    "subtitle": "Your travel companion",
+    "datesLabel": "November 2026",
+    "welcome": "Everything you need for the trip, right at your fingertips.",
+    "status": "PREVIEW — The detailed itinerary and group contact information have not been supplied yet. This is not the confirmed trip schedule.",
+    "timezone": "America/New_York",
+    "updated": "2026-11-08",
+    "heroImage": "assets/capitol-hero.jpg",
+    "heroFocus": "center 48%"
+  },
+  "announcements": [],
+  "itinerary": [],
+  "places": [
+    {
+      "id": "capitol",
+      "name": "United States Capitol",
+      "tag": "Featured landmark · Not a confirmed trip stop",
+      "summary": "The home of the United States Congress, crowned by its familiar dome.",
+      "detail": "Visit the official Capitol Visitor Center website for current visitor information. Only activities listed in the itinerary are confirmed group stops.",
+      "address": "First Street SE, Washington, DC 20515",
+      "website": "https://www.visitthecapitol.gov/",
+      "phone": "",
+      "accessibility": "See the official Capitol Visitor Center site for accessibility details.",
+      "walking": "Walking requirements will be added if this is a scheduled stop.",
+      "image": "assets/capitol-hero.jpg",
+      "imageFocus": "center 45%"
+    }
+  ],
+  "essentials": {
+    "contacts": [],
+    "hotel": null,
+    "bus": null,
+    "tips": [
+      {
+        "title": "Comfortable shoes",
+        "description": "Washington landmarks can involve more walking than they first appear."
+      },
+      {
+        "title": "Stay informed",
+        "description": "Check the itinerary and updates during the trip for verified information."
+      },
+      {
+        "title": "Emergencies",
+        "description": "For an immediate emergency, call 911."
+      }
+    ]
+  },
+  "resources": [
+    {
+      "label": "Washington, D.C. official visitor guide",
+      "url": "https://washington.org/"
+    },
+    {
+      "label": "National Mall and Memorial Parks",
+      "url": "https://www.nps.gov/nama/index.htm"
+    }
+  ]
+}
