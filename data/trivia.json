@@ -1,0 +1,546 @@
+{
+  "title": "Washington, D.C. Trivia Challenge",
+  "intro": "One fascinating question at a time. See how much you know and discover the story behind each answer.",
+  "questions": [
+    {
+      "id": "dc-001",
+      "placeId": "capitol",
+      "question": "What material is the U.S. Capitol's famous dome primarily made from?",
+      "options": [
+        "Marble",
+        "Cast iron",
+        "Copper",
+        "Granite"
+      ],
+      "correctIndex": 1,
+      "explanation": "Although it resembles stone, the dome is constructed from cast iron and was completed in 1866.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.visitthecapitol.gov/artifact/facts-about-dome"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-002",
+      "placeId": "capitol",
+      "question": "What is the name of the statue standing atop the Capitol dome?",
+      "options": [
+        "Liberty Enlightening the World",
+        "Lady Justice",
+        "Statue of Freedom",
+        "Columbia Victorious"
+      ],
+      "correctIndex": 2,
+      "explanation": "The 19½-foot bronze Statue of Freedom stands above the Capitol.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-003",
+      "placeId": "capitol",
+      "question": "How tall is the Statue of Freedom itself, without its pedestal?",
+      "options": [
+        "12 feet",
+        "19½ feet",
+        "27 feet",
+        "38 feet"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Architect of the Capitol lists the bronze statue itself at 19 feet 6 inches; the pedestal adds another 18½ feet.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-004",
+      "placeId": "capitol",
+      "question": "When was the Capitol's current iron dome finished?",
+      "options": [
+        "1800",
+        "1824",
+        "1866",
+        "1901"
+      ],
+      "correctIndex": 2,
+      "explanation": "The dome was begun in September 1855 and finished in January 1866, despite the Civil War.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.visitthecapitol.gov/artifact/facts-about-dome"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-005",
+      "placeId": "capitol",
+      "question": "About how many pounds of ironwork make up the Capitol dome?",
+      "options": [
+        "80,000",
+        "900,000",
+        "8.9 million",
+        "28 million"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Capitol Visitor Center gives a figure of 8,909,200 pounds of ironwork.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.visitthecapitol.gov/artifact/facts-about-dome"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-006",
+      "placeId": "washington-monument",
+      "question": "What unusual metal caps the very top of the Washington Monument?",
+      "options": [
+        "Silver",
+        "Aluminum",
+        "Titanium",
+        "Gold"
+      ],
+      "correctIndex": 1,
+      "explanation": "An 8.9-inch aluminum tip was placed atop the capstone in 1884, when aluminum was still costly and difficult to refine.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/articles/000/wamocap.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-007",
+      "placeId": "washington-monument",
+      "question": "About how tall is the Washington Monument?",
+      "options": [
+        "355 feet",
+        "455 feet",
+        "555 feet",
+        "655 feet"
+      ],
+      "correctIndex": 2,
+      "explanation": "The NPS measures its height at 555 feet, 5⅛ inches.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wamo/faqs.htm?mobile-app=true&theme=false"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-008",
+      "placeId": "washington-monument",
+      "question": "Why can you see different shades of stone on the Washington Monument?",
+      "options": [
+        "Lightning damage",
+        "Two major construction phases using different marble",
+        "An intentional painted stripe",
+        "A recent lighting effect"
+      ],
+      "correctIndex": 1,
+      "explanation": "Construction stopped in the 1850s and resumed later with marble from a different quarry; the stone weathered differently.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wamo/faqs.htm?mobile-app=true&theme=false"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-009",
+      "placeId": "washington-monument",
+      "question": "What do the Latin words 'Laus Deo' on the monument's aluminum cap mean?",
+      "options": [
+        "We the People",
+        "Praise be to God",
+        "Out of many, one",
+        "In God we trust"
+      ],
+      "correctIndex": 1,
+      "explanation": "The National Park Service identifies the inscription as 'Laus Deo,' or 'Praise be to God.'",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wamo/learn/historyculture/index.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-010",
+      "placeId": "lincoln",
+      "question": "How many exterior Doric columns circle the Lincoln Memorial?",
+      "options": [
+        "13",
+        "36",
+        "48",
+        "50"
+      ],
+      "correctIndex": 1,
+      "explanation": "The 36 columns represent the states in the Union when Abraham Lincoln died.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/linc/learn/historyculture/exterior-features.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-011",
+      "placeId": "lincoln",
+      "question": "In how many pieces was Lincoln's marble statue carved?",
+      "options": [
+        "1",
+        "7",
+        "28",
+        "100"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Piccirilli brothers carved the massive figure from 28 blocks of Georgia marble.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/linc/learn/historyculture/the-making-of-the-lincoln-memorial.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-012",
+      "placeId": "lincoln",
+      "question": "There are 87 steps from the Reflecting Pool to the Lincoln Memorial chamber. Was that number deliberately chosen to echo 'four score and seven'?",
+      "options": [
+        "Yes, the architect wrote that it was",
+        "No, the NPS says it appears coincidental",
+        "It was added in 1963",
+        "No one has counted them"
+      ],
+      "correctIndex": 1,
+      "explanation": "The NPS says 87 steps is a coincidence; there is no supporting evidence in the architect's plans that the number was intentionally symbolic.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/places/lincolnsteps.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-013",
+      "placeId": "lincoln",
+      "question": "Which singer performed at the Lincoln Memorial in 1939 after being denied a segregated concert venue?",
+      "options": [
+        "Ella Fitzgerald",
+        "Marian Anderson",
+        "Mahalia Jackson",
+        "Billie Holiday"
+      ],
+      "correctIndex": 1,
+      "explanation": "Marian Anderson gave a landmark open-air concert on the memorial's steps in 1939.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/places/lincolnsteps.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-014",
+      "placeId": "wwii",
+      "question": "How many gold stars appear on the World War II Memorial's Freedom Wall?",
+      "options": [
+        "1,776",
+        "4,048",
+        "5,600",
+        "16,000"
+      ],
+      "correctIndex": 1,
+      "explanation": "Each of the 4,048 gold stars represents approximately 100 Americans who died in the war.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/places/000/world-war-ii-memorial-wall-of-stars.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-015",
+      "placeId": "wwii",
+      "question": "How many granite columns form the ring around the World War II Memorial?",
+      "options": [
+        "13",
+        "36",
+        "48",
+        "56"
+      ],
+      "correctIndex": 3,
+      "explanation": "Fifty-six columns represent the states and U.S. jurisdictions represented in the war years.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/articles/ww2memorialguide.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-016",
+      "placeId": "wwii",
+      "question": "What small wartime phrase is engraved twice at the World War II Memorial?",
+      "options": [
+        "Remember Me",
+        "We Shall Return",
+        "Kilroy Was Here",
+        "V for Victory"
+      ],
+      "correctIndex": 2,
+      "explanation": "Two 'Kilroy Was Here' engravings are tucked into corners of the memorial.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/articles/ww2memorialguide.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-017",
+      "placeId": "korea",
+      "question": "How many stainless-steel soldier statues stand at the Korean War Veterans Memorial?",
+      "options": [
+        "13",
+        "19",
+        "21",
+        "38"
+      ],
+      "correctIndex": 1,
+      "explanation": "The 19 statues reflect in a dark polished wall to create the effect of 38 figures.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/kowa/learn/historyculture/on-patrol.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-018",
+      "placeId": "korea",
+      "question": "Why are the 19 Korean War statues positioned beside a reflective wall?",
+      "options": [
+        "To double their apparent number to 38",
+        "To reflect the Washington Monument",
+        "To direct visitors to Arlington",
+        "To represent 19 battles"
+      ],
+      "correctIndex": 0,
+      "explanation": "Their reflection makes 38 figures, a reference to the 38th parallel.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/kowa/learn/historyculture/on-patrol.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-019",
+      "placeId": "vietnam",
+      "question": "How are names organized on the Vietnam Veterans Memorial Wall?",
+      "options": [
+        "Alphabetically by surname",
+        "By home state",
+        "Chronologically by casualty date",
+        "By branch of service"
+      ],
+      "correctIndex": 2,
+      "explanation": "Names are arranged by date of casualty, beginning at the center and ultimately returning there.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/vive/faqs.htm?fullweb=1"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-020",
+      "placeId": "vietnam",
+      "question": "How old was Maya Lin when her design was chosen for the Vietnam Veterans Memorial?",
+      "options": [
+        "21",
+        "31",
+        "41",
+        "51"
+      ],
+      "correctIndex": 0,
+      "explanation": "Maya Lin was a 21-year-old Yale architecture student when her design won the national competition in 1981.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/teachers/classrooms/maya-lin-designing-the-vietnam-veterans-memorial-student-activity.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-021",
+      "placeId": "jefferson",
+      "question": "What was the original statue inside the Jefferson Memorial made of?",
+      "options": [
+        "Plaster",
+        "Bronze",
+        "Marble",
+        "Wood"
+      ],
+      "correctIndex": 0,
+      "explanation": "The original figure was plaster because wartime restrictions affected metal. A bronze statue replaced it in 1947.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/thje/learn/historyculture/memorialconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-022",
+      "placeId": "jefferson",
+      "question": "How tall is the bronze Thomas Jefferson statue in the Jefferson Memorial?",
+      "options": [
+        "9 feet",
+        "13 feet",
+        "19 feet",
+        "30 feet"
+      ],
+      "correctIndex": 2,
+      "explanation": "The NPS describes the bronze statue as 19 feet tall.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/thje/learn/historyculture/memorialfeatures.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-023",
+      "placeId": "arlington",
+      "question": "Since which year has the Tomb of the Unknown Soldier been guarded continuously, day and night?",
+      "options": [
+        "1864",
+        "1921",
+        "1937",
+        "1963"
+      ],
+      "correctIndex": 2,
+      "explanation": "Guards were first assigned during daylight hours in 1926; continuous 24-hour guarding began in 1937.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-024",
+      "placeId": "arlington",
+      "question": "How many steps does a Tomb Guard take on each length of the ceremonial mat?",
+      "options": [
+        "7",
+        "13",
+        "21",
+        "36"
+      ],
+      "correctIndex": 2,
+      "explanation": "The sentinel takes 21 steps and pauses for 21 seconds at points in the ritual.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-025",
+      "placeId": "arlington",
+      "question": "During November, how often is the public Changing of the Guard ceremony held at Arlington?",
+      "options": [
+        "Every 15 minutes",
+        "Every 30 minutes",
+        "Every hour",
+        "Only at noon"
+      ],
+      "correctIndex": 2,
+      "explanation": "From October 1 through March 31, the ceremony is scheduled every hour on the hour.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/Changing-of-the-Guard"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-026",
+      "placeId": "arlington",
+      "question": "Who lit the eternal flame at President John F. Kennedy's gravesite?",
+      "options": [
+        "Jacqueline Kennedy",
+        "Lyndon B. Johnson",
+        "Robert F. Kennedy",
+        "John F. Kennedy Jr."
+      ],
+      "correctIndex": 0,
+      "explanation": "Arlington's official account says Mrs. Kennedy lit the eternal flame.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/Monuments-and-Memorials/President-John-F-Kennedy-Gravesite"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-027",
+      "placeId": "mount-vernon",
+      "question": "How many farms made up the Mount Vernon estate in 1799?",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "8"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mount Vernon consisted of five farms covering about 8,000 acres.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/george-washington/slavery/slavery-at-washingtons-plantation"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-028",
+      "placeId": "mount-vernon",
+      "question": "About how many enslaved people lived at Mount Vernon in 1799?",
+      "options": [
+        "37",
+        "117",
+        "317",
+        "817"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mount Vernon's historical research documents 317 enslaved men, women, and children living on its five farms in 1799.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/george-washington/slavery/slavery-at-washingtons-plantation"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-029",
+      "placeId": "mount-vernon",
+      "question": "What year was the current Washington family tomb at Mount Vernon opened?",
+      "options": [
+        "1799",
+        "1802",
+        "1831",
+        "1865"
+      ],
+      "correctIndex": 2,
+      "explanation": "The New Tomb opened in 1831 and became the final resting place of George and Martha Washington.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/location/washington-tomb"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-030",
+      "placeId": "mount-vernon",
+      "question": "Which crop did George Washington begin emphasizing instead of tobacco in the 1760s?",
+      "options": [
+        "Coffee",
+        "Wheat",
+        "Corn",
+        "Cotton"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mount Vernon's biography notes Washington switched from tobacco to wheat as his main cash crop in the 1760s.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/george-washington/biography"
+      },
+      "verifiedOn": "2026-11-08"
+    }
+  ]
+}
