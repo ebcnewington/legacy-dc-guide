@@ -1,0 +1,4 @@
+const CACHE="ebc-legacy-dc-v2";const ASSETS=["./","./index.html","./styles.css","./app.js","./data/guide.json","./manifest.webmanifest","./assets/icon-192.png","./assets/icon-512.png","./assets/capitol-hero.jpg","./assets/ebc-primary.svg","./assets/ebc-primary-on-dark.svg","./guide-half-sheet.pdf"];
+self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
+self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(names=>Promise.all(names.filter(n=>n!==CACHE).map(n=>caches.delete(n)))).then(()=>self.clients.claim())));
+self.addEventListener("fetch",event=>{const r=event.request;if(r.method!=="GET"||new URL(r.url).origin!==self.location.origin)return;event.respondWith(fetch(r).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(r,copy))}return res}).catch(()=>caches.match(r).then(x=>x||caches.match("./index.html"))))});
