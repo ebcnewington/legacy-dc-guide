@@ -27,7 +27,7 @@
 - [x] Official maps, food/restroom guidance and destination links.
 - [x] Unconfirmed L'Enfant Plaza SW 300-block Wednesday bus pickup prominently marked POSSIBLE / NOT CONFIRMED.
 - [x] Blank lines for bus instructions and personal notes in the printed booklet.
-- [ ] Optional high-resolution 11×17 supplement using uploaded National Harbor, Mount Vernon and National Mall maps.
+- [x] Optional high-resolution 11×17 printable map supplement created from the organizer's provided NPS National Mall, Mount Vernon, National Harbor and bus-company maps. Distributed as a separate PDF attachment; not embedded in GitHub Pages yet.
 - [ ] Optionally integrate promotional postcard imagery if its crop, resolution and contrast support the brand standards.
 
 ## Guardrails
