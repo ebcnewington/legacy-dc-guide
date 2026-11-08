@@ -115,7 +115,7 @@ function finishGame(){
  game.ended=true;game.current=null;storeGame();
  let accuracy=game.answered?Math.round(game.score/game.answered*100):0;
  let avg='<p><strong>Average-player comparison:</strong> not available yet. Shared, anonymous score collection has not been connected, so we will not display a made-up average.</p>';
- $("#trivia-game").innerHTML='<div class="trivia-end"><div class="giant-icon" style="margin:0 auto 20px">'+ico("quiz")+'</div><h2>Thanks for playing!</h2><p>You've discovered a little more of Washington’s remarkable history.</p><div class="trivia-stats"><div class="stat-item"><b>'+game.score+' / '+game.answered+'</b><small>Correct answers</small></div><div class="stat-item"><b>'+accuracy+'%</b><small>Your accuracy</small></div></div>'+avg+'<button type="button" class="btn-primary" id="replay-trivia">Play a new game</button></div>';
+ $("#trivia-game").innerHTML='<div class="trivia-end"><div class="giant-icon" style="margin:0 auto 20px">'+ico("quiz")+'</div><h2>Thanks for playing!</h2><p>You have discovered a little more of Washington’s remarkable history.</p><div class="trivia-stats"><div class="stat-item"><b>'+game.score+' / '+game.answered+'</b><small>Correct answers</small></div><div class="stat-item"><b>'+accuracy+'%</b><small>Your accuracy</small></div></div>'+avg+'<button type="button" class="btn-primary" id="replay-trivia">Play a new game</button></div>';
  $("#replay-trivia").onclick=triviaStart;
 }
 async function loadTrivia(){
