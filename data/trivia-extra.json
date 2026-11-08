@@ -1,0 +1,1210 @@
+{
+  "questions": [
+    {
+      "id": "dc-031",
+      "placeId": "capitol",
+      "question": "How many sandstone Doric columns support the floor above the Capitol Crypt?",
+      "options": [
+        "24",
+        "36",
+        "40",
+        "56"
+      ],
+      "correctIndex": 2,
+      "explanation": "Forty Aquia Creek sandstone columns support the Rotunda's floor.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/crypt"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-032",
+      "placeId": "capitol",
+      "question": "Why is the room beneath the Capitol Rotunda called the Crypt?",
+      "options": [
+        "It contains a presidential burial",
+        "It resembles old church crypts",
+        "It housed a secret tunnel",
+        "It was a coal cellar"
+      ],
+      "correctIndex": 1,
+      "explanation": "Its vaulted design resembles crypts used beneath churches; no one is buried there.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/crypt"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-033",
+      "placeId": "capitol",
+      "question": "What does the white star at the center of the Capitol Crypt's floor mark?",
+      "options": [
+        "The city's highest point",
+        "The original entrance",
+        "The city's quadrant division point",
+        "The first cornerstone"
+      ],
+      "correctIndex": 2,
+      "explanation": "The central compass stone marks Washington's division into NW, NE, SW and SE.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/crypt"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-034",
+      "placeId": "capitol",
+      "question": "How many people have been buried inside the U.S. Capitol?",
+      "options": [
+        "None",
+        "Two presidents",
+        "Eleven justices",
+        "Twenty senators"
+      ],
+      "correctIndex": 0,
+      "explanation": "Congress once considered placing George and Martha Washington there, but both remain at Mount Vernon.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/crypt"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-035",
+      "placeId": "capitol",
+      "question": "Approximately how many rooms are inside the U.S. Capitol?",
+      "options": [
+        "120",
+        "540",
+        "1,500",
+        "2,400"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Architect of the Capitol counts approximately 540 rooms in the building.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-036",
+      "placeId": "capitol",
+      "question": "On what date did Congress first meet in the U.S. Capitol building?",
+      "options": [
+        "July 4, 1776",
+        "November 17, 1800",
+        "March 4, 1826",
+        "December 2, 1863"
+      ],
+      "correctIndex": 1,
+      "explanation": "Congress first met in the building on November 17, 1800.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-037",
+      "placeId": "capitol",
+      "question": "How many windows are in the Capitol's dome?",
+      "options": [
+        "36",
+        "56",
+        "108",
+        "232"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Architect of the Capitol identifies 108 windows in the dome.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-038",
+      "placeId": "capitol",
+      "question": "Who designed the Capitol's current cast-iron dome?",
+      "options": [
+        "Benjamin Henry Latrobe",
+        "Thomas U. Walter",
+        "Pierre L'Enfant",
+        "Henry Bacon"
+      ],
+      "correctIndex": 1,
+      "explanation": "Thomas U. Walter designed the dome built between 1856 and 1866.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/capitol-dome"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-039",
+      "placeId": "capitol",
+      "question": "What happened to construction of the Capitol dome during the Civil War?",
+      "options": [
+        "It stopped completely",
+        "It continued",
+        "It was dismantled",
+        "It was moved"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dome construction continued despite the outbreak of the Civil War; other extensions paused.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/capitol-dome"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-040",
+      "placeId": "capitol",
+      "question": "What famous fresco is painted inside the Capitol dome?",
+      "options": [
+        "The Apotheosis of Washington",
+        "The Last Supper",
+        "The Signing of the Constitution",
+        "The Spirit of '76"
+      ],
+      "correctIndex": 0,
+      "explanation": "Constantino Brumidi's Apotheosis of Washington rises above the Rotunda floor.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/capitol-dome"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-041",
+      "placeId": "capitol",
+      "question": "How many stars circle the helmet of the Capitol's Statue of Freedom?",
+      "options": [
+        "7",
+        "9",
+        "13",
+        "50"
+      ],
+      "correctIndex": 1,
+      "explanation": "The statue's helmet is circled by nine stars.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-042",
+      "placeId": "capitol",
+      "question": "What unusual material tips protective points on the Statue of Freedom?",
+      "options": [
+        "Gold",
+        "Platinum",
+        "Titanium",
+        "Aluminum"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ten bronze points tipped with platinum protect parts of the statue from lightning.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-043",
+      "placeId": "capitol",
+      "question": "What is on the front of the Statue of Freedom's shield?",
+      "options": [
+        "13 stripes",
+        "An eagle holding a scroll",
+        "A portrait of Washington",
+        "The scales of justice"
+      ],
+      "correctIndex": 0,
+      "explanation": "Freedom holds a shield with thirteen stripes representing the original colonies.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-044",
+      "placeId": "capitol",
+      "question": "What was removed from an early Statue of Freedom design after Jefferson Davis objected?",
+      "options": [
+        "An eagle feather",
+        "A liberty cap",
+        "A sword",
+        "A laurel wreath"
+      ],
+      "correctIndex": 1,
+      "explanation": "A liberty cap associated with emancipated slaves was removed after Jefferson Davis objected.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-045",
+      "placeId": "capitol",
+      "question": "How many major sections were used to cast the Statue of Freedom?",
+      "options": [
+        "1",
+        "3",
+        "5",
+        "13"
+      ],
+      "correctIndex": 2,
+      "explanation": "The bronze Statue of Freedom was cast in five main sections.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-046",
+      "placeId": "wwii",
+      "question": "What do wheat wreaths on the World War II Memorial's columns symbolize?",
+      "options": [
+        "Agriculture at home",
+        "Victory in Europe",
+        "Naval strength",
+        "The original 13 states"
+      ],
+      "correctIndex": 0,
+      "explanation": "Wheat represents agriculture and oak represents industrial strength.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/faqs.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-047",
+      "placeId": "wwii",
+      "question": "What do oak wreaths on World War II Memorial columns represent?",
+      "options": [
+        "National forests",
+        "Industry and manufacturing",
+        "Seapower",
+        "A military rank"
+      ],
+      "correctIndex": 1,
+      "explanation": "Oak represents industrial contribution to the war effort.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/faqs.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-048",
+      "placeId": "wwii",
+      "question": "How many bronze bas-relief panels flank the World War II Memorial entrance?",
+      "options": [
+        "8",
+        "12",
+        "24",
+        "48"
+      ],
+      "correctIndex": 2,
+      "explanation": "Twenty-four panels chronicle America's wartime service and home front.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/learn/historyculture/index.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-049",
+      "placeId": "wwii",
+      "question": "What are the World War II Memorial's two victory pavilions called?",
+      "options": [
+        "Army and Navy",
+        "Atlantic and Pacific",
+        "Europe and America",
+        "North and South"
+      ],
+      "correctIndex": 1,
+      "explanation": "They commemorate the two major theaters of the war.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/faqs.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-050",
+      "placeId": "wwii",
+      "question": "About how many individual stones make up the World War II Memorial?",
+      "options": [
+        "1,000",
+        "5,000",
+        "17,000",
+        "100,000"
+      ],
+      "correctIndex": 2,
+      "explanation": "The NPS estimates nearly 17,000 individual stones.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/faqs.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-051",
+      "placeId": "wwii",
+      "question": "When was the World War II Memorial formally dedicated?",
+      "options": [
+        "1945",
+        "1968",
+        "1982",
+        "2004"
+      ],
+      "correctIndex": 3,
+      "explanation": "It was formally dedicated Memorial Day weekend in 2004.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/learn/historyculture/index.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-052",
+      "placeId": "wwii",
+      "question": "Which detail shows how the memorial honors U.S. home-front work?",
+      "options": [
+        "A grain mill and plow",
+        "Wheat and oak wreaths",
+        "A steam locomotive",
+        "A copper torch"
+      ],
+      "correctIndex": 1,
+      "explanation": "The wheat and oak wreaths acknowledge agriculture and industry as vital to the war effort.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wwii/faqs.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-053",
+      "placeId": "lincoln",
+      "question": "How tall are the Lincoln Memorial's exterior columns?",
+      "options": [
+        "16 feet",
+        "28 feet",
+        "44 feet",
+        "60 feet"
+      ],
+      "correctIndex": 2,
+      "explanation": "The NPS measures the 36 exterior columns at 44 feet tall.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/linc/learn/historyculture/exterior-features.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-054",
+      "placeId": "lincoln",
+      "question": "How many stone 'drums' form each of the Lincoln Memorial's exterior columns?",
+      "options": [
+        "4",
+        "8",
+        "12",
+        "24"
+      ],
+      "correctIndex": 2,
+      "explanation": "Each exterior column is composed of twelve individual sections, called drums.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/linc/learn/historyculture/exterior-features.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-055",
+      "placeId": "lincoln",
+      "question": "What is written above the Lincoln Memorial's colonnade?",
+      "options": [
+        "All U.S. presidents",
+        "The 36 state names",
+        "The Constitution's preamble",
+        "The Gettysburg Address"
+      ],
+      "correctIndex": 1,
+      "explanation": "Names of 36 states and their Union admission dates appear on the exterior frieze.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/linc/learn/historyculture/exterior-features.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-056",
+      "placeId": "lincoln",
+      "question": "What year was the Lincoln Memorial dedicated?",
+      "options": [
+        "1865",
+        "1888",
+        "1922",
+        "1963"
+      ],
+      "correctIndex": 2,
+      "explanation": "The memorial was dedicated on May 30, 1922.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/linc/learn/historyculture/exterior-features.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-057",
+      "placeId": "lincoln",
+      "question": "Which architect designed the Lincoln Memorial?",
+      "options": [
+        "Henry Bacon",
+        "Thomas U. Walter",
+        "John Russell Pope",
+        "Daniel Chester French"
+      ],
+      "correctIndex": 0,
+      "explanation": "Henry Bacon designed its temple-like structure; Daniel Chester French sculpted Lincoln.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/linc/learn/historyculture/exterior-features.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-058",
+      "placeId": "lincoln",
+      "question": "How heavy is the seated Lincoln statue?",
+      "options": [
+        "17.5 tons",
+        "75 tons",
+        "175 tons",
+        "375 tons"
+      ],
+      "correctIndex": 2,
+      "explanation": "The 28-piece white Georgia marble statue weighs about 175 tons.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/linc/learn/historyculture/statue.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-059",
+      "placeId": "lincoln",
+      "question": "How tall is the seated Lincoln figure from head to foot?",
+      "options": [
+        "10 feet",
+        "19 feet",
+        "30 feet",
+        "44 feet"
+      ],
+      "correctIndex": 1,
+      "explanation": "The figure itself is 19 feet tall; a standing Lincoln at the same scale would be 28 feet tall.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/linc/learn/historyculture/statue.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-060",
+      "placeId": "lincoln",
+      "question": "What two major Lincoln speeches are carved inside the memorial?",
+      "options": [
+        "Cooper Union and Gettysburg",
+        "Gettysburg and Second Inaugural",
+        "First and Second Inaugurals",
+        "House Divided and Emancipation"
+      ],
+      "correctIndex": 1,
+      "explanation": "The interior inscriptions feature the Gettysburg Address and the Second Inaugural Address.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/linc/learn/historyculture/inscriptions.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-061",
+      "placeId": "vietnam",
+      "question": "Which way do the Vietnam Memorial's V-shaped walls point?",
+      "options": [
+        "White House and Capitol",
+        "Lincoln Memorial and Washington Monument",
+        "Arlington and Jefferson",
+        "Potomac and Capitol"
+      ],
+      "correctIndex": 1,
+      "explanation": "One arm points toward the Lincoln Memorial and the other toward the Washington Monument.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/vive/learn/historyculture/vvmoverview.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-062",
+      "placeId": "vietnam",
+      "question": "Which symbol beside a Vietnam Wall name denotes someone still missing in action?",
+      "options": [
+        "Diamond",
+        "Cross",
+        "Star",
+        "Circle"
+      ],
+      "correctIndex": 1,
+      "explanation": "A cross indicates MIA; a diamond indicates confirmed death.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/vive/learn/historyculture/vvmoverview.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-063",
+      "placeId": "vietnam",
+      "question": "How long did the initial Vietnam Wall dedication include a reading of names?",
+      "options": [
+        "12 hours",
+        "24 hours",
+        "56 hours",
+        "7 days"
+      ],
+      "correctIndex": 2,
+      "explanation": "A 56-hour reading accompanied the memorial's 1982 dedication.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/vive/learn/historyculture/vvmoverview.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-064",
+      "placeId": "vietnam",
+      "question": "What year was the Vietnam Veterans Memorial Wall dedicated?",
+      "options": [
+        "1968",
+        "1975",
+        "1982",
+        "1993"
+      ],
+      "correctIndex": 2,
+      "explanation": "The memorial was dedicated in November 1982.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/vive/learn/historyculture/vvmoverview.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-065",
+      "placeId": "vietnam",
+      "question": "What is the name of the competition-winning Vietnam Memorial designer?",
+      "options": [
+        "Maya Lin",
+        "Elaine de Kooning",
+        "Anna Hyatt Huntington",
+        "Daniel Chester French"
+      ],
+      "correctIndex": 0,
+      "explanation": "Maya Lin was a 21-year-old Yale architecture student when her design won.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/vive/learn/historyculture/vvmoverview.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-066",
+      "placeId": "jefferson",
+      "question": "How many Ionic columns form the Jefferson Memorial's circular colonnade?",
+      "options": [
+        "12",
+        "18",
+        "26",
+        "36"
+      ],
+      "correctIndex": 2,
+      "explanation": "The memorial's circular colonnade has 26 Ionic columns.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/thje/learn/historyculture/memorialfeatures.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-067",
+      "placeId": "jefferson",
+      "question": "What type of marble forms much of the Jefferson Memorial's exterior?",
+      "options": [
+        "Vermont Imperial Danby",
+        "Georgia Yule",
+        "Carrara from Italy",
+        "Seneca sandstone"
+      ],
+      "correctIndex": 0,
+      "explanation": "The memorial uses white Imperial Danby marble quarried in Vermont.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/thje/learn/historyculture/memorialfeatures.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-068",
+      "placeId": "jefferson",
+      "question": "Which president dedicated the Jefferson Memorial in 1943?",
+      "options": [
+        "Herbert Hoover",
+        "Franklin D. Roosevelt",
+        "Harry S. Truman",
+        "Dwight D. Eisenhower"
+      ],
+      "correctIndex": 1,
+      "explanation": "Franklin D. Roosevelt presided over the April 13, 1943 dedication.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/thje/learn/historyculture/memorialconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-069",
+      "placeId": "jefferson",
+      "question": "The Jefferson Memorial was dedicated on what occasion?",
+      "options": [
+        "Constitution Day",
+        "The first cherry blossom festival",
+        "Jefferson's 200th birthday",
+        "The end of World War II"
+      ],
+      "correctIndex": 2,
+      "explanation": "Its dedication fell on the 200th anniversary of Jefferson's birth.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/thje/learn/historyculture/memorialconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-070",
+      "placeId": "jefferson",
+      "question": "Who designed the Jefferson Memorial?",
+      "options": [
+        "John Russell Pope",
+        "Henry Bacon",
+        "Montgomery Meigs",
+        "Pierre L'Enfant"
+      ],
+      "correctIndex": 0,
+      "explanation": "John Russell Pope was selected to design the memorial in 1935.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/thje/learn/historyculture/memorialconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-071",
+      "placeId": "jefferson",
+      "question": "Which part of the Jefferson Memorial was replaced in bronze in 1947?",
+      "options": [
+        "The dome",
+        "The main statue",
+        "The pediment",
+        "All the columns"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bronze Jefferson statue replaced a wartime plaster figure in 1947.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://home.nps.gov/thje/learn/historyculture/memorialconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-072",
+      "placeId": "mount-vernon",
+      "question": "How many enslaved men, women and children lived at Mount Vernon in 1799?",
+      "options": [
+        "123",
+        "217",
+        "317",
+        "517"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mount Vernon's records count 317 enslaved people across its five farms in 1799.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/george-washington/slavery/plantation-structure"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-073",
+      "placeId": "mount-vernon",
+      "question": "What was George Washington's main cash crop after he shifted away from tobacco?",
+      "options": [
+        "Wheat",
+        "Cotton",
+        "Sugar",
+        "Rice"
+      ],
+      "correctIndex": 0,
+      "explanation": "Washington switched to wheat in the 1760s.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/10-facts-about-george-washingtons-mount-vernon"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-074",
+      "placeId": "mount-vernon",
+      "question": "What was the approximate peak annual whiskey output of Washington's distillery?",
+      "options": [
+        "110 gallons",
+        "1,100 gallons",
+        "11,000 gallons",
+        "110,000 gallons"
+      ],
+      "correctIndex": 2,
+      "explanation": "The distillery produced about 11,000 gallons in 1799.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-075",
+      "placeId": "mount-vernon",
+      "question": "How many enslaved workers helped distill whiskey at Mount Vernon?",
+      "options": [
+        "2",
+        "6",
+        "12",
+        "30"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mount Vernon's research names six enslaved distillers: Hanson, Peter, Nat, Daniel, James, and Timothy.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-076",
+      "placeId": "mount-vernon",
+      "question": "How many stills did Washington's distillery use at peak production?",
+      "options": [
+        "2",
+        "5",
+        "12",
+        "24"
+      ],
+      "correctIndex": 1,
+      "explanation": "The distillery operated five stills and a boiler at peak production.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-077",
+      "placeId": "mount-vernon",
+      "question": "What beverage did Washington's 1790s distillery make most often?",
+      "options": [
+        "Rum",
+        "Rye whiskey",
+        "Beer",
+        "Apple cider"
+      ],
+      "correctIndex": 1,
+      "explanation": "Its principal output was rye whiskey made with rye, corn and malted barley.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-078",
+      "placeId": "mount-vernon",
+      "question": "Was Washington's whiskey typically stored for years in charred barrels?",
+      "options": [
+        "Yes, for 10 years",
+        "Yes, for 3 years",
+        "No, it was generally sold unaged",
+        "Only in glass bottles"
+      ],
+      "correctIndex": 2,
+      "explanation": "At the time, whiskey was typically sent to market in uncharred barrels without aging.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-079",
+      "placeId": "mount-vernon",
+      "question": "What year was the newer Washington family tomb completed at Mount Vernon?",
+      "options": [
+        "1799",
+        "1805",
+        "1831",
+        "1863"
+      ],
+      "correctIndex": 2,
+      "explanation": "The New Tomb was completed in 1831.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.mountvernon.org/the-estate-gardens/10-facts-about-george-washingtons-mount-vernon"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-080",
+      "placeId": "arlington",
+      "question": "Who was the first military service member buried at Arlington in 1864?",
+      "options": [
+        "Private William Christman",
+        "General Ulysses S. Grant",
+        "Colonel John Pershing",
+        "Robert E. Lee"
+      ],
+      "correctIndex": 0,
+      "explanation": "Private William Christman was buried on May 13, 1864.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-081",
+      "placeId": "arlington",
+      "question": "How many acres did Arlington encompass when designated a military cemetery in 1864?",
+      "options": [
+        "20",
+        "200",
+        "1,100",
+        "8,000"
+      ],
+      "correctIndex": 1,
+      "explanation": "Two hundred acres were formally designated for the military cemetery.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-082",
+      "placeId": "arlington",
+      "question": "What community existed on Arlington land during and after the Civil War?",
+      "options": [
+        "Freedman's Village",
+        "Liberty City",
+        "Union Settlement",
+        "Patriot's Refuge"
+      ],
+      "correctIndex": 0,
+      "explanation": "Freedman's Village served formerly enslaved people and included homes, schools and churches.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-083",
+      "placeId": "arlington",
+      "question": "In what year did Freedman's Village at Arlington finally close?",
+      "options": [
+        "1865",
+        "1880",
+        "1900",
+        "1945"
+      ],
+      "correctIndex": 2,
+      "explanation": "The federal government closed Freedman's Village in 1900.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-084",
+      "placeId": "arlington",
+      "question": "Which two U.S. presidents are buried at Arlington National Cemetery?",
+      "options": [
+        "Washington and Jefferson",
+        "Lincoln and Grant",
+        "Taft and Kennedy",
+        "Roosevelt and Truman"
+      ],
+      "correctIndex": 2,
+      "explanation": "William Howard Taft (1930) and John F. Kennedy (1963) are buried there.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-085",
+      "placeId": "arlington",
+      "question": "How did Sergeant Edward Younger select the World War I Unknown Soldier in France?",
+      "options": [
+        "Drawing a number",
+        "Placing white roses on a casket",
+        "Choosing the oldest grave",
+        "By alphabetical order"
+      ],
+      "correctIndex": 1,
+      "explanation": "He placed a spray of white roses on one of four unidentified soldiers' caskets.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-086",
+      "placeId": "arlington",
+      "question": "Which ship brought the World War I Unknown Soldier's casket from France?",
+      "options": [
+        "USS Constitution",
+        "USS Olympia",
+        "USS Arizona",
+        "USS Missouri"
+      ],
+      "correctIndex": 1,
+      "explanation": "The USS Olympia transported the casket to Washington in 1921.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-087",
+      "placeId": "arlington",
+      "question": "What year was the large marble sarcophagus added to the Tomb of the Unknown Soldier?",
+      "options": [
+        "1921",
+        "1932",
+        "1958",
+        "1984"
+      ],
+      "correctIndex": 1,
+      "explanation": "The original tomb was a simple slab; its sarcophagus was installed in 1932.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-088",
+      "placeId": "arlington",
+      "question": "Which regiment has guarded the Tomb of the Unknown Soldier since 1948?",
+      "options": [
+        "The Old Guard, 3rd U.S. Infantry",
+        "1st Cavalry",
+        "82nd Airborne",
+        "Army Rangers"
+      ],
+      "correctIndex": 0,
+      "explanation": "The 3rd U.S. Infantry Regiment, known as the Old Guard, took over the ceremony in 1948.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-089",
+      "placeId": "arlington",
+      "question": "Who was the first U.S. president buried at Arlington?",
+      "options": [
+        "John F. Kennedy",
+        "William Howard Taft",
+        "Ulysses S. Grant",
+        "Lyndon B. Johnson"
+      ],
+      "correctIndex": 1,
+      "explanation": "William Howard Taft was buried at Arlington in 1930.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-090",
+      "placeId": "reflecting-pool",
+      "question": "Roughly how long is the Lincoln Memorial Reflecting Pool?",
+      "options": [
+        "500 feet",
+        "1,000 feet",
+        "2,028 feet",
+        "3,600 feet"
+      ],
+      "correctIndex": 2,
+      "explanation": "The pool stretches 2,028 feet between the Lincoln Memorial and the World War II Memorial.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/linc/learn/historyculture/lincoln-memorial-other-places.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-091",
+      "placeId": "reflecting-pool",
+      "question": "Approximately how much water can the Lincoln Reflecting Pool hold?",
+      "options": [
+        "67,500 gallons",
+        "675,000 gallons",
+        "6.75 million gallons",
+        "67.5 million gallons"
+      ],
+      "correctIndex": 2,
+      "explanation": "The NPS estimates almost 6,750,000 gallons.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/linc/learn/historyculture/lincoln-memorial-other-places.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-092",
+      "placeId": "washington-monument",
+      "question": "On what holiday was the Washington Monument cornerstone laid in 1848?",
+      "options": [
+        "Memorial Day",
+        "Independence Day",
+        "Thanksgiving",
+        "Washington's Birthday"
+      ],
+      "correctIndex": 1,
+      "explanation": "Its cornerstone was laid July 4, 1848.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-093",
+      "placeId": "washington-monument",
+      "question": "What happened at Washington Monument grounds during the Civil War?",
+      "options": [
+        "Cattle were kept there",
+        "The monument was demolished",
+        "A railway station was built",
+        "The monument served as a prison"
+      ],
+      "correctIndex": 0,
+      "explanation": "The unfinished monument grounds were used as a government cattle depot.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-094",
+      "placeId": "washington-monument",
+      "question": "When was the Washington Monument capstone put in place?",
+      "options": [
+        "July 4, 1848",
+        "December 6, 1884",
+        "May 29, 1922",
+        "November 11, 1931"
+      ],
+      "correctIndex": 1,
+      "explanation": "The capstone and aluminum tip were installed December 6, 1884.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-095",
+      "placeId": "korea",
+      "question": "In what year was the Korean War Veterans Memorial dedicated?",
+      "options": [
+        "1953",
+        "1975",
+        "1995",
+        "2022"
+      ],
+      "correctIndex": 2,
+      "explanation": "It was dedicated July 27, 1995, the 42nd anniversary of the armistice.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/places/000/korean-war-veterans-memorial.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-096",
+      "placeId": "korea",
+      "question": "In what year was the memorial's additional remembrance wall unveiled?",
+      "options": [
+        "1995",
+        "2001",
+        "2012",
+        "2022"
+      ],
+      "correctIndex": 3,
+      "explanation": "The newer Wall of Remembrance was added in 2022.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/places/000/korean-war-veterans-memorial.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "dc-097",
+      "placeId": "korea",
+      "question": "What phrase appears at the Korean War Veterans Memorial?",
+      "options": [
+        "Ask Not What Your Country Can Do",
+        "Freedom Is Not Free",
+        "Never Again",
+        "We Will Remember"
+      ],
+      "correctIndex": 1,
+      "explanation": "The phrase 'Freedom Is Not Free' is inscribed at the memorial.",
+      "source": {
+        "label": "Read the primary source",
+        "url": "https://www.nps.gov/places/000/korean-war-veterans-memorial.htm"
+      },
+      "verifiedOn": "2026-11-08"
+    }
+  ]
+}
