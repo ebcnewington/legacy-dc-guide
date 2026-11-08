@@ -1,140 +1,204 @@
 #!/usr/bin/env python3
-"""Build public-domain Capitol imagery, a photographic home-screen icon, and ONLY the 5.5x8.5-inch PDF."""
+"""Generate the color 5.5 × 8.5 in Washington Legacy Tour booklet and Capitol imagery."""
 from __future__ import annotations
-import io,json,html
+import io,json,html,requests,qrcode
 from pathlib import Path
 from urllib.parse import quote
-import requests,qrcode
-from PIL import Image as PILImage,ImageOps,ImageDraw
+from PIL import Image as PILImage,ImageOps
+from reportlab.pdfgen import canvas as Canvas
 from reportlab.lib import colors
-from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle,HRFlowable
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle,HRFlowable,KeepTogether
+from reportlab.lib.utils import ImageReader
 
-ROOT=Path(__file__).resolve().parents[1]; ASSETS=ROOT/"assets"
-ASSETS.mkdir(exist_ok=True)
-DATA=json.loads((ROOT/"data/guide.json").read_text("utf-8"))
-CAPITOL_SRC="https://images.unsplash.com/photo-1730888515663-5058024f2e60?auto=format&fit=crop&w=1800&q=85"
-CAPITOL_ORIG="https://upload.wikimedia.org/wikipedia/commons/0/0e/United_States_Capitol_-_west_front_edit.jpg"
+ROOT=Path(__file__).resolve().parents[1];ASSETS=ROOT/"assets";ASSETS.mkdir(exist_ok=True)
+G=json.loads((ROOT/"data/guide.json").read_text(encoding="utf-8"))
+PHOTO="https://images.unsplash.com/photo-1730888515663-5058024f2e60?auto=format&fit=crop&w=1800&q=85"
+PHOTO_FALLBACK="https://upload.wikimedia.org/wikipedia/commons/0/0e/United_States_Capitol_-_west_front_edit.jpg"
 SITE="https://ebcnewington.github.io/legacy-dc-guide/"
-TEAL=colors.HexColor("#044F56");INK=colors.HexColor("#232323");GOLD=colors.HexColor("#FFAE05")
-W,H=5.5*inch,8.5*inch;M=0.25*inch;PW=W-2*M
-def get_photo():
-    headers={"User-Agent":"EmmanuelBaptistChurchLegacyTravelGuide/1.0 (noncommercial educational guide; GitHub Actions)","Accept":"image/jpeg,image/*"}
-    errors=[]
-    for uri in (CAPITOL_SRC,CAPITOL_ORIG):
+W,H=5.5*inch,8.5*inch;M=.25*inch;RIGHT=W-M;BODY=W-2*M
+TEAL=colors.HexColor("#044F56");DARK=colors.HexColor("#033941");GOLD=colors.HexColor("#FFAE05")
+CREAM=colors.HexColor("#EDE0CA");PALE=colors.HexColor("#FAF8F1");INK=colors.HexColor("#232323")
+GREY=colors.HexColor("#566767");WHITE=colors.white;LTTEAL=colors.HexColor("#7BC2C8")
+def load_capitol():
+    if (ASSETS/"capitol-hero.jpg").exists() and (ASSETS/"icon-192.png").exists() and (ASSETS/"icon-512.png").exists():
+        print("Using existing Capitol imagery");return
+    headers={"User-Agent":"Mozilla/5.0 (compatible; EmmanuelLegacyGuide/1.0)"}
+    img=None; errors=[]
+    for url in (PHOTO,PHOTO_FALLBACK):
         try:
-            r=requests.get(uri,headers=headers,timeout=40)
-            r.raise_for_status()
-            with PILImage.open(io.BytesIO(r.content)) as img:
-                img=img.convert("RGB")
-                if img.width<512:raise ValueError("source image too small")
-                return img
-        except Exception as e:errors.append(str(e))
-    raise RuntimeError("Unable to download public-domain Capitol photo: "+ "; ".join(errors))
-def write_images():
-    if all((ASSETS/name).exists() for name in ("capitol-hero.jpg","icon-192.png","icon-512.png")):
-        print("Using locally stored Capitol photo and icons")
-        return
-    im=get_photo()
-    # Keep the Capitol dome visible in all crops.
-    hero=ImageOps.fit(im,(1680,900),method=PILImage.Resampling.LANCZOS,centering=(.5,.42))
-    hero.save(ASSETS/"capitol-hero.jpg","JPEG",quality=88,optimize=True)
-    for size in (192,512):
-        icon=ImageOps.fit(im,(size,size),method=PILImage.Resampling.LANCZOS,centering=(.5,.43))
-        icon.save(ASSETS/f"icon-{size}.png","PNG",optimize=True)
-def p(text,style):
-    return Paragraph(html.escape(str(text or "")).replace("\n","<br/>"),style)
-style={
- "eyebrow":ParagraphStyle("eyebrow",fontName="Helvetica-Bold",fontSize=8,leading=11,textColor=TEAL,spaceAfter=8),
- "title":ParagraphStyle("title",fontName="Times-Bold",fontSize=31,leading=34,textColor=TEAL,spaceAfter=8),
- "section":ParagraphStyle("section",fontName="Helvetica-Bold",fontSize=17,leading=20,textColor=TEAL,spaceBefore=11,spaceAfter=12,keepWithNext=True),
- "h2":ParagraphStyle("h2",fontName="Helvetica-Bold",fontSize=11,leading=14,textColor=TEAL,spaceBefore=10,spaceAfter=5,keepWithNext=True),
- "body":ParagraphStyle("body",fontName="Helvetica",fontSize=9,leading=13.5,textColor=INK,spaceAfter=7),
- "label":ParagraphStyle("label",fontName="Helvetica-Bold",fontSize=8,leading=11,textColor=TEAL,spaceAfter=6),
- "tiny":ParagraphStyle("tiny",fontName="Helvetica-Bold",fontSize=7,leading=9,textColor=TEAL,alignment=1),
-}
-def qr(url,size=53):
-    code=qrcode.QRCode(box_size=4,border=2,error_correction=qrcode.constants.ERROR_CORRECT_M)
-    code.add_data(url);code.make(fit=True)
-    b=io.BytesIO();code.make_image(fill_color="black",back_color="white").convert("RGB").save(b,"PNG");b.seek(0)
-    return Image(b,width=size,height=size)
-def qrcodes(pairs):
-    pairs=[(t,u) for t,u in pairs if u and str(u).startswith("https://")]
-    if not pairs:return []
-    tiles=[]
-    for title,u in pairs:
-        t=Table([[qr(u)],[p(title,style["tiny"])]],colWidths=[PW/2-12])
-        t.setStyle(TableStyle([("ALIGN",(0,0),(-1,-1),"CENTER"),("TOPPADDING",(0,0),(-1,-1),2),("BOTTOMPADDING",(0,0),(-1,-1),3)]))
-        tiles.append(t)
-    rows=[[tiles[i],tiles[i+1] if i+1<len(tiles) else ""] for i in range(0,len(tiles),2)]
-    t=Table(rows,colWidths=[PW/2,PW/2],hAlign="LEFT")
-    t.setStyle(TableStyle([("VALIGN",(0,0),(-1,-1),"TOP"),("BOTTOMPADDING",(0,0),(-1,-1),10)]))
-    return [t]
-def directions(address):
+            res=requests.get(url,headers=headers,timeout=35)
+            res.raise_for_status()
+            img=PILImage.open(io.BytesIO(res.content)).convert("RGB")
+            if img.width<700:raise ValueError("image resolution too small")
+            break
+        except Exception as ex:errors.append(str(ex))
+    if img is None:raise RuntimeError("Could not download Capitol photograph: "+"; ".join(errors))
+    ImageOps.fit(img,(1680,900),method=PILImage.Resampling.LANCZOS,centering=(.5,.44)).save(ASSETS/"capitol-hero.jpg","JPEG",quality=89,optimize=True)
+    for n in (192,512):
+        ImageOps.fit(img,(n,n),method=PILImage.Resampling.LANCZOS,centering=(.5,.45)).save(ASSETS/f"icon-{n}.png","PNG",optimize=True)
+def qr_image(url):
+    code=qrcode.QRCode(box_size=8,border=3,error_correction=qrcode.constants.ERROR_CORRECT_M);code.add_data(url);code.make(fit=True)
+    img=code.make_image(fill_color="#044F56",back_color="#FFFFFF").convert("RGB")
+    b=io.BytesIO();img.save(b,format="PNG");b.seek(0);return b
+def para(text,kind="body"):
+    return Paragraph(html.escape(str(text or "")).replace("\n","<br/>"),S[kind])
+def map_url(address):
     return "https://www.google.com/maps/search/?api=1&query="+quote(address) if address else ""
+S={
+ "page":ParagraphStyle("page",fontName="Helvetica-Bold",fontSize=18,leading=21,textColor=TEAL,spaceAfter=12),
+ "eyebrow":ParagraphStyle("eyebrow",fontName="Helvetica-Bold",fontSize=8,leading=11,textColor=TEAL,spaceAfter=9),
+ "section":ParagraphStyle("section",fontName="Helvetica-Bold",fontSize=12,leading=15,textColor=TEAL,spaceBefore=17,spaceAfter=7,keepWithNext=True),
+ "time":ParagraphStyle("time",fontName="Helvetica-Bold",fontSize=8,leading=10.5,textColor=TEAL),
+ "title":ParagraphStyle("title",fontName="Helvetica-Bold",fontSize=9.1,leading=12.3,textColor=INK,spaceAfter=4),
+ "body":ParagraphStyle("body",fontName="Helvetica",fontSize=8.15,leading=11.8,textColor=INK,spaceAfter=7),
+ "small":ParagraphStyle("small",fontName="Helvetica",fontSize=7.3,leading=10.5,textColor=GREY,spaceAfter=5),
+ "white":ParagraphStyle("white",fontName="Helvetica-Bold",fontSize=8,leading=11,textColor=WHITE,alignment=1),
+ "qr":ParagraphStyle("qr",fontName="Helvetica-Bold",fontSize=7.4,leading=10,textColor=TEAL,alignment=1),
+ "heading":ParagraphStyle("heading",fontName="Helvetica-Bold",fontSize=10,leading=13,textColor=TEAL,spaceAfter=5),
+}
+def draw_cover(c,doc):
+    c.saveState()
+    c.setFillColor(CREAM);c.rect(0,0,W,H,fill=1,stroke=0)
+    photo=ImageReader(str(ASSETS/"capitol-hero.jpg"))
+    c.drawImage(photo,0,H-330,width=W,height=330,preserveAspectRatio=False,mask="auto")
+    # Subtle dark teal edge at the lower photograph
+    c.setFillColor(TEAL);c.rect(0,H-336,W,6,fill=1,stroke=0)
+    c.setFillColor(GOLD);c.rect(0,H-341,W,5,fill=1,stroke=0)
+    c.setFillColor(TEAL);c.setFont("Times-Bold",31);c.drawCentredString(W/2,229,"WASHINGTON")
+    c.setFont("Times-Bold",37);c.drawCentredString(W/2,190,"LEGACY TOUR")
+    c.setFont("Helvetica-Bold",12);c.drawCentredString(W/2,160,"NOVEMBER 9–12, 2026")
+    c.setFillColor(WHITE);c.roundRect(30,19,W-60,116,12,fill=1,stroke=0)
+    c.setFillColor(TEAL);c.setFont("Helvetica-Bold",10);c.drawString(48,108,"THE COMPLETE DIGITAL GUIDE")
+    c.setFont("Helvetica",8.2);c.drawString(48,92,"Scan for times, directions, links, trivia,")
+    c.drawString(48,80,"and updates throughout the trip.")
+    q=qr_image(SITE);c.drawImage(ImageReader(q),W-142,26,width=102,height=102)
+    c.setFillColor(TEAL);c.rect(0,0,W,12,fill=1,stroke=0)
+    c.restoreState()
+def draw_page(c,doc):
+    c.saveState()
+    c.setFillColor(PALE);c.rect(0,0,W,H,fill=1,stroke=0)
+    c.setFillColor(TEAL);c.rect(0,H-52,W,52,fill=1,stroke=0)
+    c.setFillColor(GOLD);c.rect(0,H-56,W,4,fill=1,stroke=0)
+    c.setFillColor(WHITE);c.setFont("Helvetica-Bold",10)
+    c.drawString(M,H-31,"WASHINGTON LEGACY TOUR")
+    c.setFont("Helvetica",7.4);c.drawRightString(RIGHT,H-30,"NOV 9–12, 2026")
+    c.setStrokeColor(LTTEAL);c.setLineWidth(.5);c.line(M,29,RIGHT,29)
+    c.setFont("Helvetica",6.8);c.setFillColor(TEAL)
+    c.drawString(M,18,"EMMANUEL BAPTIST CHURCH")
+    c.drawRightString(RIGHT,18,f"{doc.page:02d}")
+    c.restoreState()
 def section(title):
-    return [p(title,style["section"]),HRFlowable(width="100%",thickness=.7,color=GOLD,spaceAfter=9)]
-def footer(canvas,doc):
-    canvas.saveState()
-    canvas.setStrokeColor(TEAL);canvas.setLineWidth(.4);canvas.line(M,27,W-M,27)
-    canvas.setFont("Helvetica",7);canvas.setFillColor(TEAL)
-    canvas.drawString(M,19,"EMMANUEL BAPTIST CHURCH  |  LEGACY GROUP")
-    canvas.drawRightString(W-M,19,str(doc.page))
-    canvas.restoreState()
-def build_pdf():
-    m=DATA.get("meta",{});story=[]
-    story.extend([p("EMMANUEL BAPTIST CHURCH  •  LEGACY GROUP",style["eyebrow"]),
-       Image(str(ASSETS/"capitol-hero.jpg"),width=PW,height=200),Spacer(1,15),
-       p("Washington, D.C.",style["title"]),
-       p(m.get("subtitle","Your travel companion"),style["body"]),
-       p(m.get("datesLabel",""),style["eyebrow"]),
-       HRFlowable(width="100%",thickness=2,color=GOLD,spaceBefore=8,spaceAfter=12),
-       p(m.get("welcome","Welcome aboard!"),style["body"])])
-    if m.get("status"):story.append(p(m["status"],style["body"]))
-    story.extend([Spacer(1,13),p("Open the mobile guide",style["h2"])])
-    story.extend(qrcodes([("Digital tour guide",SITE)]))
-    story.append(PageBreak())
-    story.extend(section("Daily itinerary"))
-    days=DATA.get("itinerary",[])
-    if not days:story.append(p("The confirmed activity schedule is being prepared. Please check the digital guide for details.",style["body"]))
-    for d in days:
-        story.append(p(d.get("label",d.get("date","Trip day")),style["h2"]))
+    return [para(title,"section"),HRFlowable(width="100%",thickness=1,color=GOLD,spaceAfter=9)]
+def qr_tile(label,url):
+    if not url or not str(url).startswith("https://"):return None
+    img=Image(qr_image(url),width=64,height=64)
+    t=Table([[img],[para(label,"qr")]],colWidths=[BODY/2-12],hAlign="CENTER")
+    t.setStyle(TableStyle([("ALIGN",(0,0),(-1,-1),"CENTER"),("VALIGN",(0,0),(-1,-1),"MIDDLE"),("TOPPADDING",(0,0),(-1,-1),2),("BOTTOMPADDING",(0,0),(-1,-1),3)]))
+    return t
+def qr_grid(entries):
+    tiles=[qr_tile(n,u) for n,u in entries]
+    tiles=[t for t in tiles if t]
+    if not tiles:return []
+    rows=[[tiles[i],tiles[i+1] if i+1<len(tiles) else ""] for i in range(0,len(tiles),2)]
+    t=Table(rows,colWidths=[BODY/2,BODY/2])
+    t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),WHITE),("BOX",(0,0),(-1,-1),.45,colors.HexColor("#DDE8E3")),("VALIGN",(0,0),(-1,-1),"TOP"),("BOTTOMPADDING",(0,0),(-1,-1),11),("TOPPADDING",(0,0),(-1,-1),7)]))
+    return [Spacer(1,7),t,Spacer(1,12)]
+def card(title,detail,color=WHITE):
+    t=Table([[para(title,"heading")],[para(detail,"body")]],colWidths=[BODY-20],hAlign="LEFT")
+    t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),color),("BOX",(0,0),(-1,-1),.5,colors.HexColor("#DCE7E3")),("LEFTPADDING",(0,0),(-1,-1),10),("RIGHTPADDING",(0,0),(-1,-1),10),("TOPPADDING",(0,0),(-1,-1),7),("BOTTOMPADDING",(0,0),(-1,-1),5)]))
+    return t
+def write_notes(story,count=4,title="Meeting-point and bus notes"):
+    story.extend(section(title))
+    for _ in range(count):
+        story.append(Spacer(1,13));story.append(HRFlowable(width="100%",thickness=.5,color=colors.HexColor("#AABAB5"),spaceAfter=7))
+def itinerary(story):
+    days=G.get("itinerary",[])
+    for i,d in enumerate(days):
+        story.append(PageBreak())
+        story.extend([para(d.get("label","Day "+str(i+1)).upper(),"eyebrow"),para(d.get("heading","Daily itinerary"),"page"),
+            para("Times and transportation arrangements may change. Follow the group leaders' instructions.","small"),Spacer(1,4)])
+        rows=[]
         for e in d.get("items",[]):
-            story.append(p((e.get("time") or "Time to be confirmed")+"  •  "+e.get("title","Activity"),style["label"]))
-            for k in ("location","summary","notes","description","walking","accessibility"):
-                if e.get(k):story.append(p(e[k],style["body"]))
-            story.extend(qrcodes([("Directions",directions(e.get("address") or e.get("location",""))),("Official website",e.get("website",""))]))
-    story.extend(section("Places & experiences"))
-    for place in DATA.get("places",[]):
-        story.append(p(place.get("name","Destination"),style["h2"]))
-        for k in ("tag","summary","detail","accessibility","walking"):
-            if place.get(k):story.append(p(place[k],style["body"]))
-        story.extend(qrcodes([("Directions",directions(place.get("address",""))),("Official website",place.get("website",""))]))
-    story.extend(section("Traveler essentials"))
-    essentials=DATA.get("essentials",{})
-    story.append(p("Group contacts",style["h2"]))
-    contacts=essentials.get("contacts",[])
-    if not contacts:story.append(p("Group leader contact details will be added once confirmed.",style["body"]))
-    for c in contacts:
-        story.append(p(c.get("name","")+" — "+c.get("role",""),style["label"]))
-        if c.get("phone"):story.append(p(c["phone"],style["body"]))
-    for name,key in (("Hotel","hotel"),("Transportation","bus")):
-        info=essentials.get(key)
-        if info:
-            story.append(p(name,style["h2"]))
-            for k in ("name","address","notes"):
-                if info.get(k):story.append(p(info[k],style["body"]))
-            story.extend(qrcodes([("Directions",directions(info.get("address","")))]))
-    for tip in essentials.get("tips",[]):
-        story.append(p(tip.get("title","Helpful reminder"),style["h2"]))
-        story.append(p(tip.get("description",tip.get("text","")),style["body"]))
-    story.extend(section("Helpful resources"))
-    story.append(p("Scan each QR code to visit the corresponding website. Web addresses are intentionally omitted from the print edition.",style["body"]))
-    story.extend(qrcodes([(r.get("label","Website"),r.get("url","")) for r in DATA.get("resources",[])]))
-    doc=SimpleDocTemplate(str(ROOT/"guide-half-sheet.pdf"),pagesize=(W,H),leftMargin=M,rightMargin=M,topMargin=M,bottomMargin=M+16,
-      title="Legacy Group Washington DC — Half-Sheet Guide",author="Emmanuel Baptist Church")
-    doc.build(story,onFirstPage=footer,onLaterPages=footer)
-    print("Created",ROOT/"guide-half-sheet.pdf")
-if __name__=="__main__":
-    write_images();build_pdf()
+            name=e.get("title","Stop")
+            if e.get("tentative"):name+="  (estimated)"
+            note=e.get("description") or e.get("notes") or ""
+            if len(note)>155:note=note[:152].rsplit(" ",1)[0]+"…"
+            part=[para(name,"title")]
+            if e.get("location"):part.append(para(e["location"],"small"))
+            if note:part.append(para(note,"small"))
+            rows.append([para(e.get("time","TBD"),"time"),part])
+        if rows:
+            t=Table(rows,colWidths=[84,BODY-84],hAlign="LEFT",repeatRows=0)
+            t.setStyle(TableStyle([("ROWBACKGROUNDS",(0,0),(-1,-1),[WHITE,colors.HexColor("#F2F5EF")]),("LINEBELOW",(0,0),(-1,-2),.5,colors.HexColor("#D4E2DE")),("LEFTPADDING",(0,0),(0,-1),9),("LEFTPADDING",(1,0),(1,-1),12),("RIGHTPADDING",(0,0),(-1,-1),8),("TOPPADDING",(0,0),(-1,-1),9),("BOTTOMPADDING",(0,0),(-1,-1),8),("VALIGN",(0,0),(-1,-1),"TOP")]))
+            story.append(t)
+        story.append(Spacer(1,13))
+        if i==2:
+            story.append(card("Possible Wednesday motorcoach pickup","300 block L’Enfant Plaza SW, south of Independence Avenue SW and north of Frontage Road SW. NOT CONFIRMED. Follow your leader's day-of directions.",colors.HexColor("#FFF0C6")))
+            story.append(Spacer(1,8))
+        write_notes(story,2 if i==2 else 3,"Bus stop and group instructions")
+def about(story):
+    story.append(PageBreak());story.extend([para("Sights & experiences","page"),para("Discover more about the places on our itinerary, then explore them further in the digital guide.","small")])
+    order=["mount-vernon","washington-monument","wwii","lincoln","vietnam","korea","jefferson","reflecting-pool","museum-bible","national-mall","capitol","arlington"]
+    for j,slug in enumerate(order):
+        p=next((p for p in G.get("places",[]) if p.get("id")==slug),None)
+        if not p:continue
+        story.extend(section(p.get("name","Place")))
+        story.append(para(p.get("summary",""),"body"))
+        if p.get("detail"):story.append(para(p["detail"],"small"))
+        if p.get("restrooms"):story.append(para("Restrooms: "+p["restrooms"],"small"))
+        if p.get("audio"):story.append(para("Audio available in the online guide.", "small"))
+        if p.get("website") and j%4==0:story.extend(qr_grid([("Official information",p["website"])]))
+def essentials(story):
+    e=G.get("essentials",{})
+    story.append(PageBreak());story.extend([para("Traveler essentials","page")])
+    story.extend(section("Call your trip leaders"))
+    for c in e.get("contacts",[]):
+        story.append(card(c.get("name","Contact")+"  |  "+c.get("role",""),c.get("phone","")))
+        story.append(Spacer(1,8))
+    story.extend(section("Hotel addresses"))
+    for h in e.get("hotels",[]):
+        story.append(card(h.get("name","Hotel"),h.get("address","")+"  •  "+h.get("notes","")))
+        story.append(Spacer(1,8))
+    story.extend(section("Preparing for the trip"))
+    for t in e.get("tips",[]):
+        story.append(para(t.get("title","Reminder"),"heading"))
+        story.append(para(t.get("description",""),"body"))
+def faqs(story):
+    story.append(PageBreak());story.append(para("Questions & answers","page"))
+    for group in G.get("faq",[]):
+        story.extend(section(group.get("topic","Frequently asked")))
+        for item in group.get("items",[]):
+            story.append(para(item.get("q",""),"heading"))
+            story.append(para(item.get("a",""),"body"))
+def resources(story):
+    story.append(PageBreak());story.append(para("Maps & useful links","page"))
+    story.append(para("Use the QR codes to open official visitor maps and information. The digital guide also has live navigation links.","body"))
+    entries=[(m.get("label","Map"),m.get("url","")) for m in G.get("maps",[])][:5]
+    story.extend(qr_grid(entries))
+    story.extend(section("Try the trivia challenge"))
+    story.append(para("Discover fascinating facts about the Capitol, Mount Vernon, the memorials, and Arlington. The mobile quiz provides an original source for every answer.","body"))
+    story.extend(qr_grid([("Open the interactive trivia game",SITE+"#trivia")]))
+    write_notes(story,7,"Your notes")
+def main():
+    load_capitol()
+    path=ROOT/"guide-half-sheet.pdf"
+    doc=SimpleDocTemplate(str(path),pagesize=(W,H),leftMargin=M,rightMargin=M,topMargin=72,bottomMargin=45,author="Emmanuel Baptist Church",title="Washington Legacy Tour | November 9-12 2026",pageCompression=1)
+    story=[Spacer(1,1),PageBreak(),
+        para("November 9–12, 2026","eyebrow"),para("Your four-day guide","page"),
+        para("Everything you need to find your way, keep in touch, and enjoy the journey.","body"),Spacer(1,6)]
+    for d in G.get("itinerary",[]):
+        content=d.get("items",[])
+        highlights="  •  ".join(x.get("title","") for x in content if x.get("important"))[:160]
+        story.append(card(d.get("label","Day")+"  |  "+d.get("heading",""),highlights))
+        story.append(Spacer(1,9))
+    story.extend(section("Good to know"))
+    story.extend([para("MONDAY DEPARTURE  •  10:00 AM  •  EMMANUEL BAPTIST CHURCH","heading"),
+        para("Parking is available in the rear lot. Two rest stops are planned en route.","body"),
+        para("Daily schedules and bus instructions may change. Check the online guide for updated information.","body")])
+    story.extend(qr_grid([("Scan for live trip updates",SITE)]))
+    itinerary(story);about(story);essentials(story);faqs(story);resources(story)
+    doc.build(story,onFirstPage=draw_cover,onLaterPages=draw_page)
+    print(f"SUCCESS: {path}; pagesize {W} x {H}")
+if __name__=="__main__":main()
