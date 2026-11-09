@@ -1,5 +1,6 @@
 {
-  "apiBaseUrl": "",
+  "provider": "apps-script",
+  "scriptUrl": "",
   "status": "not-configured",
-  "notice": "Community score comparisons and shared star ratings will appear after the anonymous statistics service is connected."
+  "notice": "Community results will be enabled after the Google Apps Script web app is connected. Trivia works locally now."
 }
