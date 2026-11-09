@@ -227,7 +227,8 @@ def itinerary(story):
         story.append(Spacer(1,13))
         if i==2:
             story.append(card("Possible Wednesday motorcoach pickup","300 block L’Enfant Plaza SW, south of Independence Avenue SW and north of Frontage Road SW. NOT CONFIRMED. Follow your leader's day-of directions.",colors.HexColor("#FFF0C6")))
-            story.append(Spacer(1,8))
+            # Do not add a trailing spacer here: on a full Wednesday page
+            # a single overflowing spacer creates an otherwise blank sheet.
         # A pair of QR shortcuts uses space otherwise lost on shorter itinerary days.
         day_maps=[
             [("National Harbor visitor map","https://www.nationalharbor.com/about/maps/")],
@@ -236,7 +237,7 @@ def itinerary(story):
             [("Arlington visitor information","https://www.arlingtoncemetery.mil/Visit")]
         ]
         if day_maps[i]:story.extend(compact_day_map_links(day_maps[i]))
-        if i in (0,3):write_notes(story,4 if i==0 else 5,"Additional bus notes")
+        if i in (0,3):write_notes(story,3 if i==0 else 5,"Additional bus notes")
         # Every single day gets its own full-page sheet of ruled notes.
         story.append(PageBreak())
         story.append(FullDayNotes(d.get("label","Day "+str(i+1))))
