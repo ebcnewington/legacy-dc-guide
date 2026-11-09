@@ -388,16 +388,16 @@ def maps_and_audio():
     # All seven resources on one fully utilized page with rounded 2-column tiles.
     gap=10
     width=(TW-gap)/2
-    height=98
+    height=88
     for i,(label,url) in enumerate(resources):
         row=i//2
         col=i%2
         y=H-top-row*(height+10)-height
         x=TX+col*(width+gap)
         rr(x,y,width,height,10,WHITE,LINE,.65)
-        qr_at(url,x+9,y+height-64,55)
+        qr_at(url,x+9,y+33,50)
         ctext(x+74,y+height-28,"SCAN",7.0,FONT_BOLD,TEAL)
-        para(label,x+9,top+row*(height+10)+67,width-18,8.4,11.6,True,TEAL)
+        para(label,x+9,top+row*(height+10)+64,width-18,8.4,11.6,True,TEAL)
     top+=4*(height+10)+6
     if can_fit(36):
         para("Audio tours, directions and live changes are available in the digital guide.",TX,top,TW,8.5,12.3,False,MUTED)
