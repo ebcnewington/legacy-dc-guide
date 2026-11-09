@@ -93,6 +93,10 @@ jobs:
           for page in pdf.pages:
               content=page.get_contents().get_data()
               assert b"n 18 18 360 576 re W* n" in content, "1/4-inch white clipping frame missing"
+          assert all(b"0 0 396 18 re f*" in p.get_contents().get_data() for p in pdf.pages), "Bottom white border overlay missing"
+          assert all(b"0 594 396 18 re f*" in p.get_contents().get_data() for p in pdf.pages), "Top white border overlay missing"
+          assert all(b"0 18 18 576 re f*" in p.get_contents().get_data() for p in pdf.pages), "Left white border overlay missing"
+          assert all(b"378 18 18 576 re f*" in p.get_contents().get_data() for p in pdf.pages), "Right white border overlay missing"
           print("Verified every PDF page uses a 0.25-inch white margin on ALL sides")
           print(f"PDF: {len(pdf.pages)} half-sheet pages with 4 full notes pages; Apple icon 180x180 verified")
           PYPDF
