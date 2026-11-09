@@ -181,6 +181,23 @@ def draw_notes(d):
     # Small gold accent, not a decorative full rectangular border.
     rr(43,66,42,4,2,GOLD)
 
+def compact_instruction_lines():
+    """Use substantial remaining itinerary space for practical handwritten notes."""
+    global top
+    available=H-56-top
+    if available<99:return
+    card_h=min(available-4,148)
+    x=TX;y=H-top-card_h
+    rr(x,y,TW,card_h,11,WHITE,LINE,.7)
+    pill(x+12,y+card_h-32,125,"BUS / STOP NOTES",TEAL,SOFT,7.2)
+    c.setStrokeColor(LINE)
+    c.setLineWidth(.65)
+    ly=y+card_h-50
+    while ly>y+18:
+        c.line(x+15,ly,x+TW-15,ly)
+        ly-=21
+    top+=card_h+8
+
 def day_item(e,i):
     global top
     time=str(e.get("time") or "TBD")
@@ -299,8 +316,9 @@ def itinerary():
             "2026-11-12":("Arlington Cemetery visitor guide","https://www.arlingtoncemetery.mil/Visit")
         }
         label,url=urls.get(d.get("date"),("The online guide",site))
-        # All map QR links are together on the dedicated resources page.
-        # Never create a single-QR continuation page before a day's Notes.
+        # All map QR links are on the resources page. Add practical writing
+        # space where the itinerary naturally leaves room, without extra pages.
+        compact_instruction_lines()
         draw_notes(d)
 
 def contact_card(person):
@@ -343,6 +361,9 @@ def practical():
     alert_card("CHARTER BUS",bus.get("notes","Monday departure from Emmanuel Baptist Church."))
     alert_card("POSSIBLE WEDNESDAY PICKUP - CHECK FIRST",
         e.get("possiblePickup",{}).get("notes","The L'Enfant Plaza SW pickup has not been confirmed."))
+    section_bar("Helpful reminders")
+    for tip in e.get("tips",[]):
+        info_card(tip.get("title","Reminder"),tip.get("description",""))
 
 def info_card(title,description,tag=""):
     global top
@@ -365,13 +386,16 @@ def attractions():
         detail=place.get("detail","")
         text=desc+(("  "+detail) if detail else "")
         info_card(title,text)
-    # The destination links and all narrated audio tours are on the online guide.
+    # Place a direct guide QR on the final sights page ONLY when it fits,
+    # rather than producing a sparse one-item continuation page.
+    if can_fit(92):qr_callout("Audio tours and directions",site+"#places")
 
 def faq():
     new_page("Travel essentials","Frequently asked","Answers from the supplied trip FAQs and companion materials.")
     for group in G.get("faq",[]):
         section_bar(group.get("topic","Questions"))
         for item in group.get("items",[]):info_card(item.get("q","Question"),item.get("a",""))
+    if can_fit(95):qr_callout("Current travel information",site+"#essentials")
 
 def maps_and_audio():
     global top
@@ -383,7 +407,8 @@ def maps_and_audio():
         ("National Harbor map","https://www.nationalharbor.com/about/maps/"),
         ("Arlington Cemetery","https://www.arlingtoncemetery.mil/Visit"),
         ("Museum of the Bible","https://www.museumofthebible.org/plan-your-visit"),
-        ("Washington trivia challenge",site+"#trivia")
+        ("Washington trivia challenge",site+"#trivia"),
+        ("Official Capitol audio tour","https://www.visitthecapitol.gov/visit/accessibility-services/audio-described-tour")
     ]
     # All seven resources on one fully utilized page with rounded 2-column tiles.
     gap=10
