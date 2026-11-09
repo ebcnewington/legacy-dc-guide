@@ -11,6 +11,11 @@ from reportlab.lib.units import inch
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle,HRFlowable,KeepTogether
 from reportlab.lib.utils import ImageReader
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont as ReportLabTTFont
+from fontTools.ttLib import TTFont as FontToolsTTFont
+from fontTools.varLib.instancer import instantiateVariableFont
+import tempfile
 
 ROOT=Path(__file__).resolve().parents[1];ASSETS=ROOT/"assets";ASSETS.mkdir(exist_ok=True)
 G=json.loads((ROOT/"data/guide.json").read_text(encoding="utf-8"))
@@ -46,17 +51,39 @@ def para(text,kind="body"):
     return Paragraph(html.escape(str(text or "")).replace("\n","<br/>"),S[kind])
 def map_url(address):
     return "https://www.google.com/maps/search/?api=1&query="+quote(address) if address else ""
+def register_brand_typefaces():
+    """Embed open-licensed Montserrat into the print guide; keep files out of the public repository."""
+    try:
+        uri="https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf"
+        rsp=requests.get(uri,timeout=20,headers={"User-Agent":"EBC-Legacy-Tour-Print/1.0"})
+        rsp.raise_for_status()
+        font_dir=Path(tempfile.mkdtemp(prefix="legacy-pdf-font-"))
+        for name,weight in (("Montserrat-Regular",400),("Montserrat-Bold",700)):
+            ft=FontToolsTTFont(io.BytesIO(rsp.content))
+            ft=instantiateVariableFont(ft,{"wght":weight},inplace=True)
+            ft.flavor=None
+            path=font_dir/(name+".ttf")
+            ft.save(path)
+            pdfmetrics.registerFont(ReportLabTTFont(name,str(path)))
+            ft.close()
+        print("Using Montserrat typography for PDF text")
+        return "Montserrat-Regular","Montserrat-Bold"
+    except Exception as err:
+        print("Montserrat font download unavailable; using embedded PDF defaults:",err)
+        return "Helvetica","Helvetica-Bold"
+
+FONT_REG,FONT_BOLD=register_brand_typefaces()
 S={
- "page":ParagraphStyle("page",fontName="Helvetica-Bold",fontSize=18,leading=21,textColor=TEAL,spaceAfter=12),
- "eyebrow":ParagraphStyle("eyebrow",fontName="Helvetica-Bold",fontSize=8,leading=11,textColor=TEAL,spaceAfter=9),
- "section":ParagraphStyle("section",fontName="Helvetica-Bold",fontSize=12,leading=15,textColor=TEAL,spaceBefore=17,spaceAfter=7,keepWithNext=True),
- "time":ParagraphStyle("time",fontName="Helvetica-Bold",fontSize=8,leading=10.5,textColor=TEAL),
- "title":ParagraphStyle("title",fontName="Helvetica-Bold",fontSize=9.1,leading=12.3,textColor=INK,spaceAfter=4),
- "body":ParagraphStyle("body",fontName="Helvetica",fontSize=8.15,leading=11.8,textColor=INK,spaceAfter=7),
- "small":ParagraphStyle("small",fontName="Helvetica",fontSize=7.3,leading=10.5,textColor=GREY,spaceAfter=5),
- "white":ParagraphStyle("white",fontName="Helvetica-Bold",fontSize=8,leading=11,textColor=WHITE,alignment=1),
- "qr":ParagraphStyle("qr",fontName="Helvetica-Bold",fontSize=7.4,leading=10,textColor=TEAL,alignment=1),
- "heading":ParagraphStyle("heading",fontName="Helvetica-Bold",fontSize=10,leading=13,textColor=TEAL,spaceAfter=5),
+ "page":ParagraphStyle("page",fontName=FONT_BOLD,fontSize=18,leading=21,textColor=TEAL,spaceAfter=12),
+ "eyebrow":ParagraphStyle("eyebrow",fontName=FONT_BOLD,fontSize=8,leading=11,textColor=TEAL,spaceAfter=9),
+ "section":ParagraphStyle("section",fontName=FONT_BOLD,fontSize=12,leading=15,textColor=TEAL,spaceBefore=17,spaceAfter=7,keepWithNext=True),
+ "time":ParagraphStyle("time",fontName=FONT_BOLD,fontSize=8,leading=10.5,textColor=TEAL),
+ "title":ParagraphStyle("title",fontName=FONT_BOLD,fontSize=9.1,leading=12.3,textColor=INK,spaceAfter=4),
+ "body":ParagraphStyle("body",fontName=FONT_REG,fontSize=8.15,leading=11.8,textColor=INK,spaceAfter=7),
+ "small":ParagraphStyle("small",fontName=FONT_REG,fontSize=7.3,leading=10.5,textColor=GREY,spaceAfter=5),
+ "white":ParagraphStyle("white",fontName=FONT_BOLD,fontSize=8,leading=11,textColor=WHITE,alignment=1),
+ "qr":ParagraphStyle("qr",fontName=FONT_BOLD,fontSize=7.4,leading=10,textColor=TEAL,alignment=1),
+ "heading":ParagraphStyle("heading",fontName=FONT_BOLD,fontSize=10,leading=13,textColor=TEAL,spaceAfter=5),
 }
 def draw_cover(c,doc):
     c.saveState()
@@ -68,10 +95,10 @@ def draw_cover(c,doc):
     c.setFillColor(GOLD);c.rect(0,H-341,W,5,fill=1,stroke=0)
     c.setFillColor(TEAL);c.setFont("Times-Bold",31);c.drawCentredString(W/2,229,"WASHINGTON")
     c.setFont("Times-Bold",37);c.drawCentredString(W/2,190,"LEGACY TOUR")
-    c.setFont("Helvetica-Bold",12);c.drawCentredString(W/2,160,"NOVEMBER 9–12, 2026")
+    c.setFont(FONT_BOLD,12);c.drawCentredString(W/2,160,"NOVEMBER 9–12, 2026")
     c.setFillColor(WHITE);c.roundRect(30,19,W-60,116,12,fill=1,stroke=0)
-    c.setFillColor(TEAL);c.setFont("Helvetica-Bold",10);c.drawString(48,108,"THE COMPLETE DIGITAL GUIDE")
-    c.setFont("Helvetica",8.2);c.drawString(48,92,"Scan for times, directions, links, trivia,")
+    c.setFillColor(TEAL);c.setFont(FONT_BOLD,10);c.drawString(48,108,"THE COMPLETE DIGITAL GUIDE")
+    c.setFont(FONT_REG,8.2);c.drawString(48,92,"Scan for times, directions, links, trivia,")
     c.drawString(48,80,"and updates throughout the trip.")
     q=qr_image(SITE);c.drawImage(ImageReader(q),W-142,26,width=102,height=102)
     c.setFillColor(TEAL);c.rect(0,0,W,12,fill=1,stroke=0)
@@ -81,11 +108,11 @@ def draw_page(c,doc):
     c.setFillColor(PALE);c.rect(0,0,W,H,fill=1,stroke=0)
     c.setFillColor(TEAL);c.rect(0,H-52,W,52,fill=1,stroke=0)
     c.setFillColor(GOLD);c.rect(0,H-56,W,4,fill=1,stroke=0)
-    c.setFillColor(WHITE);c.setFont("Helvetica-Bold",10)
+    c.setFillColor(WHITE);c.setFont(FONT_BOLD,10)
     c.drawString(M,H-31,"WASHINGTON LEGACY TOUR")
-    c.setFont("Helvetica",7.4);c.drawRightString(RIGHT,H-30,"NOV 9–12, 2026")
+    c.setFont(FONT_REG,7.4);c.drawRightString(RIGHT,H-30,"NOV 9–12, 2026")
     c.setStrokeColor(LTTEAL);c.setLineWidth(.5);c.line(M,29,RIGHT,29)
-    c.setFont("Helvetica",6.8);c.setFillColor(TEAL)
+    c.setFont(FONT_REG,6.8);c.setFillColor(TEAL)
     c.drawString(M,18,"EMMANUEL BAPTIST CHURCH")
     c.drawRightString(RIGHT,18,f"{doc.page:02d}")
     c.restoreState()
