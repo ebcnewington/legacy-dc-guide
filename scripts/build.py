@@ -137,7 +137,7 @@ def section(title):
     return [para(title,"section"),HRFlowable(width="100%",thickness=1,color=GOLD,spaceAfter=9)]
 def qr_tile(label,url):
     if not url or not str(url).startswith("https://"):return None
-    img=Image(qr_image(url),width=64,height=64)
+    img=Image(qr_image(url),width=54,height=54)
     t=Table([[img],[para(label,"qr")]],colWidths=[BODY/2-12],hAlign="CENTER")
     t.setStyle(TableStyle([("ALIGN",(0,0),(-1,-1),"CENTER"),("VALIGN",(0,0),(-1,-1),"MIDDLE"),("TOPPADDING",(0,0),(-1,-1),2),("BOTTOMPADDING",(0,0),(-1,-1),3)]))
     return t
@@ -149,6 +149,23 @@ def qr_grid(entries):
     t=Table(rows,colWidths=[BODY/2,BODY/2])
     t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),WHITE),("BOX",(0,0),(-1,-1),.45,colors.HexColor("#DDE8E3")),("VALIGN",(0,0),(-1,-1),"TOP"),("BOTTOMPADDING",(0,0),(-1,-1),11),("TOPPADDING",(0,0),(-1,-1),7)]))
     return [Spacer(1,7),t,Spacer(1,12)]
+def compact_day_map_links(entries):
+    """One small QR row rather than a tall block that spills to a blank page."""
+    tiles=[]
+    for label,url in entries[:2]:
+        qr=Image(qr_image(url),width=42,height=42)
+        caption=para(label,"small")
+        tile=Table([[qr,caption]],colWidths=[47,BODY/max(1,len(entries))-55])
+        tile.setStyle(TableStyle([("VALIGN",(0,0),(-1,-1),"MIDDLE"),("LEFTPADDING",(0,0),(-1,-1),2),
+                                  ("RIGHTPADDING",(0,0),(-1,-1),2),("TOPPADDING",(0,0),(-1,-1),2),
+                                  ("BOTTOMPADDING",(0,0),(-1,-1),2)]))
+        tiles.append(tile)
+    if not tiles:return []
+    row=Table([tiles],colWidths=[BODY/len(tiles)]*len(tiles))
+    row.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),WHITE),("BOX",(0,0),(-1,-1),.45,colors.HexColor("#DDE8E3")),("TOPPADDING",(0,0),(-1,-1),4),
+                             ("BOTTOMPADDING",(0,0),(-1,-1),4)]))
+    return [Spacer(1,7),row,Spacer(1,7)]
+
 def card(title,detail,color=WHITE):
     t=Table([[para(title,"heading")],[para(detail,"body")]],colWidths=[BODY-20],hAlign="LEFT")
     t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),color),("BOX",(0,0),(-1,-1),.5,colors.HexColor("#DCE7E3")),("LEFTPADDING",(0,0),(-1,-1),10),("RIGHTPADDING",(0,0),(-1,-1),10),("TOPPADDING",(0,0),(-1,-1),7),("BOTTOMPADDING",(0,0),(-1,-1),5)]))
@@ -205,7 +222,7 @@ def itinerary(story):
             rows.append([para(e.get("time","TBD"),"time"),part])
         if rows:
             t=Table(rows,colWidths=[84,BODY-84],hAlign="LEFT",repeatRows=0)
-            t.setStyle(TableStyle([("ROWBACKGROUNDS",(0,0),(-1,-1),[WHITE,colors.HexColor("#F2F5EF")]),("LINEBELOW",(0,0),(-1,-2),.5,colors.HexColor("#D4E2DE")),("LEFTPADDING",(0,0),(0,-1),9),("LEFTPADDING",(1,0),(1,-1),12),("RIGHTPADDING",(0,0),(-1,-1),8),("TOPPADDING",(0,0),(-1,-1),9),("BOTTOMPADDING",(0,0),(-1,-1),8),("VALIGN",(0,0),(-1,-1),"TOP")]))
+            t.setStyle(TableStyle([("ROWBACKGROUNDS",(0,0),(-1,-1),[WHITE,colors.HexColor("#F2F5EF")]),("LINEBELOW",(0,0),(-1,-2),.5,colors.HexColor("#D4E2DE")),("LEFTPADDING",(0,0),(0,-1),9),("LEFTPADDING",(1,0),(1,-1),12),("RIGHTPADDING",(0,0),(-1,-1),8),("TOPPADDING",(0,0),(-1,-1),5),("BOTTOMPADDING",(0,0),(-1,-1),5),("VALIGN",(0,0),(-1,-1),"TOP")]))
             story.append(t)
         story.append(Spacer(1,13))
         if i==2:
@@ -214,11 +231,12 @@ def itinerary(story):
         # A pair of QR shortcuts uses space otherwise lost on shorter itinerary days.
         day_maps=[
             [("National Harbor visitor map","https://www.nationalharbor.com/about/maps/")],
-            [("Mount Vernon official map","https://www.mountvernon.org/plan-your-visit"),("National Mall official map","https://www.nps.gov/nama/planyourvisit/maps.htm")],
-            [("National Mall official map","https://www.nps.gov/nama/planyourvisit/maps.htm"),("Museum visitor information","https://www.museumofthebible.org/plan-your-visit")],
+            [],
+            [],
             [("Arlington visitor information","https://www.arlingtoncemetery.mil/Visit")]
         ]
-        story.extend(qr_grid(day_maps[i]))
+        if day_maps[i]:story.extend(compact_day_map_links(day_maps[i]))
+        if i in (0,3):write_notes(story,4 if i==0 else 5,"Additional bus notes")
         # Every single day gets its own full-page sheet of ruled notes.
         story.append(PageBreak())
         story.append(FullDayNotes(d.get("label","Day "+str(i+1))))
@@ -250,7 +268,7 @@ def essentials(story):
         story.append(para(t.get("title","Reminder"),"heading"))
         story.append(para(t.get("description",""),"body"))
 def faqs(story):
-    story.append(PageBreak());story.append(para("Questions & answers","page"))
+    story.append(Spacer(1,12));story.append(para("Questions & answers","page"))
     for group in G.get("faq",[]):
         story.extend(section(group.get("topic","Frequently asked")))
         for item in group.get("items",[]):
@@ -263,7 +281,7 @@ def resources(story):
     story.extend(qr_grid(entries))
     story.extend(section("Try the trivia challenge"))
     story.append(para("Discover fascinating facts about the Capitol, Mount Vernon, the memorials, and Arlington. The mobile quiz provides an original source for every answer.","body"))
-    story.extend(qr_grid([("Open the interactive trivia game",SITE+"#trivia")]))
+    story.append(para("Open the online guide using the QR code on the front cover, then choose Trivia.","small"))
     # Daily notes pages are provided immediately after all four itineraries.
 def main():
     load_capitol()
@@ -281,7 +299,7 @@ def main():
     story.extend([para("MONDAY DEPARTURE  •  10:00 AM  •  EMMANUEL BAPTIST CHURCH","heading"),
         para("Parking is available in the rear lot. Two rest stops are planned en route.","body"),
         para("Daily schedules and bus instructions may change. Check the online guide for updated information.","body")])
-    story.extend(qr_grid([("Scan for live trip updates",SITE)]))
+    # The cover already includes a prominent QR code linking to the live guide.
     itinerary(story);about(story);essentials(story);faqs(story);resources(story)
     doc.build(story,onFirstPage=draw_cover,onLaterPages=draw_page)
     print(f"SUCCESS: {path}; pagesize {W} x {H}")
