@@ -14,3 +14,13 @@ footer{background:var(--teal);color:white;text-align:center;padding:60px 0 37px;
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 /* Brand safety: keep official logo lockups at or above 120px where displayed. */
 .identity img{min-width:120px}
+
+/* iOS Safari used to paint an oversized blue focus frame around the close control.
+   Autofocus is now moved to the dialog heading and the button keeps keyboard-only focus feedback. */
+.dialog-inside{position:relative}
+.dialog-close{position:absolute;float:none;top:13px;right:13px;left:auto;bottom:auto;display:flex;align-items:center;justify-content:center;width:43px;height:43px;padding:10px;border:1px solid #ccdcda;background:#fff;border-radius:50%;color:var(--teal);font-size:initial;line-height:1;box-shadow:0 2px 7px #0000000d;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;outline:none}
+.dialog-close svg{width:20px;height:20px;stroke-width:2.35;pointer-events:none;display:block}
+.dialog-close:focus:not(:focus-visible){outline:none;box-shadow:0 2px 7px #0000000d}
+.dialog-close:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+#place-dialog-title{padding-right:48px;outline:none}
+#dialog-body>.tag{padding-right:54px}
