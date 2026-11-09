@@ -13,7 +13,7 @@ A mobile-first, installable travel companion for Emmanuel Baptist Church's Legac
 - Frequently asked questions on walking, restrooms, security and packing.
 - Thirteen location cards, official visitor resources, maps and audio-tour links. Verified iOS audio app ratings appear only where provider rating data was found.
 - A **97-question** trivia game with source-linked explanations, 4 answer choices, continuous scoring, local progress, optional one-to-five-star ratings, play-anytime/quit-anytime and optional score comparison.
-- Rich full-color half-sheet PDF, portrait **5.5 × 8.5 inches** with **¼-inch safe margins**, travel schedule, contact information, notes space and QR codes to the guide, trivia and selected official maps.
+- Rich full-color half-sheet PDF, portrait **5.5 × 8.5 inches** with **¼-inch minimum safe margins**, a dedicated **full-page Notes sheet after each of the four days**, travel schedule, contacts, QR maps and a cover QR code to the online guide.
 - Capitol-themed home-screen icon and offline-first reading of previously loaded site assets.
 - Responsive layout and reduced-motion support.
 
@@ -27,9 +27,9 @@ The website is public. Do not place private participant information in these fil
 
 ## Shared ratings and score comparison
 
-A separate Cloudflare Worker/D1 backend is complete in `api/`. It is not live yet because no Cloudflare database or Worker deployment credentials have been connected. Until activated, trivia is fully playable, star ratings persist on the visitor's device, and shared averages are explicitly unavailable rather than fabricated.
+The recommended shared backend is now **Google Apps Script + a private Google Sheet**, with code in `google-apps-script/`. It can run from a personal Google account without needing Emmanuel's Workspace administrator. It is **not live until its web app is deployed**. Until activated, trivia is playable, star ratings persist on the current device, and group averages are explicitly unavailable.
 
-See `api/README.md` to configure the backend in a church-controlled account. Set the resulting Worker URL in `data/trivia-config.json` and republish. The frontend will automatically begin using true anonymous aggregate scores and ratings.
+See `google-apps-script/README.md` for the one-time setup. The owner runs `setupTriviaBackend`, deploys the web app for anonymous access, then pastes the `/exec` URL into `data/trivia-config.json`. The frontend will automatically use aggregate scores and shared question ratings. Earlier optional Cloudflare code remains in `api/` but is not required.
 
 ## Fonts and imagery
 
@@ -44,3 +44,7 @@ Every deployment validates `app.js`, `api/worker.js`, the complete trivia librar
 A separate high-resolution **11×17 inch** map supplement based on the source maps provided for the tour has been prepared as a downloadable PDF in the project conversation. It is not included in the public website repository because the source map PDFs were delivered as user attachments rather than repository assets.
 
 The permanent twelve-item revision checklist is maintained in `REVISION-TRACKER.md`.
+
+## iPhone home-screen installation
+
+The website now provides a dedicated root-level `apple-touch-icon.png` featuring the U.S. Capitol photograph. If your old iPhone shortcut displays a black **W**, remove that old **Home Screen shortcut** (this doesn't delete the website or its data), open the online guide in **Safari**, tap **Share → Add to Home Screen**, and add it again. iOS may cache an old icon until the shortcut is recreated. The close button on place details uses a clean SVG and keyboard-only focus outline.
