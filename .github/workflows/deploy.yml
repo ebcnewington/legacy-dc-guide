@@ -37,6 +37,8 @@ jobs:
         run: |
           node --check app.js
           node --check api/worker.js
+          cp google-apps-script/Code.gs /tmp/ebc-trivia-appscript.js
+          node --check /tmp/ebc-trivia-appscript.js
           node api/test-worker.mjs
           python -m json.tool data/guide.json > /dev/null
           python -m json.tool data/trivia.json > /dev/null
@@ -66,6 +68,24 @@ jobs:
           assert Path("guide-half-sheet.pdf").stat().st_size > 15000
           print(f"Validated four trip days and {len(trivia)} sourced questions")
           PY
+      - name: Verify print margins, daily notes and home-screen icon
+        run: |
+          python - <<'PYPDF'
+          from pathlib import Path
+          from pypdf import PdfReader
+          from PIL import Image as PIL
+          pdf=PdfReader("guide-half-sheet.pdf")
+          page_size=pdf.pages[0].mediabox
+          assert abs(float(page_size.width)-396)<.5 and abs(float(page_size.height)-612)<.5
+          notes=[i+1 for i,p in enumerate(pdf.pages) if "Notes" in (p.extract_text() or "")]
+          assert len(notes)==4, f"Expected 4 dedicated notes sheets, found notes on pages {notes}"
+          assert len(pdf.pages)<=25, f"Unexpectedly long booklet ({len(pdf.pages)} pages)"
+          icon=PIL.open("apple-touch-icon.png")
+          assert icon.size==(180,180),icon.size
+          assert Path("assets/icon-192.png").stat().st_size > 3000
+          assert Path("assets/icon-512.png").stat().st_size > 10000
+          print(f"PDF: {len(pdf.pages)} half-sheet pages with 4 full notes pages; Apple icon 180x180 verified")
+          PYPDF
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload website
