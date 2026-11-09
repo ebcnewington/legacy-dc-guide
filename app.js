@@ -76,11 +76,11 @@ function places(){
  document.querySelectorAll("[data-place]").forEach(b=>b.onclick=()=>showPlace(G.places[Number(b.dataset.place)]));
 }
 function showPlace(p){
- let body='<p class="tag">'+esc(p.tag||"Destination")+'</p><h2>'+esc(p.name)+'</h2>'+paragraphs(p.summary)+paragraphs(p.detail)+links(p);
+ let body='<p class="tag">'+esc(p.tag||"Destination")+'</p><h2 id="place-dialog-title" tabindex="-1">'+esc(p.name)+'</h2>'+paragraphs(p.summary)+paragraphs(p.detail)+links(p);
  const attributes=[["Food & dining",p.dining],["Restrooms",p.restrooms],["Accessibility",p.accessibility],["Helpful map",p.mapUrl?null:null]].filter(([_,v])=>v);
  body+=attributes.map(([t,v])=>'<div class="detail-section"><h3>'+esc(t)+'</h3>'+paragraphs(v)+'</div>').join("");
  if(p.audio?.length)body+='<div class="detail-section"><h3>'+ico("headphones")+' Audio tours &amp; listening guides</h3>'+p.audio.map(a=>'<div class="audio-item"><h4>'+esc(a.title)+'</h4><p>'+esc(a.description||"")+'</p><p class="tag">'+esc(a.cost||"Check provider")+'</p>'+link(safeURL(a.url),"Open listening guide","headphones")+'</div>').join("")+'</div>';
- $("#dialog-body").innerHTML=body;$("#place-dialog").showModal();
+ $("#dialog-body").innerHTML=body;$("#place-dialog").showModal();$("#place-dialog-title")?.focus({preventScroll:true});
 }
 function essentials(){
  const e=G.essentials||{};
