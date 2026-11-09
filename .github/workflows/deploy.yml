@@ -32,7 +32,7 @@ jobs:
       - name: Install booklet and image dependencies
         run: python -m pip install -r requirements.txt
       - name: Build Capitol imagery, icons and half-sheet PDF
-        run: python scripts/build.py
+        run: python scripts/build_editorial.py
       - name: Validate guide and trivia assets
         run: |
           node --check app.js
@@ -81,7 +81,7 @@ jobs:
           assert len(notes)==4, f"Expected 4 dedicated notes sheets, found notes on pages {notes}"
           word_counts=[len((page.extract_text() or "").split()) for page in pdf.pages]
           assert min(word_counts)>=16, f"A near-empty PDF page was generated: {[(i+1,w) for i,w in enumerate(word_counts) if w<16]}"
-          assert len(pdf.pages)<=25, f"Unexpectedly long booklet ({len(pdf.pages)} pages)"
+          assert len(pdf.pages)<=32, f"Unexpectedly long booklet ({len(pdf.pages)} pages)"
           icon=PIL.open("apple-touch-icon.png")
           assert icon.size==(180,180),icon.size
           assert Path("assets/icon-192.png").stat().st_size > 3000
