@@ -13,7 +13,7 @@ A mobile-first, installable travel companion for Emmanuel Baptist Church's Legac
 - Frequently asked questions on walking, restrooms, security and packing.
 - Thirteen location cards, official visitor resources, maps and audio-tour links. Verified iOS audio app ratings appear only where provider rating data was found.
 - A **90-question** trivia game with source-linked explanations, 4 answer choices, continuous scoring, local progress, optional one-to-five-star ratings, play-anytime/quit-anytime and optional score comparison.
-- 12-page full-color half-sheet PDF, portrait **5.5 × 8.5 inches** with **¼-inch minimum safe margins**, a dedicated **full-page Notes sheet after each of the four days**, travel schedule, contacts, QR maps and a cover QR code to the online guide.
+- 12-page full-color half-sheet PDF, portrait **5.5 × 8.5 inches** with **¼-inch minimum safe margins**, **right-hand Notes pages for Tuesday through Thursday** and a photographic back cover, travel schedule, contacts, QR maps and a cover QR code to the online guide.
 - Capitol-themed home-screen icon and offline-first reading of previously loaded site assets.
 - Responsive layout and reduced-motion support.
 

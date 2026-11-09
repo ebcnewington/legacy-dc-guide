@@ -177,15 +177,19 @@ def check_space(height):
         raise ValueError(f"Page {page_number}: content reaches {top+height:.1f} pt; shorten the print copy.")
 
 
+def visitor_map(day,x,y):
+    resource=next(m for m in G["maps"] if m["label"]==day["printMap"])
+    qr_at(resource["url"],x,y,53)
+    center_label("Visitor map",x-4,y-14,61,14,8,TEAL)
+
+
 def draw_notes(day):
     new_page("Field notes","Notes for "+day["label"])
     upper=H-top
     rr(TX,52,TW,upper-52,11,WHITE,LINE)
-    resource=next(m for m in G["maps"] if m["label"]==day["printMap"])
-    qr_at(resource["url"],W-TX-61,upper-64,53)
+    visitor_map(day,W-TX-61,upper-64)
     ctext(TX+13,upper-24,"Bus instructions",11,FONT_BOLD,TEAL)
     para("Meeting place, pickup time and directions",TX+13,top+34,TW-90,9.4,13)
-    right(W-TX-9,upper-75,"Visitor map",8,FONT_BOLD,TEAL)
     c.setStrokeColor(LINE)
     for y in range(int(upper)-87,64,-24):
         c.line(TX+13,y,W-TX-13,y)
@@ -313,22 +317,28 @@ def practical():
 
 
 def itinerary():
-    for day in G["itinerary"]:
+    for index,day in enumerate(G["itinerary"]):
         new_page(day["label"],day["heading"])
         for event in day["items"]:
             day_item(event)
         if day["date"]=="2026-11-11":
             text_card("Wednesday pickup · NOT CONFIRMED",
                       "The 300 block of L’Enfant Plaza SW is a possible pickup. Go there only if your trip leaders confirm.",True)
-        if H-52-top>=150:
+        if index==0:
+            check_space(145)
+        if index==0 or H-52-top>=150:
             height=min(145,H-52-top)
             y=H-top-height
             rr(TX,y,TW,height,9,WHITE,LINE,.65)
             ctext(TX+13,H-top-22,"Bus meeting place & time",10.5,FONT_BOLD,TEAL)
             c.setStrokeColor(LINE)
             for offset in range(47,int(height)-10,23):
-                c.line(TX+13,H-top-offset,W-TX-13,H-top-offset)
-        draw_notes(day)
+                end=W-TX-(80 if index==0 and offset<86 else 13)
+                c.line(TX+13,H-top-offset,end,H-top-offset)
+            if index==0:
+                visitor_map(day,W-TX-63,H-top-62)
+        if index>0:
+            draw_notes(day)
 
 
 def attractions():
@@ -357,6 +367,30 @@ def faq():
             if "printAnswer" in item:
                 text_card(item["q"],item["printAnswer"])
 
+def back_cover():
+    global page_number
+    finish()
+    page_number+=1
+    page_base()
+    photo=PILImage.open(ASSETS/"capitol-hero.jpg").convert("RGB")
+    size=(1080,1728)
+    crop=ImageOps.fit(photo,size,centering=(.5,.44))
+    teal=PILImage.new("RGB",size,(4,65,71))
+    fade=PILImage.new("L",(1,size[1]))
+    fade.putdata([round(180*max(0,1-(y/size[1])**1.65/.65)) for y in range(size[1])])
+    teal.paste(crop,(0,0),fade.resize(size))
+    c.saveState()
+    clip=c.beginPath()
+    clip.roundRect(SX,M,CW,H-2*M,16)
+    c.clipPath(clip,stroke=0,fill=0)
+    c.drawImage(ImageReader(teal),SX,M,CW,H-2*M)
+    c.restoreState()
+    logo_in_box(TX,154,TW,72,8)
+    rr(W/2-15,135,30,2,1,GOLD)
+    center_label("Washington Legacy Tour",TX,99,TW,29,15,WHITE)
+    center_label("November 9–12, 2026",TX,76,TW,22,10,CREAM,FONT_REG)
+
+
 def main():
     global c,header
     load_capitol()
@@ -369,6 +403,7 @@ def main():
     itinerary()
     attractions()
     faq()
+    back_cover()
     if page_number!=12:
         raise ValueError(f"Expected 12 pages; generated {page_number}")
     c.save()

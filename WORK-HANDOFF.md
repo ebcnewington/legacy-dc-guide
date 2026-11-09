@@ -34,8 +34,8 @@ The user requested a **completely new** printable-booklet design, and then refin
 - Meno Banner Bold for appropriate large cover display, Montserrat hierarchy elsewhere. No fonts are distributed to users; verify web embedding rights.
 - Compact, information-dense schedule with visually centered labels and descriptive text within rounded cards; avoid orphans/widows and **keep section headers with their related cards**.
 - Cover includes small, tasteful promotion for the **fun, educational DC trivia challenge** relevant to actual destinations.
-- **A full ruled Notes page immediately after EACH of the four itinerary days**, plus useful bus-stop instruction writing space.
-- QR codes include a prominent cover code to the online guide and official visitor-map codes on the four daily Notes pages; don't print raw URLs.
+- **Full ruled right-hand Notes pages facing the Tuesday, Wednesday and Thursday itineraries**, plus useful bus-stop instruction writing space.
+- QR codes include a prominent cover code to the online guide and official visitor-map codes on Monday’s itinerary and the three Notes pages; don't print raw URLs.
 - Avoid wasted/sparse pages; preserve readable content, purposeful spacing and the PDF's full-color aesthetic.
 - The most recent refinement's code is already deployed from `scripts/build_editorial.py`; review the current generated PDF before further edits.
 
@@ -90,3 +90,7 @@ Next technical follow-up: see the offline first-visit timing issue in the tracke
 Page 1 is the photo cover, page 2 has contacts and hotels, and pages 3–10 pair each day's itinerary with a ruled Notes sheet and its visitor-map QR. Pages 11–12 condense landmarks and FAQs. The physical quarter-inch white borders remain. The cover uses a smaller QR panel and an optically centered logo. Interior headers use the same Capitol photo under a teal gradient. Allow a clear gutter between time labels and itinerary text. Packing, Travel Light and Keep Exploring sections are omitted from print.
 
 The current bank has 90 questions with stable IDs. Review prompts, choices, explanations and linked sources for slavery-related material before adding questions. Favor observable landmark details and source-verifiable history. The print-only itinerary and FAQ wording lives alongside its full version in `data/guide.json`.
+
+### November 8 · Facing-page booklet revision
+
+Monday’s itinerary and National Harbor map share page 3. Tuesday, Wednesday and Thursday each have a left-hand itinerary facing a ruled Notes page (4–5, 6–7 and 8–9). Landmarks and FAQs occupy pages 10 and 11. Page 12 is a photographic back cover with the church logo, tour title and dates.

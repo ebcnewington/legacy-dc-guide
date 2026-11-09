@@ -26,7 +26,7 @@
 - [x] FAQs covering packing, restrooms, walking, security and travel.
 - [x] Official maps, food/restroom guidance and destination links.
 - [x] Unconfirmed L'Enfant Plaza SW 300-block Wednesday bus pickup prominently marked POSSIBLE / NOT CONFIRMED.
-- [x] Dedicated **full-page Notes** sheet immediately after *each* day's itinerary, plus QR shortcuts to official maps. The PDF maintains **¼-inch minimum safe margins** on all sides.
+- [x] Dedicated **full-page Notes** sheet facing each Tuesday–Thursday itinerary, plus QR shortcuts to official maps. The PDF maintains **¼-inch minimum safe margins** on all sides.
 - [x] Optional high-resolution 11×17 printable map supplement created from the organizer's provided NPS National Mall, Mount Vernon, National Harbor and bus-company maps. Distributed as a separate PDF attachment; not embedded in GitHub Pages yet.
 - [ ] Optional postcard-background integration. The supplied image was reviewed, but the current licensed Capitol photography and official teal/gold brand palette have been retained to preserve the established visual hierarchy. Source artwork was not uploaded to the public GitHub repo.
 
@@ -59,3 +59,7 @@ GitHub Pages is a static host. The optional Google Apps Script + private Google 
 Page 1 is the photo cover, page 2 has contacts and hotels, and pages 3–10 pair each day's itinerary with a ruled Notes sheet and its visitor-map QR. Pages 11–12 condense landmarks and FAQs. The physical quarter-inch white borders remain. The cover uses a smaller QR panel and an optically centered logo. Interior headers use the same Capitol photo under a teal gradient. Allow a clear gutter between time labels and itinerary text. Packing, Travel Light and Keep Exploring sections are omitted from print.
 
 The current bank has 90 questions with stable IDs. Review prompts, choices, explanations and linked sources for slavery-related material before adding questions. Favor observable landmark details and source-verifiable history. The print-only itinerary and FAQ wording lives alongside its full version in `data/guide.json`.
+
+### November 8 · Facing-page booklet revision
+
+Monday’s itinerary and National Harbor map share page 3. Tuesday, Wednesday and Thursday each have a left-hand itinerary facing a ruled Notes page (4–5, 6–7 and 8–9). Landmarks and FAQs occupy pages 10 and 11. Page 12 is a photographic back cover with the church logo, tour title and dates.
