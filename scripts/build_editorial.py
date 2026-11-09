@@ -253,6 +253,59 @@ def qr_callout(label,url,width=152):
     para("Scan to open the online guide or live visitor map.",TX+86,top+37,TW-103,7.8,10.8,False,CREAM)
     top+=height+12
 
+_MENO_FONT=None
+_MENO_ATTEMPTED=False
+def get_meno_font():
+    """Render only cover-letter shapes from the official EBC font download.
+
+    The original font binary is never published or stored in the website.
+    """
+    global _MENO_FONT,_MENO_ATTEMPTED
+    if _MENO_ATTEMPTED:return _MENO_FONT
+    _MENO_ATTEMPTED=True
+    import zipfile
+    candidates=[Path("/mnt/data/Meno Banner.zip"),ROOT/"Meno Banner.zip"]
+    payload=None
+    for candidate in candidates:
+        if candidate.is_file():
+            payload=candidate.read_bytes();break
+    if not payload:
+        # Official EBC brand-guide download; public link already in the brand standards.
+        origin="https://firebasestorage.googleapis.com/v0/b/standards-site-beta.appspot.com/o/documents%2Feb43a98f3e2%2Fb18a34a75a9%2FMeno%20Banner.zip?alt=media&token=7c489b19-7978-417f-ab11-ba47f91e0e93"
+        try:
+            response=requests.get(origin,timeout=12)
+            response.raise_for_status()
+            payload=response.content
+        except Exception as ex:print("Meno Banner download unavailable; Montserrat bold fallback:",ex)
+    if payload:
+        try:
+            with zipfile.ZipFile(io.BytesIO(payload)) as z:
+                name=next(n for n in z.namelist() if n.endswith("meno-banner-bold.otf") and not n.startswith("__"))
+                _MENO_FONT=z.read(name)
+            print("Using official EBC Meno Banner Bold for cover display")
+        except Exception as ex:print("Unable to load Meno Banner:",ex)
+    return _MENO_FONT
+
+def display_meno(text,x,y,maxw=325,maxh=37):
+    """Draw an anti-aliased, high-resolution title graphic, never a font asset."""
+    face=get_meno_font()
+    if not face:return False
+    try:
+        font=ImageFont.truetype(io.BytesIO(face),size=128)
+        bb=font.getbbox(text,stroke_width=0)
+        iw=bb[2]-bb[0]+20;ih=bb[3]-bb[1]+22
+        img=PILImage.new("RGBA",(iw,ih),(0,0,0,0))
+        d=ImageDraw.Draw(img)
+        d.text((10-bb[0],11-bb[1]),text,font=font,fill=(4,79,86,255))
+        tw,th=iw/3.2,ih/3.2
+        scale=min(1,maxw/tw,maxh/th)
+        width=tw*scale;height=th*scale
+        c.drawImage(ImageReader(img),x,y,width=width,height=height,mask="auto")
+        return True
+    except Exception as ex:
+        print("Meno Banner display failed:",ex)
+        return False
+
 def page_cover():
     global page_number
     finish()
@@ -267,10 +320,12 @@ def page_cover():
     rr(31,H-324,166,35,10,GOLD)
     ctext(44,H-311,"NOVEMBER 9-12, 2026",9.0,FONT_BOLD,INK)
     # Fresh editorial cover; not using any prior border or layout.
-    ctext(TX,258,"WASHINGTON",27.5,FONT_BOLD,TEAL)
-    ctext(TX,222,"LEGACY TOUR",29.4,FONT_BOLD,TEAL)
+    if not display_meno("WASHINGTON",TX,244,maxw=319,maxh=36):
+        ctext(TX,252,"WASHINGTON",27.5,FONT_BOLD,TEAL)
+    if not display_meno("LEGACY TOUR",TX,207,maxw=319,maxh=36):
+        ctext(TX,215,"LEGACY TOUR",29.4,FONT_BOLD,TEAL)
     c.setStrokeColor(GOLD);c.setLineWidth(3)
-    c.line(TX,205,121,205)
+    c.line(TX,199,121,199)
     para("A four-day guide to places, people, and history.",TX,416,TW-15,10.1,14.5,False,INK)
     # QR tile is built into the cream surface as a rounded light card.
     rr(31,39,334,116,12,WHITE)
