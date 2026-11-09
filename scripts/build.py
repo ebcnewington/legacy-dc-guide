@@ -71,6 +71,17 @@ def register_brand_typefaces():
             ft=FontToolsTTFont(io.BytesIO(rsp.content))
             ft=instantiateVariableFont(ft,{"wght":weight},inplace=True)
             ft.flavor=None
+            # Give each instanced static font a unique internal identity.
+            # Otherwise ReportLab collapses both weights into Montserrat-Thin.
+            family="Montserrat"
+            subfamily="Regular" if weight==400 else "Bold"
+            for platform,encoding,language in ((3,1,1033),(1,0,0)):
+                for name_id,value in ((1,family),(2,subfamily),(4,family+" "+subfamily),(6,"Montserrat-"+subfamily)):
+                    try:
+                        ft["name"].setName(value,name_id,platform,encoding,language)
+                    except Exception:pass
+            ft["OS/2"].usWeightClass=weight
+            ft["head"].macStyle=1 if weight==700 else 0
             path=font_dir/(name+".ttf")
             ft.save(path)
             pdfmetrics.registerFont(ReportLabTTFont(name,str(path)))
