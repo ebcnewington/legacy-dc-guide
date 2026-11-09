@@ -33,7 +33,8 @@ def load_capitol():
         print("Using existing Capitol imagery")
         # Apple uses a real 180px PNG at the site root, not the manifest fallback.
         with PILImage.open(ASSETS/"icon-512.png") as cached:
-            ImageOps.fit(cached.convert("RGB"),(180,180),method=PILImage.Resampling.LANCZOS,centering=(.5,.41)).save(ROOT/"apple-touch-icon.png","PNG",optimize=True)
+            for filename in ("apple-touch-icon.png","apple-touch-icon-capitol-2026.png","apple-touch-icon-180x180.png"):
+                ImageOps.fit(cached.convert("RGB"),(180,180),method=PILImage.Resampling.LANCZOS,centering=(.5,.41)).save(ROOT/filename,"PNG",optimize=True)
         return
     headers={"User-Agent":"Mozilla/5.0 (compatible; EmmanuelLegacyGuide/1.0)"}
     img=None; errors=[]
@@ -49,7 +50,8 @@ def load_capitol():
     ImageOps.fit(img,(1680,900),method=PILImage.Resampling.LANCZOS,centering=(.5,.44)).save(ASSETS/"capitol-hero.jpg","JPEG",quality=89,optimize=True)
     for n in (192,512):
         ImageOps.fit(img,(n,n),method=PILImage.Resampling.LANCZOS,centering=(.5,.45)).save(ASSETS/f"icon-{n}.png","PNG",optimize=True)
-    ImageOps.fit(img,(180,180),method=PILImage.Resampling.LANCZOS,centering=(.5,.42)).save(ROOT/"apple-touch-icon.png","PNG",optimize=True)
+    for filename in ("apple-touch-icon.png","apple-touch-icon-capitol-2026.png","apple-touch-icon-180x180.png"):
+        ImageOps.fit(img,(180,180),method=PILImage.Resampling.LANCZOS,centering=(.5,.42)).save(ROOT/filename,"PNG",optimize=True)
 def qr_image(url):
     code=qrcode.QRCode(box_size=8,border=3,error_correction=qrcode.constants.ERROR_CORRECT_M);code.add_data(url);code.make(fit=True)
     img=code.make_image(fill_color="#044F56",back_color="#FFFFFF").convert("RGB")
@@ -92,8 +94,16 @@ S={
  "qr":ParagraphStyle("qr",fontName=FONT_BOLD,fontSize=7.4,leading=10,textColor=TEAL,alignment=1),
  "heading":ParagraphStyle("heading",fontName=FONT_BOLD,fontSize=10,leading=13,textColor=TEAL,spaceAfter=5),
 }
+def clip_to_white_print_border(c):
+    """Actual white border: all full-page colors/images clipped to 1/4 inch inside the paper."""
+    c.setFillColor(WHITE);c.rect(0,0,W,H,fill=1,stroke=0)
+    clipping=c.beginPath()
+    clipping.rect(M,M,W-2*M,H-2*M)
+    c.clipPath(clipping,stroke=0,fill=0)
+
 def draw_cover(c,doc):
     c.saveState()
+    clip_to_white_print_border(c)
     c.setFillColor(CREAM);c.rect(0,0,W,H,fill=1,stroke=0)
     photo=ImageReader(str(ASSETS/"capitol-hero.jpg"))
     c.drawImage(photo,0,H-330,width=W,height=330,preserveAspectRatio=False,mask="auto")
@@ -122,16 +132,17 @@ def draw_cover(c,doc):
     c.restoreState()
 def draw_page(c,doc):
     c.saveState()
+    clip_to_white_print_border(c)
     c.setFillColor(PALE);c.rect(0,0,W,H,fill=1,stroke=0)
     c.setFillColor(TEAL);c.rect(0,H-52,W,52,fill=1,stroke=0)
     c.setFillColor(GOLD);c.rect(0,H-56,W,4,fill=1,stroke=0)
     c.setFillColor(WHITE);c.setFont(FONT_BOLD,10)
     c.drawString(M,H-31,"WASHINGTON LEGACY TOUR")
     c.setFont(FONT_REG,7.4);c.drawRightString(RIGHT,H-30,"NOV 9–12, 2026")
-    c.setStrokeColor(LTTEAL);c.setLineWidth(.5);c.line(M,29,RIGHT,29)
+    c.setStrokeColor(LTTEAL);c.setLineWidth(.5);c.line(M+2,33,RIGHT-2,33)
     c.setFont(FONT_REG,6.8);c.setFillColor(TEAL)
-    c.drawString(M,18,"EMMANUEL BAPTIST CHURCH")
-    c.drawRightString(RIGHT,18,f"{doc.page:02d}")
+    c.drawString(M+2,21,"EMMANUEL BAPTIST CHURCH")
+    c.drawRightString(RIGHT-2,21,f"{doc.page:02d}")
     c.restoreState()
 def section(title):
     return [para(title,"section"),HRFlowable(width="100%",thickness=1,color=GOLD,spaceAfter=9)]
