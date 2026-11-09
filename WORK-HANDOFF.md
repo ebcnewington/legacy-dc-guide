@@ -94,3 +94,7 @@ The current bank has 90 questions with stable IDs. Review prompts, choices, expl
 ### November 8 · Facing-page booklet revision
 
 Monday’s itinerary and National Harbor map share page 3. Tuesday, Wednesday and Thursday each have a left-hand itinerary facing a ruled Notes page (4–5, 6–7 and 8–9). Landmarks and FAQs occupy pages 10 and 11. Page 12 is a photographic back cover with the church logo, tour title and dates.
+
+### Map supplement · print revision
+
+The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-photo header, Montserrat type and quarter-inch white borders. The dining information sits beside the National Harbor map. The original map artwork remains at its original scale, with lossless compression. Continue editing the existing supplement file.
