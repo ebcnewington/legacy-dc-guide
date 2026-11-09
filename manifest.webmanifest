@@ -2,7 +2,7 @@
   "name": "Washington Legacy Tour — Emmanuel Baptist Church",
   "short_name": "Legacy Tour",
   "description": "Nov 9–12, 2026: schedules, hotel contacts, history and trivia in Washington, D.C.",
-  "start_url": "./",
+  "start_url": "./?installed=capitol-2026",
   "scope": "./",
   "display": "standalone",
   "background_color": "#FFFFFF",
@@ -26,5 +26,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "id": "./?id=legacy-capitol-2026"
 }
