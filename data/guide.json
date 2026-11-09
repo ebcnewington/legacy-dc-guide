@@ -238,9 +238,10 @@
         {
           "title": "Official Mount Vernon Audio Tour",
           "url": "https://www.mountvernon.org/plan-your-visit/audio-tour",
-          "cost": "Included with admission",
-          "description": "29 narrated stops; the estate also offers a mobile listening option.",
-          "type": "official"
+          "cost": "Included with estate admission",
+          "description": "Official 29-stop narrated tour through the Mount Vernon estate, with a take-home recap option. Pick up an audio device at the estate.",
+          "type": "official",
+          "duration": "29 stops · Self-paced"
         }
       ]
     },
@@ -252,7 +253,19 @@
       "detail": "The monument's stone changes color partway up because construction resumed years later with marble from other quarries.",
       "address": "2 15th St NW, Washington, DC 20024",
       "website": "https://www.nps.gov/wamo/",
-      "restrooms": "Washington Monument Lodge / Sylvan Theater area; hours may vary."
+      "restrooms": "Washington Monument Lodge / Sylvan Theater area; hours may vary.",
+      "audio": [
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
+        }
+      ]
     },
     {
       "id": "wwii",
@@ -261,7 +274,19 @@
       "summary": "A memorial honoring more than 16 million Americans who served during World War II.",
       "detail": "The Freedom Wall contains 4,048 gold stars, each representing approximately 100 Americans who died in military service.",
       "address": "1750 Independence Ave SW, Washington, DC 20024",
-      "website": "https://www.nps.gov/wwii/"
+      "website": "https://www.nps.gov/wwii/",
+      "audio": [
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
+        }
+      ]
     },
     {
       "id": "lincoln",
@@ -279,6 +304,16 @@
           "cost": "Free",
           "description": "National Park Service audio guide to the memorial and its history, divided into sections.",
           "type": "official"
+        },
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
         }
       ]
     },
@@ -289,7 +324,19 @@
       "summary": "A black granite wall inscribed with the names of Americans who died or remain missing.",
       "detail": "Names are arranged in the order of casualties, with the chronology beginning and ending near the middle of the memorial.",
       "address": "5 Henry Bacon Dr NW, Washington, DC 20002",
-      "website": "https://www.nps.gov/vive/"
+      "website": "https://www.nps.gov/vive/",
+      "audio": [
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
+        }
+      ]
     },
     {
       "id": "korea",
@@ -298,7 +345,19 @@
       "summary": "Nineteen figures of soldiers on patrol honor those who served in the Korean War.",
       "detail": "Their reflection in the polished wall creates the visual effect of 38 figures, a reference to the 38th parallel.",
       "address": "900 Ohio Dr SW, Washington, DC 20024",
-      "website": "https://www.nps.gov/kowa/"
+      "website": "https://www.nps.gov/kowa/",
+      "audio": [
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
+        }
+      ]
     },
     {
       "id": "jefferson",
@@ -308,7 +367,19 @@
       "detail": "The original statue was plaster; the present bronze statue replaced it in 1947.",
       "address": "16 E Basin Dr SW, Washington, DC 20242",
       "website": "https://www.nps.gov/thje/",
-      "restrooms": "Public facilities at the memorial may have limited hours."
+      "restrooms": "Public facilities at the memorial may have limited hours.",
+      "audio": [
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
+        }
+      ]
     },
     {
       "id": "reflecting-pool",
@@ -317,7 +388,19 @@
       "summary": "The long reflecting pool provides an iconic view toward the Washington Monument.",
       "detail": "Construction of the pool was not complete when the Lincoln Memorial was dedicated in 1922.",
       "address": "Lincoln Memorial Reflecting Pool, Washington, DC",
-      "website": "https://www.nps.gov/places/000/lincoln-memorial-reflecting-pool.htm"
+      "website": "https://www.nps.gov/places/000/lincoln-memorial-reflecting-pool.htm",
+      "audio": [
+        {
+          "title": "Washington DC Monuments Tour — GPS Audio",
+          "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
+        }
+      ]
     },
     {
       "id": "museum-bible",
@@ -329,7 +412,26 @@
       "website": "https://www.museumofthebible.org/plan-your-visit",
       "dining": "The museum's Manna restaurant and Milk + Honey café are options listed in the supplied companion; also see L’Enfant Plaza.",
       "restrooms": "Restrooms on all visitor floors; family restrooms on B1 and floors 2–6.",
-      "accessibility": "Wheelchairs may be available at Coat Check on a first-come, first-served basis."
+      "accessibility": "Wheelchairs may be available at Coat Check on a first-come, first-served basis.",
+      "audio": [
+        {
+          "title": "Museum of the Bible — Official Mobile App",
+          "url": "https://tickets.museumofthebible.org/mobile-app?mode=light",
+          "cost": "Free app",
+          "description": "Official self-guided and Top 10 tours with in-museum information. Bring your own headphones. The iOS app is rated 4.9/5 from 857 App Store ratings; Android rating 4.7/5 from 108 reviews (checked November 2026).",
+          "rating": "iOS 4.9/5 · 857 App Store ratings",
+          "provider": "Museum of the Bible",
+          "type": "rated",
+          "requiresApp": true
+        },
+        {
+          "title": "Free Guided Museum Tours",
+          "url": "https://www.museumofthebible.org/museum-tours",
+          "cost": "Free with museum admission · on-site reservation",
+          "description": "Live guides, not recordings. Includes Highlights (60 minutes), Christian Faith (75 minutes), and World of Jesus of Nazareth (45 minutes). Availability changes; tickets first come, first served.",
+          "type": "live"
+        }
+      ]
     },
     {
       "id": "national-mall",
@@ -350,18 +452,22 @@
           "type": "official"
         },
         {
-          "title": "Washington DC Monuments Narrated Walk",
+          "title": "Washington DC Monuments Tour — GPS Audio",
           "url": "https://apps.apple.com/us/app/washington-dc-monuments-tour/id1584974070",
-          "cost": "Free app with in-app purchase",
-          "description": "GPS audio stories; App Store listing shows 4.6/5 from 75 ratings at research time. iPhone/iPad.",
-          "type": "rated"
+          "cost": "iOS · Free download; full walking tour $16.99",
+          "description": "App Store 4.6/5 from 75 ratings (checked November 2026). GPS narration and offline listening after downloading the tour. Bring headphones and a power bank.",
+          "type": "rated",
+          "rating": "4.6/5 · 75 App Store ratings",
+          "requiresApp": true,
+          "provider": "Experience History LLC"
         },
         {
           "title": "Action Tour Guide — Monument Audio Walk",
           "url": "https://washington.org/find-dc-listings/action-tour-guide",
-          "cost": "Paid tour",
-          "description": "GPS-triggered narrated tour, offline support; separate app required. TripAdvisor listing has a 4.8/5 rating from nine reviews at research time.",
-          "type": "rated"
+          "cost": "Paid app download",
+          "description": "GPS-triggered walking-tour narration from Action Tour Guide. Requires a purchase and app download. Exact star rating not independently established.",
+          "type": "rated",
+          "rating": null
         }
       ]
     },
@@ -373,7 +479,17 @@
       "detail": "The dome was completed in January 1866. The bronze Statue of Freedom on top is 19 feet, 6 inches tall.",
       "address": "First St SE, Washington, DC 20004",
       "website": "https://www.visitthecapitol.gov/",
-      "accessibility": "Security screening is scheduled for 6:00 p.m. Wednesday; specific entrance instructions must come from trip leaders."
+      "accessibility": "Security screening is scheduled for 6:00 p.m. Wednesday; specific entrance instructions must come from trip leaders.",
+      "audio": [
+        {
+          "title": "Official Capitol Exhibition Hall Audio Tour",
+          "url": "https://www.visitthecapitol.gov/visit/accessibility-services/audio-described-tour",
+          "cost": "Free · Official visitor center resource",
+          "description": "A 95-minute narrated guide, or choose individual exhibit sections. This relates to the Visitor Center Exhibition Hall, not the Wednesday evening worship service.",
+          "type": "official",
+          "duration": "95 minutes or individual sections"
+        }
+      ]
     },
     {
       "id": "arlington",
@@ -390,8 +506,8 @@
         {
           "title": "Arlington Interpretive Tram (live narration)",
           "url": "https://www.arlingtoncemetery.mil/Visit/Tours-and-Groups",
-          "cost": "Paid tram · trip estimate approximately $22",
-          "description": "Live-narrated, hop-on/hop-off tram, not a voice recording. Price and arrangements should be confirmed.",
+          "cost": "Paid, live narration · Approx. $22 per trip schedule",
+          "description": "Arlington's only authorized interpretive tour bus offers a live-narrated hop-on/hop-off route with stops including the Tomb of the Unknown Soldier. This is not a prerecorded audio tour; confirm ticket cost and schedule.",
           "type": "live"
         }
       ]
@@ -572,6 +688,14 @@
     {
       "label": "Washington DC tourism",
       "url": "https://washington.org/"
+    },
+    {
+      "label": "Museum of the Bible — official self-guided app",
+      "url": "https://tickets.museumofthebible.org/mobile-app?mode=light"
+    },
+    {
+      "label": "U.S. Capitol — 95-minute audio described tour",
+      "url": "https://www.visitthecapitol.gov/visit/accessibility-services/audio-described-tour"
     }
   ],
   "trivia": {
