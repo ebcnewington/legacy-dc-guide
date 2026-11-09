@@ -198,7 +198,7 @@ def essentials(story):
         story.append(Spacer(1,8))
     story.extend(section("Hotel addresses"))
     for h in e.get("hotels",[]):
-        story.append(card(h.get("name","Hotel"),h.get("address","")+"  •  "+h.get("notes","")))
+        story.append(card(h.get("name","Hotel"),h.get("address","")+"  |  Tel: "+h.get("phone","Check with front desk")+"  •  "+h.get("notes","")))
         story.append(Spacer(1,8))
     story.extend(section("Preparing for the trip"))
     for t in e.get("tips",[]):
