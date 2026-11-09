@@ -41,3 +41,9 @@ GitHub Pages is a static host. The optional Google Apps Script + private Google 
 - [x] Confirm PDF cover links to the online guide through a QR code.
 - [x] Improve PDF spacing with per-day QR map resources, four full-page ruled notes sheets and an explicit quarter-inch margin minimum.
 - [~] Community backend moved from Cloudflare to Google Apps Script + private Google Sheets. Script/code are ready; anonymous web app deployment requires authorization by the owner's Google account.
+
+### November 8 — Physical print border and Apple icon recheck
+- [x] Correction: white **¼-inch physical border** enforced by clipping every PDF page, including the cover (not just the text margin).
+- [x] Generated multiple 180×180 Capitol PNG filenames, including a fresh cache-busting version; iOS meta links use a direct absolute URL under the GitHub Pages subpath.
+- [x] PDF build validation checks the clipping frame on **every page** and checks the fresh Apple image.
+- [ ] iOS live Home Screen selection can only be confirmed from the actual iPhone after Safari offers the new icon.
