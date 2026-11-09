@@ -37,10 +37,28 @@ function schedule(){
  const d=days[dayIndex];
  $("#itinerary-heading").innerHTML='<h2>'+esc(d.heading||d.label)+'</h2><p>'+esc(d.label)+'</p>';
  $("#itinerary-content").innerHTML='<div class="timeline">'+(d.items||[]).map(itemSection).join("")+'</div>';
- const now=new Date(),iso=new Intl.DateTimeFormat("en-CA",{timeZone:G.meta?.timezone||"America/New_York",year:"numeric",month:"2-digit",day:"2-digit"}).format(now);
- const future=days.find(x=>x.date>=iso)||days[days.length-1];
- const first=(future.items||[])[0];
- $("#next-event").innerHTML=first?'<div class="upcoming-day">'+esc(future.label)+'</div><div class="upcoming-time">'+esc(first.time)+'</div><div class="upcoming-title">'+esc(first.title)+'</div>'+paragraphs(first.description)+link("#itinerary","View full schedule","calendar"):"See the daily itinerary for details.";
+ const now=new Date();
+ // Scheduled event times use Eastern Standard Time during this November trip.
+ const eventDateTime=(d,e)=>{
+  const m=(e.time||"").match(/^(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if(!m||!d.date)return null;
+  let h=(Number(m[1])%12)+(m[3].toUpperCase()==="PM"?12:0);
+  return new Date(d.date+"T"+String(h).padStart(2,"0")+":"+m[2]+":00-05:00");
+ };
+ let upcoming=null;
+ for(const d of days){
+  for(const e of d.items||[]){
+   const moment=eventDateTime(d,e);
+   if(moment&&moment.getTime()>=now.getTime()-4*60000){upcoming={d,e};break}
+  }
+  if(upcoming)break;
+ }
+ if(upcoming){
+  const {d,e}=upcoming;
+  $("#next-event").innerHTML='<div class="upcoming-day">'+esc(d.label)+'</div><div class="upcoming-time">'+esc(e.time)+'</div><div class="upcoming-title">'+esc(e.title)+'</div>'+paragraphs(e.description)+link("#itinerary","View full schedule","calendar");
+ }else{
+  $("#next-event").innerHTML='<strong>Thank you for traveling with us.</strong><p>The scheduled activities have concluded. You can still explore places, audio guides, and trivia.</p>'+link("#trivia","Play Washington trivia","quiz");
+ }
 }
 function placeGroup(p){
  if(["national-harbor"].includes(p.id))return "hotel";
