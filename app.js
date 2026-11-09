@@ -97,22 +97,75 @@ function essentials(){
  $("#maps-content").innerHTML='<div class="resources">'+maps.filter(r=>safeURL(r.url)).map(r=>'<a class="resource-link" href="'+esc(safeURL(r.url))+'" target="_blank" rel="noopener noreferrer"><span>'+esc(r.label)+'</span>'+ico("link")+'</a>').join("")+'</div>';
 }
 let allRatings=getLS("ebc_trivia_ratings_1",{});
-function isCommunityLive(){return triviaService.status==="live"&&/^https:\/\/[^\s/]+/.test(triviaService.apiBaseUrl||"")}
+function usesAppsScript(){return triviaService?.provider==="apps-script"}
+function isCommunityLive(){
+ if(triviaService?.status!=="live")return false;
+ if(usesAppsScript()){
+  const target=triviaService.scriptUrl||"";
+  return /^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec(?:\?.*)?$/i.test(target);
+ }
+ return /^https:\/\/[^\s/]+/.test(triviaService?.apiBaseUrl||"");
+}
+function loadAggregateJsonp(url){
+ return new Promise((resolve,reject)=>{
+  const callback="__ebcTriviaCb_"+Math.random().toString(36).slice(2);
+  const element=document.createElement("script");
+  const cleanup=()=>{
+   clearTimeout(timer);
+   try{delete window[callback]}catch(_){window[callback]=undefined}
+   element.remove();
+  };
+  const timer=setTimeout(()=>{cleanup();reject(new Error("Shared statistics timed out"))},9000);
+  window[callback]=stats=>{cleanup();resolve(stats)};
+  element.onerror=()=>{cleanup();reject(new Error("Shared statistics unavailable"))};
+  const request=new URL(url);
+  request.searchParams.set("action","stats");
+  request.searchParams.set("callback",callback);
+  request.searchParams.set("_",Date.now().toString());
+  element.src=request.href;
+  element.referrerPolicy="no-referrer";
+  document.head.appendChild(element);
+ });
+}
 async function loadTriviaService(){
  try{
-  const cfg=await fetch("data/trivia-config.json",{cache:"no-store"});if(cfg.ok)triviaService=await cfg.json();
+  const cfg=await fetch("data/trivia-config.json",{cache:"no-store"});
+  if(cfg.ok)triviaService=await cfg.json();
   if(!isCommunityLive())return;
-  const response=await fetch(triviaService.apiBaseUrl.replace(/\/$/,"")+"/v1/stats",{mode:"cors",cache:"no-store"});
-  if(!response.ok)throw Error("Stats endpoint unavailable");
-  communityStats=await response.json();
- }catch(e){console.warn("Shared trivia statistics unavailable",e);communityStats=null}
+  if(usesAppsScript()){
+   communityStats=await loadAggregateJsonp(triviaService.scriptUrl);
+  }else{
+   const response=await fetch(triviaService.apiBaseUrl.replace(/\/$/,"")+"/v1/stats",{mode:"cors",cache:"no-store"});
+   if(!response.ok)throw Error("Stats endpoint unavailable");
+   communityStats=await response.json();
+  }
+  if(!communityStats||!Number.isFinite(communityStats.totalGames))communityStats=null;
+ }catch(e){
+  console.warn("Shared trivia statistics unavailable",e);
+  communityStats=null;
+ }
 }
 async function postCommunity(path,body){
  if(!isCommunityLive())return false;
  try{
-  const response=await fetch(triviaService.apiBaseUrl.replace(/\/$/,"")+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),mode:"cors"});
+  if(usesAppsScript()){
+   // Apps Script redirects Content Service responses and does not expose CORS
+   // headers. We send a simple POST with no-cors; the browser cannot confirm
+   // whether the server accepted the submission. Stats come back via JSONP.
+   const kind=path.endsWith("/rating")?"rating":"score";
+   await fetch(triviaService.scriptUrl,{
+    method:"POST",mode:"no-cors",cache:"no-store",
+    headers:{"Content-Type":"text/plain;charset=UTF-8"},
+    body:JSON.stringify({kind,...body})
+   });
+   return true; // request sent; server acknowledgement cannot be inspected
+  }
+  const response=await fetch(triviaService.apiBaseUrl.replace(/\/$/,"")+path,{
+   method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify(body),mode:"cors"
+  });
   return response.ok;
- }catch(e){console.warn("Shared trivia submission delayed",e);return false}
+ }catch(e){console.warn("Shared trivia submission could not be sent",e);return false}
 }
 function pendingSubmission(type,payload){
  if(!isCommunityLive())return;
@@ -175,7 +228,7 @@ function renderQuestion(){
   $("#compare-trivia").setAttribute("aria-expanded",String(!panel.hidden));
  };
  $("#end-trivia").onclick=finishGame;
- if(revealed){$("#next-trivia").onclick=nextQuestion;document.querySelectorAll("[data-stars]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.stars);allRatings[q.id]=n;putLS("ebc_trivia_ratings_1",allRatings);document.querySelectorAll("[data-stars]").forEach(s=>{const k=Number(s.dataset.stars);s.classList.toggle("selected",k<=n);s.setAttribute("aria-pressed",String(k===n))});$("#rating-confirmation").textContent=isCommunityLive()?"Sharing with fellow travelers…":"Saved on this device";pendingSubmission("/v1/rating",{questionId:q.id,deviceToken,stars:n})})}
+ if(revealed){$("#next-trivia").onclick=nextQuestion;document.querySelectorAll("[data-stars]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.stars);allRatings[q.id]=n;putLS("ebc_trivia_ratings_1",allRatings);document.querySelectorAll("[data-stars]").forEach(s=>{const k=Number(s.dataset.stars);s.classList.toggle("selected",k<=n);s.setAttribute("aria-pressed",String(k===n))});$("#rating-confirmation").textContent=isCommunityLive()?"Saved here · shared result pending":"Saved on this device";pendingSubmission("/v1/rating",{questionId:q.id,deviceToken,stars:n})})}
  else document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.answer);game.selection=n;game.correct=n===q.correctIndex;game.answered++;if(game.correct)game.score++;storeGame();renderQuestion()});
 }
 function finishGame(){
