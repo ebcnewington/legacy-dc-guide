@@ -14,6 +14,7 @@ import requests, qrcode
 from PIL import Image as PILImage, ImageDraw, ImageFont, ImageOps
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
+from reportlab.pdfbase import pdfmetrics
 from reportlab.lib.utils import ImageReader
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import Paragraph
@@ -52,15 +53,44 @@ P=Path(ROOT)/"guide-half-sheet.pdf"
 def Pstyle(name,size=9.1,leading=None,weight=False,color=INK,align=0):
     return ParagraphStyle(name,fontName=FONT_BOLD if weight else FONT_REG,fontSize=size,leading=leading or size*1.5,
                           textColor=color,spaceBefore=0,spaceAfter=0,alignment=align,allowWidows=0,allowOrphans=0)
-def para(text,x,t,w,size=9.1,leading=None,weight=False,color=INK):
+def fitted_paragraph(text,w,size=9.1,leading=None,weight=False,color=INK,align=0):
+    """Avoid stranded last words, keeping copy intact and card headings attached."""
     txt=html.escape(str(text or "")).replace("\n","<br/>")
-    obj=Paragraph(txt,Pstyle("body",size,leading,weight,color))
-    _,h=obj.wrap(w,850)
+    steps=(1.0,.99,.98,.97,.96,.95,.94) if size<=10.1 and len(str(text))>32 else (1.0,)
+    for scale in steps:
+        fs=size*scale
+        ld=(leading or size*1.5)*scale
+        obj=Paragraph(txt,Pstyle("text",fs,ld,weight,color,align))
+        _,h=obj.wrap(w,850)
+        lines=obj.blPara.lines
+        if len(lines)<2:return obj,h
+        last=lines[-1]
+        words=last[1] if isinstance(last,tuple) else getattr(last,'words',[])
+        if not words:return obj,h
+        last_line=' '.join(str(word) for word in words)
+        if len(words)>=2 and len(last_line)>=12:return obj,h
+    # If needed, bind the final two words to prevent a one-word widow.
+    lines=obj.blPara.lines
+    if len(lines)>1:
+        last=lines[-1]
+        words=last[1] if isinstance(last,tuple) else getattr(last,'words',[])
+        if len(words)==1:
+            raw=str(text or "")
+            parts=raw.rsplit(" ",1)
+            if len(parts)==2 and len(parts[-1])<=22:
+                joined=html.escape(parts[0])+"&nbsp;"+html.escape(parts[1])
+                alternate=Paragraph(joined,Pstyle("no-widow",size*.96,(leading or size*1.5)*.96,weight,color,align))
+                _,new_h=alternate.wrap(w,850)
+                return alternate,new_h
+    return obj,h
+
+def para(text,x,t,w,size=9.1,leading=None,weight=False,color=INK,align=0):
+    obj,h=fitted_paragraph(text,w,size,leading,weight,color,align)
     obj.drawOn(c,x,H-t-h)
     return h
+
 def ph(text,w,size=9.1,leading=None,weight=False):
-    obj=Paragraph(html.escape(str(text or "")),Pstyle("measure",size,leading,weight))
-    return obj.wrap(w,850)[1]
+    return fitted_paragraph(text,w,size,leading,weight)[1]
 def rr(x,y,w,h,r,fill,stroke=None,sw=.7):
     c.setLineWidth(sw)
     c.setFillColor(fill)
@@ -81,9 +111,18 @@ def logo(x,y,width=120):
             return
     except Exception as e:print("Logo fallback:",e)
     ctext(x,y+12,"EMMANUEL BAPTIST CHURCH",9,FONT_BOLD,WHITE)
+def center_label(text,x,y,w,h,size=8.3,color=TEAL,font=None):
+    """Optically center short labels in rounded panels."""
+    font=font or FONT_BOLD
+    while pdfmetrics.stringWidth(text,font,size)>w-13 and size>6.8:
+        size-=.15
+    c.setFont(font,size)
+    c.setFillColor(color)
+    c.drawCentredString(x+w/2,y+(h-size)/2+size*.24,text)
+
 def pill(x,y,w,text,fg=TEAL,bg=SOFT,size=7.4):
     rr(x,y,w,20,10,bg)
-    ctext(x+9,y+6.5,text,size,FONT_BOLD,fg)
+    center_label(text,x,y,w,20,size,fg)
 def photo_card(x,y,w,h):
     """A rounded photo, unlike the earlier hard-edged image block."""
     c.saveState()
@@ -142,10 +181,11 @@ def ensure(height,section=None):
         return True
     return False
 
-def section_bar(title,letter=None):
+def section_bar(title,letter=None,follow_height=85):
+    """Keep headings with their first related content card."""
     global top
-    h=27
-    ensure(h+12)
+    h=31
+    ensure(h+follow_height+8)
     if letter:
         rr(TX,H-top-22,22,22,7,TEAL)
         ctext(TX+7,H-top-16,letter,9,FONT_BOLD,WHITE)
@@ -170,7 +210,7 @@ def draw_notes(d):
     ytop=159
     x=30; width=336
     rr(x,54,width,H-ytop-54,14,WHITE,LINE,0.8)
-    pill(43,H-ytop-37,103,"BUS INSTRUCTIONS",TEAL,SOFT,7)
+    pill(43,H-ytop-37,129,"BUS INSTRUCTIONS",TEAL,SOFT,7)
     ctext(47,H-ytop-61,"Meeting location / pickup instructions",8.1,FONT_REG,MUTED)
     c.setStrokeColor(LINE);c.setLineWidth(.75)
     # 14 generous, single-spaced writing rules that stop within rounded card.
@@ -205,7 +245,7 @@ def day_item(e,i):
     loc=e.get("location","")
     desc=e.get("description") or e.get("notes") or ""
     # Keep schedule descriptions intact, with full-height cards as needed.
-    rx=TX+89; rw=TW-101
+    rx=TX+85; rw=TW-94
     h_title=ph(title,rw,9.7,12.2,True)
     h_loc=ph(loc,rw,8.1,10.2) if loc else 0
     h_desc=ph(desc,rw,8.6,12.7) if desc else 0
@@ -216,12 +256,12 @@ def day_item(e,i):
     rr(TX,y,TW,card_h,10,WHITE,LINE,0.55)
     # Time stripe is gently separated rather than heavy or dark.
     rr(TX+7,y+7,77,card_h-14,7,SOFT)
-    time_top=top+11
-    if len(time)>17:
-        para(time,TX+13,time_top,64,7.3,9.0,True,TEAL)
-    else:
-        para(time,TX+13,time_top,65,8.0,10.5,True,TEAL)
-    tt=top+10
+    time_size,time_leading=(7.3,9.0) if len(time)>17 else (8.0,10.5)
+    time_h=ph(time,65,time_size,time_leading,True)
+    time_top=top+(card_h-time_h)/2
+    para(time,TX+13,time_top,65,time_size,time_leading,True,TEAL,align=1)
+    group_h=h_title+(h_loc+3 if loc else 0)+(h_desc+3 if desc else 0)
+    tt=top+(card_h-group_h)/2
     para(title,rx,tt,rw,9.7,12.2,True,TEAL)
     tt+=h_title+3
     if loc:
@@ -233,13 +273,15 @@ def day_item(e,i):
 
 def alert_card(title,description):
     global top
-    hh=ph(description,TW-25,8.6,12.9)
-    height=31+hh+12
+    th=ph(title,TW-24,8.9,11.8,True)
+    hh=ph(description,TW-24,8.6,12.9)
+    height=max(58,th+hh+27)
     ensure(height+8)
     y=H-top-height
     rr(TX,y,TW,height,10,YELLOW,GOLD,.7)
-    para(title,TX+12,top+10,TW-24,8.9,11.8,True,TEAL)
-    para(description,TX+12,top+27,TW-24,8.6,12.9)
+    start=top+(height-(th+hh+5))/2
+    para(title,TX+12,start,TW-24,8.9,11.8,True,TEAL)
+    para(description,TX+12,start+th+5,TW-24,8.6,12.9)
     top+=height+10
 
 def qr_callout(label,url,width=152):
@@ -249,8 +291,13 @@ def qr_callout(label,url,width=152):
     y=H-top-height
     rr(TX,y,TW,height,11,TEAL)
     qr_at(url,TX+9,y+8,68)
-    para(label,TX+86,top+13,TW-97,9.1,12.5,True,WHITE)
-    para("Scan to open the online guide or live visitor map.",TX+86,top+37,TW-103,7.8,10.8,False,CREAM)
+    caption="Scan for the guide, directions and visitor information."
+    lh=ph(label,TW-97,9.1,12.5,True)
+    ch=ph(caption,TW-103,7.8,10.8)
+    content_h=lh+5+ch
+    start=top+(height-content_h)/2
+    para(label,TX+86,start,TW-97,9.1,12.5,True,WHITE)
+    para(caption,TX+86,start+lh+5,TW-103,7.8,10.8,False,CREAM)
     top+=height+12
 
 _MENO_FONT=None
@@ -318,7 +365,7 @@ def page_cover():
     logo(44,H-70,122)
     # Floating date chip attached visually to the image card.
     rr(31,H-324,166,35,10,GOLD)
-    ctext(44,H-311,"NOVEMBER 9-12, 2026",9.0,FONT_BOLD,INK)
+    center_label("NOVEMBER 9-12, 2026",31,H-324,166,35,9.0,INK)
     # Fresh editorial cover; not using any prior border or layout.
     if not display_meno("WASHINGTON",TX,244,maxw=319,maxh=36):
         ctext(TX,252,"WASHINGTON",27.5,FONT_BOLD,TEAL)
@@ -329,9 +376,12 @@ def page_cover():
     para("A four-day guide to places, people, and history.",TX,416,TW-15,10.1,14.5,False,INK)
     # QR tile is built into the cream surface as a rounded light card.
     rr(31,39,334,116,12,WHITE)
-    rr(45,112,161,29,8,SOFT)
-    ctext(56,122,"YOUR DIGITAL GUIDE",8.4,FONT_BOLD,TEAL)
-    para("Schedule, directions, audio tours, and trivia - updated online.",45,505,205,8.7,12.6,False,INK)
+    rr(45,112,193,29,8,SOFT)
+    center_label("YOUR DIGITAL GUIDE",45,112,193,29,8.4,TEAL)
+    para("Schedule, maps and narrated tours.",45,505,205,8.6,12.2,False,INK)
+    rr(45,49,198,32,9,colors.HexColor("#FFF0C7"))
+    center_label("97 QUESTIONS  /  DC TRIVIA",45,61,198,18,7.6,TEAL)
+    center_label("Fun, educational facts from our stops",45,49,198,17,7.2,INK,FONT_REG)
     qr_at(site,262,51,88)
     c.setFillColor(AQUA)
     c.circle(48,52,3,stroke=0,fill=1)
@@ -339,7 +389,7 @@ def page_cover():
 def page_overview():
     global top
     new_page("Travel overview","Four days. One guide.","All dates, hotel information, and bus details in one place.")
-    section_bar("Your journey")
+    section_bar("Your journey",follow_height=58)
     for n,d in enumerate(G.get("itinerary",[]),1):
         full=d.get("heading","")
         hh=ph(full,TW-66,9.0,13.1,True)
@@ -348,7 +398,7 @@ def page_overview():
         y=H-top-h
         rr(TX,y,TW,h,9,WHITE,LINE,.6)
         rr(TX+8,y+8,31,h-16,7,TEAL)
-        ctext(TX+15,y+h/2-3,str(n).zfill(2),9.2,FONT_BOLD,WHITE)
+        center_label(str(n).zfill(2),TX+8,y+8,31,h-16,9.2,WHITE)
         para(d.get("label",""),TX+50,top+7,TW-63,7.6,10,False,MUTED)
         para(full,TX+50,top+19,TW-62,9.0,13.1,True,TEAL)
         top+=h+7
@@ -385,7 +435,7 @@ def contact_card(person):
     ctext(TX+12,y+33,person.get("name",""),10.2,FONT_BOLD,TEAL)
     para(person.get("role",""),TX+12,top+27,TW-150,7.8,10.4,False,MUTED)
     rr(TX+TW-122,y+12,110,32,9,SOFT)
-    ctext(TX+TW-114,y+24,person.get("phone",""),7.7,FONT_BOLD,TEAL)
+    center_label(person.get("phone",""),TX+TW-122,y+12,110,32,7.7,TEAL)
     top+=height+9
 
 def hotel_card(hotel):
@@ -427,16 +477,16 @@ def packing_checklist():
 
 def practical():
     new_page("Travel essentials","Who to call","Keep this information handy during the tour.")
-    section_bar("Your trip leaders")
+    section_bar("Your trip leaders",follow_height=66)
     for item in G.get("essentials",{}).get("contacts",[]):contact_card(item)
-    section_bar("Your National Harbor hotels")
+    section_bar("Your National Harbor hotels",follow_height=125)
     for h in G.get("essentials",{}).get("hotels",[]):hotel_card(h)
     e=G.get("essentials",{})
     bus=e.get("bus",{})
     alert_card("CHARTER BUS",bus.get("notes","Monday departure from Emmanuel Baptist Church."))
     alert_card("POSSIBLE WEDNESDAY PICKUP - CHECK FIRST",
         e.get("possiblePickup",{}).get("notes","The L'Enfant Plaza SW pickup has not been confirmed."))
-    section_bar("Helpful reminders")
+    section_bar("Helpful reminders",follow_height=80)
     for tip in e.get("tips",[]):
         info_card(tip.get("title","Reminder"),tip.get("description",""))
     packing_checklist()
@@ -450,8 +500,10 @@ def info_card(title,description,tag=""):
     y=H-top-height
     rr(TX,y,TW,height,11,WHITE,LINE,.6)
     if tag: pill(TX+TW-60,y+height-22,47,tag,TEAL,SOFT,6.5)
-    para(title,TX+13,top+10,TW-28-(50 if tag else 0),9.9,12.4,True,TEAL)
-    para(description,TX+13,top+12+title_h+5,TW-26,8.8,13.1)
+    content_h=title_h+5+desc_h
+    text_top=top+(height-content_h)/2
+    para(title,TX+13,text_top,TW-28-(50 if tag else 0),9.9,12.4,True,TEAL)
+    para(description,TX+13,text_top+title_h+5,TW-26,8.8,13.1)
     top+=height+9
 
 def attractions():
@@ -469,7 +521,7 @@ def attractions():
 def faq():
     new_page("Travel essentials","Frequently asked","Answers from the supplied trip FAQs and companion materials.")
     for group in G.get("faq",[]):
-        section_bar(group.get("topic","Questions"))
+        section_bar(group.get("topic","Questions"),follow_height=105)
         for item in group.get("items",[]):info_card(item.get("q","Question"),item.get("a",""))
     if can_fit(95):qr_callout("Current travel information",site+"#essentials")
 
@@ -497,8 +549,8 @@ def maps_and_audio():
         x=TX+col*(width+gap)
         rr(x,y,width,height,10,WHITE,LINE,.65)
         qr_at(url,x+9,y+33,50)
-        ctext(x+74,y+height-28,"SCAN",7.0,FONT_BOLD,TEAL)
-        para(label,x+9,top+row*(height+10)+64,width-18,8.4,11.6,True,TEAL)
+        center_label("SCAN",x+69,y+height-38,width-79,22,7.0,TEAL)
+        para(label,x+10,top+row*(height+10)+64,width-20,8.4,11.6,True,TEAL,align=1)
     top+=4*(height+10)+6
     if can_fit(36):
         para("Audio tours, directions and live changes are available in the digital guide.",TX,top,TW,8.5,12.3,False,MUTED)
