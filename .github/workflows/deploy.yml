@@ -86,6 +86,14 @@ jobs:
           assert icon.size==(180,180),icon.size
           assert Path("assets/icon-192.png").stat().st_size > 3000
           assert Path("assets/icon-512.png").stat().st_size > 10000
+          named_icon=PIL.open("apple-touch-icon-capitol-2026.png")
+          assert named_icon.size==(180,180)
+          assert named_icon.getextrema()[0][1]>150, "Apple icon appears unexpectedly blank or dark"
+          assert Path("apple-touch-icon-180x180.png").exists()
+          for page in pdf.pages:
+              content=page.get_contents().get_data()
+              assert b"n 18 18 360 576 re W* n" in content, "1/4-inch white clipping frame missing"
+          print("Verified every PDF page uses a 0.25-inch white margin on ALL sides")
           print(f"PDF: {len(pdf.pages)} half-sheet pages with 4 full notes pages; Apple icon 180x180 verified")
           PYPDF
       - name: Configure GitHub Pages
