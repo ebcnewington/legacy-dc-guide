@@ -76,3 +76,11 @@ The user requested a **completely new** printable-booklet design, and then refin
 5. Ask user approval before external account permissions, purchasing, publishing sensitive information, or irreversible changes.
 
 **Do not start over.** The repository is authoritative for executable files. This handoff and the current ChatGPT Project conversation are authoritative for design intent and the user's approvals.
+
+## Work transition review · November 8, 2026
+
+The first Work review used `main` at `ee2abed` and [Pages run 42552767077](https://github.com/ebcnewington/legacy-dc-guide/actions/runs/42552767077). The deployed HTML, CSS, JavaScript, service worker, manifest and four guide/trivia JSON files matched the checkout byte for byte. The 23-page live booklet had a pure white 18-point border on every side of every page. The daily Notes sheets followed their itineraries on pages 4, 7, 10 and 12. The homepage and a complete local trivia session were inspected in the live browser, including reload, saved rating and score comparison.
+
+The separate three-page map supplement was located under the filename `Washington-Legacy-Tour-11x17-Map-Supplement-Print.pdf`. It remains a separate organizer-provided resource. The repository contains the official SVG logo lockups and the generator for the main booklet.
+
+Next technical follow-up: see the offline first-visit timing issue in the tracker. Shared trivia statistics still require an owner-authorized Apps Script deployment, the resulting `/exec` URL and `status: live` in the trivia configuration.

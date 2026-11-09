@@ -46,4 +46,10 @@ GitHub Pages is a static host. The optional Google Apps Script + private Google 
 - [x] Correction: white **¼-inch physical border** enforced by clipping every PDF page, including the cover (not just the text margin).
 - [x] Generated multiple 180×180 Capitol PNG filenames, including a fresh cache-busting version; iOS meta links use a direct absolute URL under the GitHub Pages subpath.
 - [x] PDF build validation checks the clipping frame on **every page** and checks the fresh Apple image.
-- [ ] iOS live Home Screen selection can only be confirmed from the actual iPhone after Safari offers the new icon.
+- [x] The organizer confirmed the Capitol photo when installing from Safari on iPhone. The black W appeared when installing from Firefox.
+
+### November 8 — Work transition review
+
+- [x] Verified the live guide against `main` at `ee2abed`, checked the 97 unique source-linked questions, played a game through completion and confirmed that its score and star rating survived a reload.
+- [x] Inspected the published 23-page booklet, the cover trivia promotion, the four daily Notes pages and the physical white borders. Located the separate three-page 11×17 map supplement.
+- [ ] Make offline setup reliable on a fresh visit. In `app.js`, `init()` waits for the guide data before attaching the window load listener that registers `sw.js`. A timing test of the current script produced zero registrations when load fired before the data response, and one when load fired after it. Verify the correction with a fresh browser profile, a delayed data response and an offline reload of the itinerary and trivia.
