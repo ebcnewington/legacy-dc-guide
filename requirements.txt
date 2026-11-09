@@ -4,3 +4,4 @@ Pillow>=11,<13
 requests>=2.32,<3
 fonttools>=4.55,<6
 svglib>=1.5,<2
+pypdf>=5,<7
