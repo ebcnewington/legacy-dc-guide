@@ -11,6 +11,8 @@ from reportlab.lib.units import inch
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle,HRFlowable,KeepTogether
 from reportlab.lib.utils import ImageReader
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPDF
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont as ReportLabTTFont
 from fontTools.ttLib import TTFont as FontToolsTTFont
@@ -91,6 +93,16 @@ def draw_cover(c,doc):
     photo=ImageReader(str(ASSETS/"capitol-hero.jpg"))
     c.drawImage(photo,0,H-330,width=W,height=330,preserveAspectRatio=False,mask="auto")
     # Subtle dark teal edge at the lower photograph
+    # Brand-safe dark strip lets the official cream-and-gold church lockup remain legible.
+    c.setFillColor(TEAL);c.rect(0,H-70,W,70,fill=1,stroke=0)
+    try:
+        drawing=svg2rlg(str(ASSETS/"ebc-primary-on-dark.svg"))
+        if drawing and drawing.width>0:
+            scale=116/drawing.width
+            drawing.scale(scale,scale)
+            renderPDF.draw(drawing,c,24,H-59)
+    except Exception as e:
+        print("Cover logo could not be rendered:",e)
     c.setFillColor(TEAL);c.rect(0,H-336,W,6,fill=1,stroke=0)
     c.setFillColor(GOLD);c.rect(0,H-341,W,5,fill=1,stroke=0)
     c.setFillColor(TEAL);c.setFont("Times-Bold",31);c.drawCentredString(W/2,229,"WASHINGTON")
