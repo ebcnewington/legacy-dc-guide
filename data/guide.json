@@ -530,21 +530,24 @@
       {
         "name": "AC Hotel National Harbor",
         "address": "156 Waterfront St, National Harbor, MD 20745",
-        "website": "https://www.marriott.com/en-us/hotels/wasar-ac-hotel-national-harbor-washington-dc-area/overview/",
-        "notes": "Hotel assignment for travelers requiring two beds (per the trip FAQ)."
+        "website": "https://www.marriott.com/en-us/hotels/waswa-ac-hotel-national-harbor-washington-dc-area/overview/",
+        "notes": "Hotel assignment for travelers requiring two beds (per the trip FAQ).",
+        "phone": "301-749-2299"
       },
       {
         "name": "Residence Inn National Harbor",
         "address": "192 Waterfront St, National Harbor, MD 20745",
         "website": "https://www.marriott.com/en-us/hotels/wasnh-residence-inn-national-harbor-washington-dc-area/overview/",
-        "notes": "Hotel assignment for travelers requiring one king bed (per the trip FAQ)."
+        "notes": "Hotel assignment for travelers requiring one king bed (per the trip FAQ).",
+        "phone": "301-749-4755"
       }
     ],
     "hotel": {
       "name": "AC Hotel National Harbor",
       "address": "156 Waterfront St, National Harbor, MD 20745",
-      "website": "https://www.marriott.com/en-us/hotels/wasar-ac-hotel-national-harbor-washington-dc-area/overview/",
-      "notes": "Hotel assignment for travelers requiring two beds (per the trip FAQ)."
+      "website": "https://www.marriott.com/en-us/hotels/waswa-ac-hotel-national-harbor-washington-dc-area/overview/",
+      "notes": "Hotel assignment for travelers requiring two beds (per the trip FAQ).",
+      "phone": "301-749-2299"
     },
     "bus": {
       "name": "Charter motorcoach",
