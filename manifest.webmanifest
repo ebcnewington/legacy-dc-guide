@@ -1,7 +1,7 @@
 {
-  "name": "Legacy Group — Washington, D.C.",
-  "short_name": "Legacy DC",
-  "description": "Emmanuel Baptist Church Legacy Group travel guide",
+  "name": "Washington Legacy Tour — Emmanuel Baptist Church",
+  "short_name": "Legacy Tour",
+  "description": "Nov 9–12, 2026: schedules, hotel contacts, history and trivia in Washington, D.C.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
