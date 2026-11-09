@@ -30,7 +30,11 @@ CREAM=colors.HexColor("#EDE0CA");PALE=colors.HexColor("#FAF8F1");INK=colors.HexC
 GREY=colors.HexColor("#566767");WHITE=colors.white;LTTEAL=colors.HexColor("#7BC2C8")
 def load_capitol():
     if (ASSETS/"capitol-hero.jpg").exists() and (ASSETS/"icon-192.png").exists() and (ASSETS/"icon-512.png").exists():
-        print("Using existing Capitol imagery");return
+        print("Using existing Capitol imagery")
+        # Apple uses a real 180px PNG at the site root, not the manifest fallback.
+        with PILImage.open(ASSETS/"icon-512.png") as cached:
+            ImageOps.fit(cached.convert("RGB"),(180,180),method=PILImage.Resampling.LANCZOS,centering=(.5,.41)).save(ROOT/"apple-touch-icon.png","PNG",optimize=True)
+        return
     headers={"User-Agent":"Mozilla/5.0 (compatible; EmmanuelLegacyGuide/1.0)"}
     img=None; errors=[]
     for url in (PHOTO,PHOTO_FALLBACK):
@@ -45,6 +49,7 @@ def load_capitol():
     ImageOps.fit(img,(1680,900),method=PILImage.Resampling.LANCZOS,centering=(.5,.44)).save(ASSETS/"capitol-hero.jpg","JPEG",quality=89,optimize=True)
     for n in (192,512):
         ImageOps.fit(img,(n,n),method=PILImage.Resampling.LANCZOS,centering=(.5,.45)).save(ASSETS/f"icon-{n}.png","PNG",optimize=True)
+    ImageOps.fit(img,(180,180),method=PILImage.Resampling.LANCZOS,centering=(.5,.42)).save(ROOT/"apple-touch-icon.png","PNG",optimize=True)
 def qr_image(url):
     code=qrcode.QRCode(box_size=8,border=3,error_correction=qrcode.constants.ERROR_CORRECT_M);code.add_data(url);code.make(fit=True)
     img=code.make_image(fill_color="#044F56",back_color="#FFFFFF").convert("RGB")
@@ -152,6 +157,37 @@ def write_notes(story,count=4,title="Meeting-point and bus notes"):
     story.extend(section(title))
     for _ in range(count):
         story.append(Spacer(1,13));story.append(HRFlowable(width="100%",thickness=.5,color=colors.HexColor("#AABAB5"),spaceAfter=7))
+class FullDayNotes(KeepTogether.__bases__[0]):
+    """One full, ruled notes page after each day's schedule."""
+    def __init__(self, day_name):
+        from reportlab.platypus import Flowable
+        Flowable.__init__(self)
+        self.day_name=day_name
+    def wrap(self,avail_width,avail_height):
+        self.width=avail_width
+        self.height=max(120,avail_height-4)
+        return (self.width,self.height)
+    def draw(self):
+        c=self.canv
+        c.setFillColor(TEAL)
+        c.setFont(FONT_BOLD,22)
+        c.drawString(0,self.height-36,"Notes")
+        c.setFont(FONT_BOLD,9)
+        c.setFillColor(GREY)
+        c.drawString(0,self.height-55,self.day_name.upper())
+        c.setStrokeColor(GOLD)
+        c.setLineWidth(2.2)
+        c.line(0,self.height-69,self.width,self.height-69)
+        c.setFont(FONT_REG,8)
+        c.setFillColor(GREY)
+        c.drawString(0,self.height-88,"Bus stop instructions:")
+        c.setStrokeColor(colors.HexColor("#AABAB5"))
+        c.setLineWidth(.65)
+        y=self.height-108
+        while y>=14:
+            c.line(0,y,self.width,y)
+            y-=21
+
 def itinerary(story):
     days=G.get("itinerary",[])
     for i,d in enumerate(days):
@@ -176,7 +212,17 @@ def itinerary(story):
         if i==2:
             story.append(card("Possible Wednesday motorcoach pickup","300 block L’Enfant Plaza SW, south of Independence Avenue SW and north of Frontage Road SW. NOT CONFIRMED. Follow your leader's day-of directions.",colors.HexColor("#FFF0C6")))
             story.append(Spacer(1,8))
-        write_notes(story,2 if i==2 else 3,"Bus stop and group instructions")
+        # A pair of QR shortcuts uses space otherwise lost on shorter itinerary days.
+        day_maps=[
+            [("National Harbor visitor map","https://www.nationalharbor.com/about/maps/")],
+            [("Mount Vernon official map","https://www.mountvernon.org/plan-your-visit"),("National Mall official map","https://www.nps.gov/nama/planyourvisit/maps.htm")],
+            [("National Mall official map","https://www.nps.gov/nama/planyourvisit/maps.htm"),("Museum visitor information","https://www.museumofthebible.org/plan-your-visit")],
+            [("Arlington visitor information","https://www.arlingtoncemetery.mil/Visit")]
+        ]
+        story.extend(qr_grid(day_maps[i]))
+        # Every single day gets its own full-page sheet of ruled notes.
+        story.append(PageBreak())
+        story.append(FullDayNotes(d.get("label","Day "+str(i+1))))
 def about(story):
     story.append(PageBreak());story.extend([para("Sights & experiences","page"),para("Discover more about the places on our itinerary, then explore them further in the digital guide.","small")])
     order=["mount-vernon","washington-monument","wwii","lincoln","vietnam","korea","jefferson","reflecting-pool","museum-bible","national-mall","capitol","arlington"]
@@ -219,11 +265,11 @@ def resources(story):
     story.extend(section("Try the trivia challenge"))
     story.append(para("Discover fascinating facts about the Capitol, Mount Vernon, the memorials, and Arlington. The mobile quiz provides an original source for every answer.","body"))
     story.extend(qr_grid([("Open the interactive trivia game",SITE+"#trivia")]))
-    write_notes(story,7,"Your notes")
+    # Daily notes pages are provided immediately after all four itineraries.
 def main():
     load_capitol()
     path=ROOT/"guide-half-sheet.pdf"
-    doc=SimpleDocTemplate(str(path),pagesize=(W,H),leftMargin=M,rightMargin=M,topMargin=72,bottomMargin=45,author="Emmanuel Baptist Church",title="Washington Legacy Tour | November 9-12 2026",pageCompression=1)
+    doc=SimpleDocTemplate(str(path),pagesize=(W,H),leftMargin=M,rightMargin=M,topMargin=M+44,bottomMargin=M+24,author="Emmanuel Baptist Church",title="Washington Legacy Tour | November 9-12 2026",pageCompression=1)
     story=[Spacer(1,1),PageBreak(),
         para("November 9–12, 2026","eyebrow"),para("Your four-day guide","page"),
         para("Everything you need to find your way, keep in touch, and enjoy the journey.","body"),Spacer(1,6)]
