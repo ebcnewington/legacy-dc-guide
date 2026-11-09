@@ -295,10 +295,24 @@ def resources(story):
     story.append(para("Discover fascinating facts about the Capitol, Mount Vernon, the memorials, and Arlington. The mobile quiz provides an original source for every answer.","body"))
     story.append(para("Open the online guide using the QR code on the front cover, then choose Trivia.","small"))
     # Daily notes pages are provided immediately after all four itineraries.
+class WhiteBorderDocTemplate(SimpleDocTemplate):
+    def afterPage(self):
+        super().afterPage()
+        # Paint AFTER body flowables. A background-only clip cannot prevent
+        # story tables from antialiasing into the intended white border.
+        c=self.canv
+        c.saveState()
+        c.setFillColor(WHITE)
+        c.rect(0,0,W,M,fill=1,stroke=0)
+        c.rect(0,H-M,W,M,fill=1,stroke=0)
+        c.rect(0,M,M,H-2*M,fill=1,stroke=0)
+        c.rect(W-M,M,M,H-2*M,fill=1,stroke=0)
+        c.restoreState()
+
 def main():
     load_capitol()
     path=ROOT/"guide-half-sheet.pdf"
-    doc=SimpleDocTemplate(str(path),pagesize=(W,H),leftMargin=M,rightMargin=M,topMargin=M+44,bottomMargin=M+24,author="Emmanuel Baptist Church",title="Washington Legacy Tour | November 9-12 2026",pageCompression=1)
+    doc=WhiteBorderDocTemplate(str(path),pagesize=(W,H),leftMargin=M,rightMargin=M,topMargin=M+44,bottomMargin=M+24,author="Emmanuel Baptist Church",title="Washington Legacy Tour | November 9-12 2026",pageCompression=1)
     story=[Spacer(1,1),PageBreak(),
         para("November 9–12, 2026","eyebrow"),para("Your four-day guide","page"),
         para("Everything you need to find your way, keep in touch, and enjoy the journey.","body"),Spacer(1,6)]
