@@ -1,0 +1,13 @@
+name = "ebc-legacy-trivia"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Create a D1 database, then replace the ID:
+# npx wrangler d1 create ebc-legacy-trivia
+[[d1_databases]]
+binding = "DB"
+database_name = "ebc-legacy-trivia"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# Secret RATE_HASH_SECRET is set separately:
+# npx wrangler secret put RATE_HASH_SECRET
