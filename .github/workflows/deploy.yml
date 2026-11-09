@@ -32,16 +32,19 @@ jobs:
       - name: Validate guide and trivia assets
         run: |
           node --check app.js
+          node --check api/worker.js
           python -m json.tool data/guide.json > /dev/null
           python -m json.tool data/trivia.json > /dev/null
+          python -m json.tool data/trivia-extra.json > /dev/null
           python - <<'PY'
           import json
           from pathlib import Path
           guide=json.loads(Path("data/guide.json").read_text())
-          trivia=json.loads(Path("data/trivia.json").read_text())["questions"]
+          trivia=json.loads(Path("data/trivia.json").read_text())["questions"] + json.loads(Path("data/trivia-extra.json").read_text())["questions"]
           ids={p["id"] for p in guide["places"]}
           assert len(guide["itinerary"]) == 4, "Four trip days required"
-          assert len(trivia)>=20, "Question bank unexpectedly small"
+          assert len(trivia)>=90, "Question bank unexpectedly small"
+          assert len({q["id"] for q in trivia}) == len(trivia), "Duplicate trivia IDs"
           for q in trivia:
               assert q["placeId"] in ids, q["id"]
               assert 0 <= q["correctIndex"] < len(q["options"]), q["id"]
