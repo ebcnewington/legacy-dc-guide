@@ -1,5 +1,7 @@
 (()=>{"use strict";
-let G=null,Q=null,dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}};
+let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}};
+const deviceToken=getOrMakeDeviceToken();
+function getOrMakeDeviceToken(){let v=null;try{v=localStorage.getItem("ebc_trivia_device_token_1")}catch{}if(v&&/^[a-f0-9-]{36}$/i.test(v))return v;v=crypto.randomUUID();try{localStorage.setItem("ebc_trivia_device_token_1",v)}catch{}return v}
 const $=sel=>document.querySelector(sel);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ico=name=>'<svg class="icon" aria-hidden="true"><use href="#i-'+esc(name)+'"/></svg>';
@@ -77,11 +79,49 @@ function essentials(){
  $("#maps-content").innerHTML='<div class="resources">'+maps.filter(r=>safeURL(r.url)).map(r=>'<a class="resource-link" href="'+esc(safeURL(r.url))+'" target="_blank" rel="noopener noreferrer"><span>'+esc(r.label)+'</span>'+ico("link")+'</a>').join("")+'</div>';
 }
 let allRatings=getLS("ebc_trivia_ratings_1",{});
+function isCommunityLive(){return triviaService.status==="live"&&/^https:\/\/[^\s/]+/.test(triviaService.apiBaseUrl||"")}
+async function loadTriviaService(){
+ try{
+  const cfg=await fetch("data/trivia-config.json",{cache:"no-store"});if(cfg.ok)triviaService=await cfg.json();
+  if(!isCommunityLive())return;
+  const response=await fetch(triviaService.apiBaseUrl.replace(/\/$/,"")+"/v1/stats",{mode:"cors",cache:"no-store"});
+  if(!response.ok)throw Error("Stats endpoint unavailable");
+  communityStats=await response.json();
+ }catch(e){console.warn("Shared trivia statistics unavailable",e);communityStats=null}
+}
+async function postCommunity(path,body){
+ if(!isCommunityLive())return false;
+ try{
+  const response=await fetch(triviaService.apiBaseUrl.replace(/\/$/,"")+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),mode:"cors"});
+  return response.ok;
+ }catch(e){console.warn("Shared trivia submission delayed",e);return false}
+}
+function pendingSubmission(type,payload){
+ if(!isCommunityLive())return;
+ const queue=getLS("ebc_trivia_pending_1",[]);queue.push({type,payload});
+ putLS("ebc_trivia_pending_1",queue.slice(-100));flushPending();
+}
+async function flushPending(){
+ if(!isCommunityLive())return;
+ const queue=getLS("ebc_trivia_pending_1",[]);if(!queue.length)return;
+ const remaining=[];
+ for(const item of queue){if(!await postCommunity(item.type,item.payload))remaining.push(item)}
+ putLS("ebc_trivia_pending_1",remaining);
+ if(!remaining.length)loadTriviaService();
+}
 function questionIndex(){
  const remaining=Q.questions.filter(q=>!game.asked.includes(q.id));if(!remaining.length)return null;
  // With shared ratings unavailable, weight only this browser's expressed preferences by destination.
  // Include uniform exploration so new or unrated questions continue to appear.
- const weights=remaining.map(q=>{let related=Q.questions.filter(x=>x.placeId===q.placeId).map(x=>allRatings[x.id]).filter(Number.isFinite);let average=related.length?related.reduce((a,b)=>a+b,0)/related.length:3;return 1+Math.max(0,average-2)*.20});
+ const weights=remaining.map(q=>{
+  const shared=communityStats?.questionRatings?.[q.id];
+  const local=allRatings[q.id];
+  const voteCount=shared?.votes||0;
+  const mean=shared?.mean??(local||3.5);
+  const bayesian=(3.5*8+mean*voteCount)/(8+voteCount);
+  const exploration=.45,preference=Math.pow(bayesian/5,2)*1.55;
+  return exploration+preference;
+ });
  const total=weights.reduce((a,b)=>a+b,0);let cursor=Math.random()*total;
  for(let i=0;i<remaining.length;i++){cursor-=weights[i];if(cursor<=0)return remaining[i]}
  return remaining[remaining.length-1];
@@ -90,7 +130,7 @@ function storeGame(){putLS("ebc_trivia_session_1",game)}
 function triviaStart(){
  const $t=$("#trivia-game");
  $t.innerHTML='<div class="trivia-start"><div class="giant-icon">'+ico("quiz")+'</div><h2>History is full of surprises.</h2><p class="trivia-intro">'+esc(Q?.intro||"Test your knowledge of Washington’s landmarks. Each answer includes a link to an original source.")+'</p><p class="trivia-intro">One question at a time. End your game whenever you wish.</p><button type="button" class="btn-primary" id="begin-trivia">Start playing</button></div>';
- $("#begin-trivia").onclick=()=>{game={started:true,ended:false,asked:[],score:0,answered:0,current:null,selection:null,correct:null,ratings:{}};storeGame();nextQuestion()};
+ $("#begin-trivia").onclick=()=>{game={started:true,ended:false,asked:[],score:0,answered:0,current:null,selection:null,correct:null,ratings:{},sessionId:crypto.randomUUID()};storeGame();nextQuestion()};
 }
 function nextQuestion(){
  const selected=questionIndex();
@@ -108,18 +148,35 @@ function renderQuestion(){
  const explanation=revealed?'<div class="trivia-result"><strong>'+(game.correct?"Correct!":"Here's the answer")+'</strong><p>'+esc(q.explanation)+'</p>'+link(safeURL(q.source?.url),"Read the primary source","link")+'</div><div class="rating-row"><span class="rating-label">Rate this question</span><span class="rating-stars">'+[1,2,3,4,5].map(n=>'<button class="star-button '+(n<=prev?"selected":"")+'" type="button" data-stars="'+n+'" aria-label="Rate '+n+' out of five stars" aria-pressed="'+(n===prev?'true':'false')+'">★</button>').join("")+'</span><span class="rating-label" id="rating-confirmation">'+(prev?"Saved on this device":"Optional")+'</span></div>':"";
  $("#trivia-game").innerHTML='<div class="trivia-card"><div class="trivia-top"><span>Question '+game.answered+(revealed?0:1)+'</span><span>Score: '+game.score+' / '+game.answered+'</span></div><p class="trivia-location">'+esc(name)+'</p><h2 class="trivia-question">'+esc(q.question)+'</h2><div class="answer-buttons">'+choices+'</div>'+explanation+'<div class="trivia-actions"><button type="button" class="btn-secondary" id="end-trivia">End game</button>'+(revealed?'<button type="button" class="btn-primary" id="next-trivia">Next question →</button>':'<span class="fineprint">Choose one answer</span>')+'</div></div>';
  $("#end-trivia").onclick=finishGame;
- if(revealed){$("#next-trivia").onclick=nextQuestion;document.querySelectorAll("[data-stars]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.stars);allRatings[q.id]=n;putLS("ebc_trivia_ratings_1",allRatings);document.querySelectorAll("[data-stars]").forEach(s=>{const k=Number(s.dataset.stars);s.classList.toggle("selected",k<=n);s.setAttribute("aria-pressed",String(k===n))});$("#rating-confirmation").textContent="Saved on this device"})}
+ if(revealed){$("#next-trivia").onclick=nextQuestion;document.querySelectorAll("[data-stars]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.stars);allRatings[q.id]=n;putLS("ebc_trivia_ratings_1",allRatings);document.querySelectorAll("[data-stars]").forEach(s=>{const k=Number(s.dataset.stars);s.classList.toggle("selected",k<=n);s.setAttribute("aria-pressed",String(k===n))});$("#rating-confirmation").textContent=isCommunityLive()?"Sharing with fellow travelers…":"Saved on this device";pendingSubmission("/v1/rating",{questionId:q.id,deviceToken,stars:n})})}
  else document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.answer);game.selection=n;game.correct=n===q.correctIndex;game.answered++;if(game.correct)game.score++;storeGame();renderQuestion()});
 }
 function finishGame(){
  game.ended=true;game.current=null;storeGame();
  let accuracy=game.answered?Math.round(game.score/game.answered*100):0;
- let avg='<p><strong>Average-player comparison:</strong> not available yet. Shared, anonymous score collection has not been connected, so we will not display a made-up average.</p>';
+ let avg=communityStats?.totalGames>0&&Number.isFinite(communityStats.averageAccuracy)
+  ?'<p><strong>Other players average: '+communityStats.averageAccuracy.toFixed(1)+'%.</strong> '+(accuracy>=communityStats.averageAccuracy?'You scored '+Math.round((accuracy-communityStats.averageAccuracy)*10)/10+' percentage points above the group average.':'You scored '+Math.round((communityStats.averageAccuracy-accuracy)*10)/10+' percentage points below the group average.')+' Based on '+communityStats.totalGames+' completed game'+(communityStats.totalGames===1?'':'s')+'.</p>'
+  :'<p><strong>Average-player comparison:</strong> not yet available. Shared results only appear after the community service receives completed games.</p>';
+ if(game.answered>0){
+  if(!game.sessionId)game.sessionId=crypto.randomUUID();
+  pendingSubmission("/v1/score",{sessionId:game.sessionId,deviceToken,correct:game.score,answered:game.answered});
+ }
  $("#trivia-game").innerHTML='<div class="trivia-end"><div class="giant-icon" style="margin:0 auto 20px">'+ico("quiz")+'</div><h2>Thanks for playing!</h2><p>You have discovered a little more of Washington’s remarkable history.</p><div class="trivia-stats"><div class="stat-item"><b>'+game.score+' / '+game.answered+'</b><small>Correct answers</small></div><div class="stat-item"><b>'+accuracy+'%</b><small>Your accuracy</small></div></div>'+avg+'<button type="button" class="btn-primary" id="replay-trivia">Play a new game</button></div>';
  $("#replay-trivia").onclick=triviaStart;
 }
 async function loadTrivia(){
- try{let r=await fetch(G.trivia?.questionsUrl||"data/trivia.json",{cache:"no-cache"});if(!r.ok)throw Error("Trivia unavailable");Q=await r.json();
+ try{
+  const [original,extra]=await Promise.all([
+   fetch(G.trivia?.questionsUrl||"data/trivia.json",{cache:"no-cache"}),
+   fetch("data/trivia-extra.json",{cache:"no-cache"})
+  ]);
+  if(!original.ok||!extra.ok)throw Error("Trivia library unavailable");
+  const first=await original.json(),additional=await extra.json();
+  const questions=[...(first.questions||[]),...(additional.questions||[])];
+  const ids=new Set();
+  Q={...first,questions:questions.filter(q=>{if(ids.has(q.id))return false;ids.add(q.id);return true})};
+  await loadTriviaService();
+  flushPending();
   const old=getLS("ebc_trivia_session_1",null);
   if(old?.started&&!old?.ended&&Array.isArray(old.asked)){
    game={...game,...old};if(game.current)renderQuestion();else triviaStart();
