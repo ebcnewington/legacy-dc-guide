@@ -16,8 +16,8 @@
 8. [x] REMOVE only the tiny category/eyebrow labels, KEEP full-width photographic banners and their main headings. This supersedes any earlier interpretation to remove banners.
 9. [x] Remove date pill; substitute “November 9–12, 2026” for “Your travel companion.”
 10. [x] Richly designed, full-color 5.5×8.5-inch PDF with quarter-inch safe margins. Photo, dark teal, cream, gold, QR codes, itinerary, contacts, FAQ and notes, no ink-saving requirement.
-11. [~] Interactive historical trivia: one question at a time; initial 30 location-tagged questions with direct links to original institutional sources; score tracking, end/replay at will, discreet star ratings. **Remaining:** research toward 75–100 thoroughly checked questions; enable genuine shared average-player results and community-weighted ratings via a separately hosted, spam-resistant data service. Until then ratings are stored on the current device and shared averages are explicitly unavailable.
-12. [x] Narrated tour links where found: official Mount Vernon 29-stop audio tour, NPS Lincoln Memorial audio-described brochure, highly rated iOS National Mall GPS audio, commercial monuments audio tour, and Arlington's live-narrated tram clearly identified as NOT a recording. Links and prices are subject to provider changes.
+11. [~] Interactive historical trivia: **97 source-linked questions** across historical sites; one question at a time, score tracking, finish/restart anytime, discreet ratings, in-game compare, and local progress persistence. Weighted community selection and shared average/player statistics are implemented in the frontend plus a fully coded Cloudflare Worker/D1 backend. **Remaining external authorization:** create a Cloudflare D1 database, deploy the Worker, and connect the endpoint in data/trivia-config.json. Until connected, local ratings work, the game remains usable offline, and no imaginary shared statistics are shown.
+12. [x] Narrated tour links on 12 individual destination pages where appropriate: official Mount Vernon 29-stop audio tour, NPS Lincoln Memorial brochure, U.S. Capitol Visitor Center 95-minute audio-described Exhibition Hall tour, Museum of the Bible official self-guided app, iOS National Mall GPS audio (App Store 4.6/5, 75 ratings, $16.99 full tour), and Arlington's authorized live-narrated tram (clearly NOT recorded). Links, prices and ratings are based on provider information as of November 8, 2026.
 
 ## Additional source-document requirements
 
@@ -28,8 +28,8 @@
 - [x] Unconfirmed L'Enfant Plaza SW 300-block Wednesday bus pickup prominently marked POSSIBLE / NOT CONFIRMED.
 - [x] Blank lines for bus instructions and personal notes in the printed booklet.
 - [x] Optional high-resolution 11×17 printable map supplement created from the organizer's provided NPS National Mall, Mount Vernon, National Harbor and bus-company maps. Distributed as a separate PDF attachment; not embedded in GitHub Pages yet.
-- [ ] Optionally integrate promotional postcard imagery if its crop, resolution and contrast support the brand standards.
+- [ ] Optional postcard-background integration. The supplied image was reviewed, but the current licensed Capitol photography and official teal/gold brand palette have been retained to preserve the established visual hierarchy. Source artwork was not uploaded to the public GitHub repo.
 
 ## Guardrails
 
-GitHub Pages is a static host. It cannot provide real cross-visitor ratings, anti-duplicate counts or average scores without an independent backend. Do not fabricate a community average. No traveler identity should be collected by default. Keep source citations for each trivia answer. Do not present tentative pickup locations as confirmed. Publishing continues automatically from the main branch.
+GitHub Pages is a static host. The optional Worker/D1 API code has been written, with browser-level duplicate-rate protections and no names/emails stored; a separate Cloudflare authorization and deployment is required before cross-visitor statistics can work. Do not fabricate a community average. No traveler identity should be collected by default. Keep source citations for each trivia answer. Do not present tentative pickup locations as confirmed. Publishing continues automatically from the main branch.
