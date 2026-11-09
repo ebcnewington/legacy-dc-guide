@@ -137,7 +137,8 @@ def can_fit(height,margin=0):
 
 def ensure(height,section=None):
     if not can_fit(height):
-        new_page(section or current_section,current_subtitle+"  /  continued")
+        base=re.sub(r"(?:\s*/\s*continued)+$","",current_subtitle,flags=re.I)
+        new_page(section or current_section,base+"  /  continued")
         return True
     return False
 
@@ -253,12 +254,12 @@ def page_cover():
     ctext(TX,222,"LEGACY TOUR",29.4,FONT_BOLD,TEAL)
     c.setStrokeColor(GOLD);c.setLineWidth(3)
     c.line(TX,205,121,205)
-    para("A four-day guide to places, people, and history.",TX,196,TW-15,10.1,14.5,False,INK)
+    para("A four-day guide to places, people, and history.",TX,416,TW-15,10.1,14.5,False,INK)
     # QR tile is built into the cream surface as a rounded light card.
     rr(31,39,334,116,12,WHITE)
     rr(45,112,161,29,8,SOFT)
     ctext(56,122,"YOUR DIGITAL GUIDE",8.4,FONT_BOLD,TEAL)
-    para("Schedule, directions, audio tours, and trivia - updated online.",45,103,213,8.7,12.6,False,INK)
+    para("Schedule, directions, audio tours, and trivia - updated online.",45,505,205,8.7,12.6,False,INK)
     qr_at(site,262,51,88)
     c.setFillColor(AQUA)
     c.circle(48,52,3,stroke=0,fill=1)
@@ -281,7 +282,7 @@ def page_overview():
         top+=h+7
     top+=8
     qr_callout("Open the full digital guide",site)
-    loose_text("Times and pickup instructions can change. Please follow Ashlee and Pastor Rob's announcements.",8.3,MUTED)
+    # This reminder is provided in the itinerary section; don't create a nearly empty page.
 
 def itinerary():
     for d in G.get("itinerary",[]):
@@ -298,7 +299,8 @@ def itinerary():
             "2026-11-12":("Arlington Cemetery visitor guide","https://www.arlingtoncemetery.mil/Visit")
         }
         label,url=urls.get(d.get("date"),("The online guide",site))
-        qr_callout(label,url)
+        # All map QR links are together on the dedicated resources page.
+        # Never create a single-QR continuation page before a day's Notes.
         draw_notes(d)
 
 def contact_card(person):
@@ -363,7 +365,7 @@ def attractions():
         detail=place.get("detail","")
         text=desc+(("  "+detail) if detail else "")
         info_card(title,text)
-    qr_callout("Listen and explore online",site+"#places")
+    # The destination links and all narrated audio tours are on the online guide.
 
 def faq():
     new_page("Travel essentials","Frequently asked","Answers from the supplied trip FAQs and companion materials.")
@@ -375,24 +377,31 @@ def maps_and_audio():
     global top
     new_page("Maps and resources","Keep exploring","Scan to open official resources on your phone.")
     resources=[
-        ("Digital guide and live details",site),
-        ("Washington landmarks map","https://www.nps.gov/nama/planyourvisit/maps.htm"),
-        ("Mount Vernon visitor information","https://www.mountvernon.org/plan-your-visit"),
+        ("Digital guide and updates",site),
+        ("National Mall maps","https://www.nps.gov/nama/planyourvisit/maps.htm"),
+        ("Mount Vernon estate","https://www.mountvernon.org/plan-your-visit"),
         ("National Harbor map","https://www.nationalharbor.com/about/maps/"),
-        ("Arlington Cemetery information","https://www.arlingtoncemetery.mil/Visit"),
+        ("Arlington Cemetery","https://www.arlingtoncemetery.mil/Visit"),
         ("Museum of the Bible","https://www.museumofthebible.org/plan-your-visit"),
-        ("Try the 97-question trivia challenge",site+"#trivia")
+        ("Washington trivia challenge",site+"#trivia")
     ]
-    # A curated, balanced grid of QR tiles; no raw printed URLs.
-    for label,url in resources:
-        height=65
-        ensure(height+8)
-        y=H-top-height
-        rr(TX,y,TW,height,10,WHITE,LINE,.6)
-        qr_at(url,TX+7,y+6,53)
-        para(label,TX+70,top+14,TW-83,9.2,13.5,True,TEAL)
-        top+=height+8
-    loose_text("For narrated audio tours, look for the headphones icon on each location in the digital guide.",8.5,MUTED)
+    # All seven resources on one fully utilized page with rounded 2-column tiles.
+    gap=10
+    width=(TW-gap)/2
+    height=98
+    for i,(label,url) in enumerate(resources):
+        row=i//2
+        col=i%2
+        y=H-top-row*(height+10)-height
+        x=TX+col*(width+gap)
+        rr(x,y,width,height,10,WHITE,LINE,.65)
+        qr_at(url,x+9,y+height-64,55)
+        ctext(x+74,y+height-28,"SCAN",7.0,FONT_BOLD,TEAL)
+        para(label,x+9,top+row*(height+10)+67,width-18,8.4,11.6,True,TEAL)
+    top+=4*(height+10)+6
+    if can_fit(36):
+        para("Audio tours, directions and live changes are available in the digital guide.",TX,top,TW,8.5,12.3,False,MUTED)
+        top+=33
 
 def draw_final_note():
     global top
