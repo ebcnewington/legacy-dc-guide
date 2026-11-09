@@ -9,7 +9,7 @@ from reportlab.pdfgen import canvas as Canvas
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle,HRFlowable,KeepTogether
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle,HRFlowable,KeepTogether,Flowable
 from reportlab.lib.utils import ImageReader
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
@@ -157,11 +157,10 @@ def write_notes(story,count=4,title="Meeting-point and bus notes"):
     story.extend(section(title))
     for _ in range(count):
         story.append(Spacer(1,13));story.append(HRFlowable(width="100%",thickness=.5,color=colors.HexColor("#AABAB5"),spaceAfter=7))
-class FullDayNotes(KeepTogether.__bases__[0]):
+class FullDayNotes(Flowable):
     """One full, ruled notes page after each day's schedule."""
     def __init__(self, day_name):
-        from reportlab.platypus import Flowable
-        Flowable.__init__(self)
+        super().__init__()
         self.day_name=day_name
     def wrap(self,avail_width,avail_height):
         self.width=avail_width
