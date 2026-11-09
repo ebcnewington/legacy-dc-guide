@@ -79,6 +79,8 @@ jobs:
           assert abs(float(page_size.width)-396)<.5 and abs(float(page_size.height)-612)<.5
           notes=[i+1 for i,p in enumerate(pdf.pages) if "Notes" in (p.extract_text() or "")]
           assert len(notes)==4, f"Expected 4 dedicated notes sheets, found notes on pages {notes}"
+          word_counts=[len((page.extract_text() or "").split()) for page in pdf.pages]
+          assert min(word_counts)>=16, f"A near-empty PDF page was generated: {[(i+1,w) for i,w in enumerate(word_counts) if w<16]}"
           assert len(pdf.pages)<=25, f"Unexpectedly long booklet ({len(pdf.pages)} pages)"
           icon=PIL.open("apple-touch-icon.png")
           assert icon.size==(180,180),icon.size
