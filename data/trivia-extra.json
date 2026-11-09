@@ -741,33 +741,33 @@
     {
       "id": "dc-072",
       "placeId": "mount-vernon",
-      "question": "How many enslaved men, women and children lived at Mount Vernon in 1799?",
+      "question": "In 1799, how many enslaved people at Mount Vernon were legally owned by George Washington himself?",
       "options": [
         "123",
-        "217",
+        "153",
         "317",
-        "517"
+        "577"
       ],
-      "correctIndex": 2,
-      "explanation": "Mount Vernon's records count 317 enslaved people across its five farms in 1799.",
+      "correctIndex": 0,
+      "explanation": "Mount Vernon's research distinguishes 123 people owned by George Washington from others owned by the Custis estate or other owners.",
       "source": {
         "label": "Read the primary source",
-        "url": "https://www.mountvernon.org/george-washington/slavery/plantation-structure"
+        "url": "https://www.mountvernon.org/george-washington/slavery/ten-facts-about-washington-slavery"
       },
       "verifiedOn": "2026-11-08"
     },
     {
       "id": "dc-073",
       "placeId": "mount-vernon",
-      "question": "What was George Washington's main cash crop after he shifted away from tobacco?",
+      "question": "Washington's Mount Vernon gristmill had how many pairs of millstones?",
       "options": [
-        "Wheat",
-        "Cotton",
-        "Sugar",
-        "Rice"
+        "One",
+        "Two",
+        "Four",
+        "Eight"
       ],
-      "correctIndex": 0,
-      "explanation": "Washington switched to wheat in the 1760s.",
+      "correctIndex": 1,
+      "explanation": "One pair ground corn into meal, while a second ground wheat for high-quality flour.",
       "source": {
         "label": "Read the primary source",
         "url": "https://www.mountvernon.org/the-estate-gardens/10-facts-about-george-washingtons-mount-vernon"
@@ -867,15 +867,15 @@
     {
       "id": "dc-079",
       "placeId": "mount-vernon",
-      "question": "What year was the newer Washington family tomb completed at Mount Vernon?",
+      "question": "Where did George Washington request to be buried in his final will?",
       "options": [
-        "1799",
-        "1805",
-        "1831",
-        "1863"
+        "U.S. Capitol",
+        "Arlington Cemetery",
+        "Mount Vernon",
+        "Independence Hall"
       ],
       "correctIndex": 2,
-      "explanation": "The New Tomb was completed in 1831.",
+      "explanation": "Although congressional leaders considered placing Washington's remains at the Capitol, his will specified burial at Mount Vernon.",
       "source": {
         "label": "Read the primary source",
         "url": "https://www.mountvernon.org/the-estate-gardens/10-facts-about-george-washingtons-mount-vernon"
