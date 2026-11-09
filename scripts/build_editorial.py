@@ -90,7 +90,9 @@ def photo_card(x,y,w,h):
     clipping=c.beginPath()
     clipping.roundRect(x,y,w,h,15)
     c.clipPath(clipping,stroke=0,fill=0)
-    c.drawImage(str(ASSETS/"capitol-hero.jpg"),x,y,width=w,height=h,preserveAspectRatio=False,mask="auto")
+    original=PILImage.open(ASSETS/"capitol-hero.jpg").convert("RGB")
+    fitted=ImageOps.fit(original,(1200,int(1200*h/w)),method=PILImage.Resampling.LANCZOS,centering=(.5,.44))
+    c.drawImage(ImageReader(fitted),x,y,width=w,height=h,preserveAspectRatio=False,mask="auto")
     c.restoreState()
 def qr_at(url,x,y,size=70):
     image=ImageReader(qr_image(url))
@@ -118,12 +120,11 @@ def new_page(section,title="",subtitle=""):
     if title:
         para(section.upper(),TX,100,TW,7.6,11,True,TEAL)
         headline=title
-        if len(headline)>39:headline=headline[:38]+"..."
-        para(headline,TX,116,TW,18.6,22,True,TEAL)
-        top=146
+        htitle=para(headline,TX,115,TW,18.4,22.0,True,TEAL)
+        top=115+htitle+10
         if subtitle:
-            h=para(subtitle,TX,142,TW,8.4,12,False,MUTED)
-            top=146+h+4
+            h=para(subtitle,TX,top-4,TW,8.4,12,False,MUTED)
+            top=top+h+8
     else:top=111
     # Footline, very quiet: intentionally inset from white page edge.
     c.setStrokeColor(LINE);c.setLineWidth(.5)
@@ -269,7 +270,7 @@ def page_overview():
     for n,d in enumerate(G.get("itinerary",[]),1):
         full=d.get("heading","")
         hh=ph(full,TW-66,9.0,13.1,True)
-        h=max(43,15+hh)
+        h=max(52,26+hh)
         ensure(h+7)
         y=H-top-h
         rr(TX,y,TW,h,9,WHITE,LINE,.6)
@@ -343,14 +344,15 @@ def practical():
 
 def info_card(title,description,tag=""):
     global top
+    title_h=ph(title,TW-29-(50 if tag else 0),9.9,12.4,True)
     desc_h=ph(description,TW-29,8.8,13.1)
-    height=max(60,31+desc_h+11)
+    height=max(61,12+title_h+6+desc_h+12)
     ensure(height+9)
     y=H-top-height
     rr(TX,y,TW,height,11,WHITE,LINE,.6)
     if tag: pill(TX+TW-60,y+height-22,47,tag,TEAL,SOFT,6.5)
     para(title,TX+13,top+10,TW-28-(50 if tag else 0),9.9,12.4,True,TEAL)
-    para(description,TX+13,top+29,TW-26,8.8,13.1)
+    para(description,TX+13,top+12+title_h+5,TW-26,8.8,13.1)
     top+=height+9
 
 def attractions():
@@ -414,7 +416,7 @@ def main():
     attractions()
     faq()
     maps_and_audio()
-    draw_final_note()
+    if can_fit(85):draw_final_note()
     c.save()
     print(f"Created new editorial booklet: {P} ({page_number} pages); safe 0.25-inch white margin")
 
