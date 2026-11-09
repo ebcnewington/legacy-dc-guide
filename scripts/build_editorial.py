@@ -405,6 +405,26 @@ def hotel_card(hotel):
     ctext(TX+13,y+10,"FRONT DESK  "+tel,8.1,FONT_BOLD,TEAL)
     top+=height+10
 
+def packing_checklist():
+    """A useful packing panel on the final tips page, not extra filler pages."""
+    global top
+    h=133
+    if not can_fit(h+6):return
+    y=H-top-h
+    rr(TX,y,TW,h,11,WHITE,LINE,.7)
+    ctext(TX+13,y+h-21,"PACKING CHECKLIST",9.9,FONT_BOLD,TEAL)
+    c.setStrokeColor(GOLD);c.setLineWidth(2.0);c.line(TX+13,y+h-28,TX+86,y+h-28)
+    items=["Walking shoes","Warm layers","Photo ID","Medication","Phone & charger","Umbrella / rainwear"]
+    colw=(TW-31)/2
+    for i,item in enumerate(items):
+        col=i%2;row=i//2
+        x=TX+14+col*colw
+        yy=y+h-52-row*26
+        c.setStrokeColor(AQUA);c.setLineWidth(1.1)
+        c.roundRect(x,yy-2,10,10,3,stroke=1,fill=0)
+        para(item,x+17,H-yy-7,colw-20,8.6,11.9,False,INK)
+    top+=h+9
+
 def practical():
     new_page("Travel essentials","Who to call","Keep this information handy during the tour.")
     section_bar("Your trip leaders")
@@ -419,6 +439,7 @@ def practical():
     section_bar("Helpful reminders")
     for tip in e.get("tips",[]):
         info_card(tip.get("title","Reminder"),tip.get("description",""))
+    packing_checklist()
 
 def info_card(title,description,tag=""):
     global top
