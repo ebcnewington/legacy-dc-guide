@@ -157,8 +157,12 @@ def new_page(section,title="",subtitle=""):
     right(W-32,H-56,"WASHINGTON, D.C.",7.0,FONT_REG,CREAM)
     rr(32,H-92,42,4,2,GOLD)
     if title:
-        para(section.upper(),TX,100,TW,7.6,11,True,TEAL)
-        headline=title
+        continued=title.endswith("  /  continued")
+        label=section.upper()+("  /  CONTINUED" if continued else "")
+        para(label,TX,100,TW,7.6,11,True,TEAL)
+        headline=title[:-len("  /  continued")] if continued else title
+        if headline=="Mount Vernon & evening monuments":
+            headline="Mount Vernon &\nevening monuments"
         htitle=para(headline,TX,115,TW,18.4,22.0,True,TEAL)
         top=115+htitle+10
         if subtitle:
