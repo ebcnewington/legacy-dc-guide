@@ -34,13 +34,15 @@
           "address": "Emmanuel Baptist Church, Newington, CT",
           "description": "Meet for charter-bus departure. Travelers may leave cars in the rear parking lot.",
           "type": "transport",
-          "important": true
+          "important": true,
+          "printDescription": "Park in the rear lot and meet the charter bus in Newington."
         },
         {
           "time": "En route",
           "title": "Travel and comfort stops",
           "description": "Two rest stops are planned. A restroom is available on the charter bus. Dinner arrangements are to be determined.",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": "Two rest stops are planned. The bus has a restroom. Dinner arrangements are still open."
         },
         {
           "time": "7:00 PM (est.)",
@@ -49,7 +51,8 @@
           "address": "National Harbor, MD",
           "description": "Estimated arrival only; traffic may affect timing.",
           "type": "arrival",
-          "tentative": true
+          "tentative": true,
+          "printDescription": "Traffic may affect arrival."
         },
         {
           "time": "9:00 PM (est.)",
@@ -57,9 +60,11 @@
           "location": "National Harbor",
           "description": "Check in at your assigned hotel: AC Hotel National Harbor or Residence Inn National Harbor. Dinner on your own or en route.",
           "type": "hotel",
-          "tentative": true
+          "tentative": true,
+          "printDescription": "Check in at your assigned hotel (page 2). Dinner is on your own or en route."
         }
-      ]
+      ],
+      "printMap": "National Harbor Waterfront District"
     },
     {
       "date": "2026-11-10",
@@ -70,13 +75,15 @@
           "time": "8:00 AM",
           "title": "Breakfast on your own",
           "description": "Breakfast arrangements are your choice.",
-          "type": "meal"
+          "type": "meal",
+          "printDescription": ""
         },
         {
           "time": "9:30 AM",
           "title": "Depart for Mount Vernon",
           "location": "National Harbor hotels",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": "Meet at the National Harbor hotels."
         },
         {
           "time": "10:00 AM",
@@ -85,7 +92,8 @@
           "address": "3200 Mount Vernon Memorial Hwy, Mount Vernon, VA 22121",
           "website": "https://www.mountvernon.org/plan-your-visit",
           "description": "Visit the estate and historic grounds. Lunch on site at a restaurant or quick-service location. Allow time for restrooms at the orientation and museum facilities.",
-          "placeId": "mount-vernon"
+          "placeId": "mount-vernon",
+          "printDescription": "Visit the estate and grounds. Have lunch on site; restrooms are at the orientation center and museum."
         },
         {
           "time": "12:10 / 12:15 / 12:20 PM",
@@ -93,28 +101,33 @@
           "location": "Mount Vernon Mansion",
           "description": "Reserved tours are divided into groups of 20, 20, and 15 at 12:10, 12:15, and 12:20 p.m. Follow your leader's group assignment.",
           "placeId": "mount-vernon",
-          "important": true
+          "important": true,
+          "printDescription": "Groups of 20, 20 and 15 enter at the three listed times, respectively. Follow your leader’s assignment."
         },
         {
           "time": "3:00 PM",
           "title": "Return to hotels",
           "description": "Depart Mount Vernon for National Harbor. Dinner on your own near the hotels.",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": "Dinner on your own near the hotels."
         },
         {
           "time": "6:30 PM",
           "title": "Depart for evening monument tour",
           "description": "Scheduled sights: Washington Monument, World War II Memorial, Lincoln Memorial, Vietnam Veterans Memorial, Korean War Veterans Memorial, Jefferson Memorial, and Reflecting Pool. Specific stop order and time at each site are not given.",
           "placeId": "national-mall",
-          "important": true
+          "important": true,
+          "printDescription": "Washington Monument, WWII, Lincoln, Vietnam, Korean War and Jefferson memorials, and the Reflecting Pool. Stop order may vary."
         },
         {
           "time": "10:00 PM",
           "title": "Return to hotels",
           "description": "Scheduled return from the evening monument tour.",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": ""
         }
-      ]
+      ],
+      "printMap": "Mount Vernon visitor map"
     },
     {
       "date": "2026-11-11",
@@ -124,7 +137,8 @@
         {
           "time": "9:00 AM",
           "title": "Depart for Museum of the Bible",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": ""
         },
         {
           "time": "9:30 AM",
@@ -133,7 +147,8 @@
           "address": "400 4th St SW, Washington, DC 20024",
           "website": "https://www.museumofthebible.org/plan-your-visit",
           "description": "Explore the museum. Lunch on your own. Toilets are located on visitor floors; family restrooms are on B1 and floors 2–6.",
-          "placeId": "museum-bible"
+          "placeId": "museum-bible",
+          "printDescription": "Lunch on your own. Family restrooms are on B1 and floors 2–6."
         },
         {
           "time": "1:00 PM",
@@ -141,18 +156,21 @@
           "location": "National Mall / Capitol area",
           "address": "National Mall, Washington, DC",
           "description": "Independent exploration. Use the official map and plan ahead for walking, restrooms, and the group's next bus meeting instructions.",
-          "placeId": "national-mall"
+          "placeId": "national-mall",
+          "printDescription": "Explore independently. Check the map and confirm where and when to meet the bus."
         },
         {
           "time": "3:00 PM",
           "title": "Depart for hotel break",
           "description": "Return to National Harbor for rest and dinner on your own.",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": "Rest and have dinner on your own in National Harbor."
         },
         {
           "time": "5:30 PM",
           "title": "Depart for the Capitol",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": ""
         },
         {
           "time": "6:00 PM",
@@ -160,7 +178,8 @@
           "location": "U.S. Capitol area",
           "address": "First St SE, Washington, DC 20004",
           "description": "Allow additional time for security. Follow the group leader's instructions.",
-          "placeId": "capitol"
+          "placeId": "capitol",
+          "printDescription": "Allow extra time and follow your leader’s directions."
         },
         {
           "time": "7:00 PM",
@@ -168,14 +187,17 @@
           "location": "Capitol Hill",
           "description": "Group worship service as listed in the schedule.",
           "placeId": "capitol",
-          "important": true
+          "important": true,
+          "printDescription": ""
         },
         {
           "time": "9:00 PM",
           "title": "Depart Capitol for hotels",
-          "type": "transport"
+          "type": "transport",
+          "printDescription": ""
         }
-      ]
+      ],
+      "printMap": "National Mall & monuments"
     },
     {
       "date": "2026-11-12",
@@ -188,7 +210,8 @@
           "location": "National Harbor",
           "description": "Be packed and ready for hotel checkout and bus departure.",
           "type": "hotel",
-          "important": true
+          "important": true,
+          "printDescription": "Be packed and ready to leave National Harbor."
         },
         {
           "time": "Morning",
@@ -197,16 +220,19 @@
           "address": "1 Memorial Ave, Arlington, VA 22211",
           "website": "https://www.arlingtoncemetery.mil/Visit",
           "description": "Explore on foot or consider the narrated tram tour. The schedule estimates tram tickets at approximately $22; availability, group arrangements, and exact pricing remain unconfirmed. Restrooms and tram tickets are at the Welcome Center.",
-          "placeId": "arlington"
+          "placeId": "arlington",
+          "printDescription": "Walk or take the narrated tram. Tickets are estimated at $22; price and availability are unconfirmed. Tickets and restrooms are at the Welcome Center."
         },
         {
           "time": "11:00 AM",
           "title": "Depart for Connecticut",
           "description": "Return trip with two planned rest stops. Lunch and dinner stops are to be determined; evening arrival is expected.",
           "type": "transport",
-          "important": true
+          "important": true,
+          "printDescription": "Two rest stops are planned. Meal stops are still open. Expect to arrive in the evening."
         }
-      ]
+      ],
+      "printMap": "Arlington National Cemetery"
     }
   ],
   "places": [
@@ -597,7 +623,8 @@
         },
         {
           "q": "How much walking is involved?",
-          "a": "Walking and standing are expected at Mount Vernon, monuments, Museum of the Bible, National Mall, and Arlington. Some routes are hilly or uneven. Discuss mobility concerns with Ashlee."
+          "a": "Walking and standing are expected at Mount Vernon, monuments, Museum of the Bible, National Mall, and Arlington. Some routes are hilly or uneven. Discuss mobility concerns with Ashlee.",
+          "printAnswer": "Expect standing, hills and uneven paths at several stops. Speak with Ashlee about mobility concerns."
         }
       ]
     },
@@ -618,7 +645,8 @@
         },
         {
           "q": "Are meals included?",
-          "a": "The schedule lists most meals on your own. Several travel-day meal stops remain to be determined."
+          "a": "The schedule lists most meals on your own. Several travel-day meal stops remain to be determined.",
+          "printAnswer": "Most meals are on your own. Travel-day meal stops are still to be decided."
         }
       ]
     },
@@ -627,15 +655,18 @@
       "items": [
         {
           "q": "Where are restrooms available?",
-          "a": "Charter bus and planned rest stops en route. At Mount Vernon: Ford Orientation Center, museum and visitor facilities. Museum of the Bible: restrooms on visitor floors. At the Mall, use open museums and designated facilities. Arlington: Welcome Center and near the Tomb of the Unknown Soldier."
+          "a": "Charter bus and planned rest stops en route. At Mount Vernon: Ford Orientation Center, museum and visitor facilities. Museum of the Bible: restrooms on visitor floors. At the Mall, use open museums and designated facilities. Arlington: Welcome Center and near the Tomb of the Unknown Soldier.",
+          "printAnswer": "Use the bus or planned rest stops. At Mount Vernon, look for the orientation center or museum. At the Mall, use open museums or designated facilities. At Arlington, use the Welcome Center or the area near the Tomb of the Unknown Soldier."
         },
         {
           "q": "Will there be security screening?",
-          "a": "Yes, at several sites. Travel light, allow extra time, and follow each venue's current bag and ID rules. Mount Vernon limits larger bags; Arlington prohibits food, with bottled water permitted."
+          "a": "Yes, at several sites. Travel light, allow extra time, and follow each venue's current bag and ID rules. Mount Vernon limits larger bags; Arlington prohibits food, with bottled water permitted.",
+          "printAnswer": "Allow time for screening and check each venue’s bag and ID rules. Arlington permits bottled water and prohibits food."
         },
         {
           "q": "What if I get separated from the group?",
-          "a": "Call Ashlee or Pastor Rob, follow the announced bus meeting place and time, and stay with your assigned smaller group when applicable. Do not assume a possible pickup location is confirmed."
+          "a": "Call Ashlee or Pastor Rob, follow the announced bus meeting place and time, and stay with your assigned smaller group when applicable. Do not assume a possible pickup location is confirmed.",
+          "printAnswer": "Call Ashlee or Pastor Rob (page 2). Follow the meeting place and time announced by your leader."
         }
       ]
     }

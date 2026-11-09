@@ -235,24 +235,6 @@
       "verifiedOn": "2026-11-08"
     },
     {
-      "id": "dc-044",
-      "placeId": "capitol",
-      "question": "What was removed from an early Statue of Freedom design after Jefferson Davis objected?",
-      "options": [
-        "An eagle feather",
-        "A liberty cap",
-        "A sword",
-        "A laurel wreath"
-      ],
-      "correctIndex": 1,
-      "explanation": "A liberty cap associated with emancipated slaves was removed after Jefferson Davis objected.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://www.aoc.gov/explore-capitol-campus/art/statue-freedom"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
       "id": "dc-045",
       "placeId": "capitol",
       "question": "How many major sections were used to cast the Statue of Freedom?",
@@ -530,7 +512,7 @@
         "Cooper Union and Gettysburg",
         "Gettysburg and Second Inaugural",
         "First and Second Inaugurals",
-        "House Divided and Emancipation"
+        "Farewell and First Inaugural"
       ],
       "correctIndex": 1,
       "explanation": "The interior inscriptions feature the Gettysburg Address and the Second Inaugural Address.",
@@ -739,24 +721,6 @@
       "verifiedOn": "2026-11-08"
     },
     {
-      "id": "dc-072",
-      "placeId": "mount-vernon",
-      "question": "In 1799, how many enslaved people at Mount Vernon were legally owned by George Washington himself?",
-      "options": [
-        "123",
-        "153",
-        "317",
-        "577"
-      ],
-      "correctIndex": 0,
-      "explanation": "Mount Vernon's research distinguishes 123 people owned by George Washington from others owned by the Custis estate or other owners.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://www.mountvernon.org/george-washington/slavery/ten-facts-about-washington-slavery"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
       "id": "dc-073",
       "placeId": "mount-vernon",
       "question": "Washington's Mount Vernon gristmill had how many pairs of millstones?",
@@ -786,24 +750,6 @@
       ],
       "correctIndex": 2,
       "explanation": "The distillery produced about 11,000 gallons in 1799.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
-      "id": "dc-075",
-      "placeId": "mount-vernon",
-      "question": "How many enslaved workers helped distill whiskey at Mount Vernon?",
-      "options": [
-        "2",
-        "6",
-        "12",
-        "30"
-      ],
-      "correctIndex": 1,
-      "explanation": "Mount Vernon's research names six enslaved distillers: Hanson, Peter, Nat, Daniel, James, and Timothy.",
       "source": {
         "label": "Read the primary source",
         "url": "https://www.mountvernon.org/the-estate-gardens/distillery/ten-facts-about-the-distillery"
@@ -912,42 +858,6 @@
       ],
       "correctIndex": 1,
       "explanation": "Two hundred acres were formally designated for the military cemetery.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
-      "id": "dc-082",
-      "placeId": "arlington",
-      "question": "What community existed on Arlington land during and after the Civil War?",
-      "options": [
-        "Freedman's Village",
-        "Liberty City",
-        "Union Settlement",
-        "Patriot's Refuge"
-      ],
-      "correctIndex": 0,
-      "explanation": "Freedman's Village served formerly enslaved people and included homes, schools and churches.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
-      "id": "dc-083",
-      "placeId": "arlington",
-      "question": "In what year did Freedman's Village at Arlington finally close?",
-      "options": [
-        "1865",
-        "1880",
-        "1900",
-        "1945"
-      ],
-      "correctIndex": 2,
-      "explanation": "The federal government closed Freedman's Village in 1900.",
       "source": {
         "label": "Read the primary source",
         "url": "https://arlingtoncemetery.mil/Explore/History-of-Arlington-National-Cemetery/Arlington-House"

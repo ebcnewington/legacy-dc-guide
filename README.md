@@ -12,16 +12,18 @@ A mobile-first, installable travel companion for Emmanuel Baptist Church's Legac
 - Two National Harbor hotels, bus logistics and contacts for Ashlee Dickerson and Pastor Rob Brown.
 - Frequently asked questions on walking, restrooms, security and packing.
 - Thirteen location cards, official visitor resources, maps and audio-tour links. Verified iOS audio app ratings appear only where provider rating data was found.
-- A **97-question** trivia game with source-linked explanations, 4 answer choices, continuous scoring, local progress, optional one-to-five-star ratings, play-anytime/quit-anytime and optional score comparison.
-- Rich full-color half-sheet PDF, portrait **5.5 × 8.5 inches** with **¼-inch minimum safe margins**, a dedicated **full-page Notes sheet after each of the four days**, travel schedule, contacts, QR maps and a cover QR code to the online guide.
+- A **90-question** trivia game with source-linked explanations, 4 answer choices, continuous scoring, local progress, optional one-to-five-star ratings, play-anytime/quit-anytime and optional score comparison.
+- 12-page full-color half-sheet PDF, portrait **5.5 × 8.5 inches** with **¼-inch minimum safe margins**, a dedicated **full-page Notes sheet after each of the four days**, travel schedule, contacts, QR maps and a cover QR code to the online guide.
 - Capitol-themed home-screen icon and offline-first reading of previously loaded site assets.
 - Responsive layout and reduced-motion support.
 
 ## Updating the guide
 
+The PDF uses optional `printDescription` and `printAnswer` fields for concise itinerary and FAQ copy. Update those fields alongside the full text when the underlying facts change.
+
 For schedule corrections, announcements, contact changes or destinations, edit `data/guide.json` and commit to `main`. The website and PDF rebuild automatically.
 
-`data/trivia.json` contains the first 30 trivia questions and `data/trivia-extra.json` contains 67 additional questions. Together they make the 97-question library. Every question includes `placeId`, `correctIndex`, `explanation` and a direct primary-source URL.
+`data/trivia.json` contains the first 28 trivia questions and `data/trivia-extra.json` contains 62 additional questions. Together they make the 90-question library. Every question includes `placeId`, `correctIndex`, `explanation` and a direct primary-source URL.
 
 The website is public. Do not place private participant information in these files. The 300 block of L'Enfant Plaza SW is **only a possible Wednesday bus pickup point**; it must not be presented as confirmed without a new instruction from trip leadership.
 

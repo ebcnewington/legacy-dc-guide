@@ -259,7 +259,8 @@ async function loadTrivia(){
   flushPending();
   const old=getLS("ebc_trivia_session_1",null);
   if(old?.started&&!old?.ended&&Array.isArray(old.asked)){
-   game={...game,...old};if(game.current)renderQuestion();else triviaStart();
+   game={...game,...old};if(Q.questions.some(q=>q.id===game.current))renderQuestion();
+   else nextQuestion();
   }else triviaStart();
  }catch(e){console.error(e);$("#trivia-game").innerHTML=sec("Trivia temporarily unavailable","Try reopening the game once you have a connection.")}
  $("#trivia-disclaimer").textContent=G.trivia?.disclaimer||"";

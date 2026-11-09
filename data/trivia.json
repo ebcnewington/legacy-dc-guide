@@ -221,7 +221,7 @@
     {
       "id": "dc-013",
       "placeId": "lincoln",
-      "question": "Which singer performed at the Lincoln Memorial in 1939 after being denied a segregated concert venue?",
+      "question": "Which singer gave an open-air concert at the Lincoln Memorial in 1939?",
       "options": [
         "Ella Fitzgerald",
         "Marian Anderson",
@@ -467,42 +467,6 @@
       "source": {
         "label": "Read the primary source",
         "url": "https://arlingtoncemetery.mil/Explore/Monuments-and-Memorials/President-John-F-Kennedy-Gravesite"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
-      "id": "dc-027",
-      "placeId": "mount-vernon",
-      "question": "How many farms made up the Mount Vernon estate in 1799?",
-      "options": [
-        "2",
-        "3",
-        "5",
-        "8"
-      ],
-      "correctIndex": 2,
-      "explanation": "Mount Vernon consisted of five farms covering about 8,000 acres.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://www.mountvernon.org/george-washington/slavery/slavery-at-washingtons-plantation"
-      },
-      "verifiedOn": "2026-11-08"
-    },
-    {
-      "id": "dc-028",
-      "placeId": "mount-vernon",
-      "question": "About how many enslaved people lived at Mount Vernon in 1799?",
-      "options": [
-        "37",
-        "117",
-        "317",
-        "817"
-      ],
-      "correctIndex": 2,
-      "explanation": "Mount Vernon's historical research documents 317 enslaved men, women, and children living on its five farms in 1799.",
-      "source": {
-        "label": "Read the primary source",
-        "url": "https://www.mountvernon.org/george-washington/slavery/slavery-at-washingtons-plantation"
       },
       "verifiedOn": "2026-11-08"
     },
