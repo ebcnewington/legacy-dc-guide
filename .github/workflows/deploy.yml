@@ -33,9 +33,19 @@ jobs:
         run: |
           node --check app.js
           node --check api/worker.js
+          node api/test-worker.mjs
           python -m json.tool data/guide.json > /dev/null
           python -m json.tool data/trivia.json > /dev/null
           python -m json.tool data/trivia-extra.json > /dev/null
+          python - <<'PYSQL'
+          import sqlite3
+          from pathlib import Path
+          db=sqlite3.connect(":memory:")
+          db.executescript(Path("api/schema.sql").read_text())
+          db.execute("INSERT INTO ratings(question_id,visitor_hash,stars) VALUES(?,?,?)",("dc-001","test-hash",5))
+          assert db.execute("SELECT stars FROM ratings").fetchone()[0]==5
+          print("Cloudflare D1-compatible schema smoke test passed")
+          PYSQL
           python - <<'PY'
           import json
           from pathlib import Path
