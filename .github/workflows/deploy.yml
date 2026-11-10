@@ -49,6 +49,8 @@ jobs:
         run: |
           node --check app.js
           node --check update-check.js
+          cp publisher/Code.gs /tmp/ebc-tour-publisher.js
+          node --check /tmp/ebc-tour-publisher.js
           python -m py_compile scripts/stamp_release.py
           node --check api/worker.js
           cp google-apps-script/Code.gs /tmp/ebc-trivia-appscript.js

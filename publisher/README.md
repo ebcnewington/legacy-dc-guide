@@ -1,39 +1,29 @@
-# Legacy Tour organizer publisher — one-time setup
+# Trip Updates — simple organizer publishing
 
-The public website is on GitHub Pages, which cannot safely validate a PIN or store a token that can post to GitHub. This separate Google Apps Script web app is the secured publishing service. It is displayed in the guide after you activate it and is independent of the unfinished trivia backend.
+The Legacy Tour guide includes a discreet lock icon beside Trip updates. Once the publisher is activated, the icon opens a modal with a single form: choose **Rob** or **Ashlee**, enter a short title and update, type your four-digit PIN, and tap **Publish update**.
 
-## Enable private organizer access
+There is no email verification, account creation or GitHub login for organizers. The private Google Apps Script server validates each PIN and submits the announcement through the existing GitHub issue-based update pipeline.
 
-1. Open https://script.google.com/home/projects/create in the Google account that will own the publisher. Create a standalone project named **Legacy Tour Updates Publisher**. Replace Code.gs with the contents of publisher/Code.gs, and create an HTML file named **Index** using publisher/Index.html.
+## One-time activation by the owner
 
-2. Go to **Project Settings → Script Properties**. Enter the following five values privately:
+1. Open https://script.google.com/home/projects/create in your Google account and create a standalone project called Legacy Tour Updates Publisher.
+2. Replace Code.gs in that project with the contents of publisher/Code.gs from this repository. Add an HTML file named Index using the contents of publisher/Index.html. Save.
+3. In Project Settings → Script Properties, set only the following three private properties:
+   - EBC_UPDATES_ROB_PIN_INITIAL — Rob's initial four-digit PIN, using his phone number's last four digits if desired
+   - EBC_UPDATES_ASHLEE_PIN_INITIAL — Ashlee's initial four-digit PIN, using her phone number's last four digits if desired
+   - EBC_UPDATES_GITHUB_TOKEN — a fine-grained token scoped only to ebcnewington/legacy-dc-guide, with Issues Read and write permission
+4. Run initializePublisher once in the Apps Script editor. Authorize the permissions it asks for. Initialization hashes each PIN with a unique salt and deletes the raw initial PIN properties, leaving the private hashed values.
+5. Select Deploy → New deployment → Web app. Choose Execute as: Me and Who has access: Anyone. Deploy and copy the URL ending in /exec.
+6. In the existing repository, edit data/publisher-config.json: set status to live and appUrl to the deployed Apps Script /exec URL. Commit the change. The existing lock button will open the functioning organizer modal.
 
-   - EBC_UPDATES_ROB_EMAIL — Rob's email address to receive verification codes
-   - EBC_UPDATES_ASHLEE_EMAIL — Ashlee's email address to receive verification codes
-   - EBC_UPDATES_ROB_PIN_INITIAL — Rob's initial four-digit PIN
-   - EBC_UPDATES_ASHLEE_PIN_INITIAL — Ashlee's initial four-digit PIN
-   - EBC_UPDATES_GITHUB_TOKEN — a fine-grained GitHub personal access token that grants Issues **Read and write** permission on only ebcnewington/legacy-dc-guide
+Do not send the actual PINs, phone numbers or GitHub access token in ChatGPT or commit them to public code. GitHub fine-grained token management: https://github.com/settings/personal-access-tokens/new.
 
-   Use the last four digits of the respective phone number for each initial PIN if desired. Do **not** put actual PINs, the full phone numbers, email addresses, or the GitHub token in public GitHub source code, files, or a ChatGPT message.
+## Everyday publishing
 
-3. Run the **initializePublisher** function from the Apps Script editor and authorize its requested access. This function validates configuration, hashes both PINs with independent random salts, and deletes the raw PIN properties after successful setup. The script requires permissions for email and outbound HTTPS.
+Open the guide, tap the lock icon beside Trip updates, choose your name, enter a title, type the announcement, enter your four-digit PIN, and tap Publish update. The private server creates a public issue whose title begins [Trip Update]. The existing GitHub workflow publishes the new feed and timestamps the update; visitors can tap Refresh or reopen the guide. No traveler needs to clear browsing history, cookies or the app cache.
 
-4. Choose **Deploy → New deployment → Web app** with **Execute as: Me** and **Who has access: Anyone**. Deploy and copy the full HTTPS /exec URL (not /dev). The published app page may be accessible to anyone, but posting requires the organizer's PIN plus a six-digit email code.
+This is deliberately simple and accepts the limited security of four-digit phone-derived PINs. The server still throttles incorrect PIN attempts (five per hour per organizer) and successful posting (fifteen per hour per organizer). Keep posts limited to non-sensitive public information and the GitHub credential scoped to this one repository.
 
-5. In this repository update **data/publisher-config.json** with status **live** and appUrl set to the full /exec URL. Commit the change. The discreet organizer lock icon will appear beside Trip updates on the online guide. Rob or Ashlee can use the in-guide editor without a GitHub login.
+**Activation is still required.** These files prepare the modal and private publishing service but do not create Google Apps Script deployments or set secrets automatically. Until activation, the lock icon truthfully displays the setup notice; the ordinary Trip Updates section remains functional.
 
-## Posting workflow
-
-Choose your name, enter your four-digit PIN, then enter the email code. Compose a title and message, and tap Publish update. The server makes a GitHub issue titled [Trip Update] followed by your title, with a private fine-grained token. The existing GitHub Actions workflow regenerates and publishes the public JSON feed; travelers see the update after the build completes. They can tap Refresh to check for it. The issue body may include a public organizer attribution comment, which is stripped from the display text.
-
-Each six-digit code expires in ten minutes. Sessions expire after one hour. The server rejects more than five wrong PIN attempts in an hour per organizer, limits sign-in emails to three per hour per organizer, rejects more than five wrong verification codes per hour, and limits publishing to fifteen announcements per hour per organizer.
-
-**Why email verification is necessary:** the requested PINs derive from telephone numbers, which may be displayed publicly in the guide. A four-digit PIN and a hidden icon are not sufficient security. PIN checking, throttling, email codes and the GitHub access token remain server-side, never in browser JavaScript.
-
-## Validation and recovery
-
-After setup, verify separate logins for Rob and Ashlee. Post a harmless test message, confirm GitHub creates an issue, verify the Actions workflow succeeds, then check the update's timestamp on the guide. Close a test issue to remove its notice during the next deployment.
-
-If embedding the Google app is blocked by a browser privacy restriction, the same /exec URL can be opened separately, without a GitHub account. To hide organizer access, change status to not-configured and clear appUrl in data/publisher-config.json; to disable server-side posting, revoke the fine-grained GitHub token.
-
-These repository files prepare the service, but **do not automatically deploy the Apps Script**, set anyone's PIN, or enable organizer access. The account owner must complete the one-time steps above. Treat the existing published updates as operational even if this optional publisher has not been configured.
+If the browser prevents the embedded form from opening, the exact same secure publishing page can be opened directly via its /exec URL (still no GitHub login).

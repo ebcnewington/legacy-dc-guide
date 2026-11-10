@@ -95,3 +95,9 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Detect new releases on opening, foreground return, connectivity restoration and periodically; auto-navigate once to a cache-busted URL without clearing visitor data.
 - [x] Precache update checker in service worker v10, retain offline fallback, preserve hash and local data.
 - [ ] Privately configure and deploy organizer publishing, then verify Rob and Ashlee login, two-factor email codes, and a posting test.
+
+## November 10 — Reduce publishing friction
+
+- [x] Replace two-factor organizer sign-in with a single-step four-digit PIN form, branded for in-guide modal use.
+- [x] Remove email address/OTP configuration and keep private PIN hashes, retry limits and GitHub write token on server.
+- [ ] Account owner must create/deploy the independent Apps Script publisher, set initial PINs privately and connect its /exec URL. Verify a Rob and Ashlee test post. This remains the only activation blocker.
