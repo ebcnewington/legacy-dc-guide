@@ -63,7 +63,7 @@ button:disabled{opacity:.55;cursor:wait}
        $("pin").value="";
        if(!result||!result.ok){setStatus("The update could not be confirmed.","error");return}
        $("title").value="";$("message").value="";
-       setStatus("Update submitted successfully.","success");
+       setStatus("Update published successfully.","success");
        if(typeof result.url==="string"&&result.url.startsWith("https://github.com/")){
          const link=document.createElement("a");
          link.href=result.url;link.target="_blank";link.rel="noopener noreferrer";

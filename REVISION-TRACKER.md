@@ -101,3 +101,13 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Replace two-factor organizer sign-in with a single-step four-digit PIN form, branded for in-guide modal use.
 - [x] Remove email address/OTP configuration and keep private PIN hashes, retry limits and GitHub write token on server.
 - [ ] Account owner must create/deploy the independent Apps Script publisher, set initial PINs privately and connect its /exec URL. Verify a Rob and Ashlee test post. This remains the only activation blocker.
+
+## November 10 — One-file Google Sheets publishing (current)
+
+- [x] Eliminate GitHub issue creation and GitHub token from the in-guide organizer publisher.
+- [x] Embed the posting form in a single Google Apps Script Code.gs file.
+- [x] Automatically create a private Google Sheet for new organizer updates; only the read-only public JSONP feed is exposed.
+- [x] Preserve existing GitHub-based announcements and combine them with new private-sheet entries.
+- [x] Add a Copy setup code action to the visible organizer modal.
+- [x] Keep separate server-side four-digit PINs for Rob and Ashlee; no email code or GitHub login.
+- [ ] Owner creates/deploys the one-file Apps Script and supplies its /exec URL. Both private PINs must be entered in Google Script Properties by the owner. No access is live until verified.

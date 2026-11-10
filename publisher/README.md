@@ -1,29 +1,32 @@
-# Trip Updates — simple organizer publishing
+# Fast setup: Legacy Tour Trip Updates
 
-The Legacy Tour guide includes a discreet lock icon beside Trip updates. Once the publisher is activated, the icon opens a modal with a single form: choose **Rob** or **Ashlee**, enter a short title and update, type your four-digit PIN, and tap **Publish update**.
+This is the simplified publisher. **Only one code file is needed.** It saves new announcements to a private Google Sheet owned by you, not to GitHub, so you do not need a GitHub access token, a second HTML file, or email verification.
 
-There is no email verification, account creation or GitHub login for organizers. The private Google Apps Script server validates each PIN and submits the announcement through the existing GitHub issue-based update pipeline.
+## One-time setup
 
-## One-time activation by the owner
+1. Open the [online Legacy Tour guide](https://ebcnewington.github.io/legacy-dc-guide/), tap the small lock icon next to **Trip updates**, and tap **Copy setup code**.
+2. Open [New Google Apps Script project](https://script.google.com/home/projects/create) in your Google account. Delete the default contents of **Code.gs**, paste the copied code, and save. Call the project **Legacy Tour Updates Publisher**.
+3. In the Apps Script editor open **Project Settings** (gear) → **Script Properties**. Add only TWO private properties:
+   - `EBC_UPDATES_ROB_PIN_INITIAL`: your chosen four-digit PIN
+   - `EBC_UPDATES_ASHLEE_PIN_INITIAL`: Ashlee's chosen four-digit PIN
 
-1. Open https://script.google.com/home/projects/create in your Google account and create a standalone project called Legacy Tour Updates Publisher.
-2. Replace Code.gs in that project with the contents of publisher/Code.gs from this repository. Add an HTML file named Index using the contents of publisher/Index.html. Save.
-3. In Project Settings → Script Properties, set only the following three private properties:
-   - EBC_UPDATES_ROB_PIN_INITIAL — Rob's initial four-digit PIN, using his phone number's last four digits if desired
-   - EBC_UPDATES_ASHLEE_PIN_INITIAL — Ashlee's initial four-digit PIN, using her phone number's last four digits if desired
-   - EBC_UPDATES_GITHUB_TOKEN — a fine-grained token scoped only to ebcnewington/legacy-dc-guide, with Issues Read and write permission
-4. Run initializePublisher once in the Apps Script editor. Authorize the permissions it asks for. Initialization hashes each PIN with a unique salt and deletes the raw initial PIN properties, leaving the private hashed values.
-5. Select Deploy → New deployment → Web app. Choose Execute as: Me and Who has access: Anyone. Deploy and copy the URL ending in /exec.
-6. In the existing repository, edit data/publisher-config.json: set status to live and appUrl to the deployed Apps Script /exec URL. Commit the change. The existing lock button will open the functioning organizer modal.
+   You can choose the last four digits of each phone number, as originally requested. Enter these PINs only inside Google's Script Properties. **Do not send them in this chat or add them to the public GitHub repository.**
+4. At the top of the Apps Script editor, choose the function **initializePublisher**, click **Run**, and approve Google authorization. This automatically creates a private Google Sheet named **Washington Legacy Tour — Trip Updates**, hashes your two PINs with separate salts, and deletes the original plain PIN entries.
+5. Choose **Deploy → New deployment → Web app**. Configure **Execute as: Me** and **Who has access: Anyone**, then deploy. Copy the URL ending in **/exec**, and paste that URL back into this ChatGPT conversation. The URL itself is not a password. I'll connect it to the existing guide and check deployment.
 
-Do not send the actual PINs, phone numbers or GitHub access token in ChatGPT or commit them to public code. GitHub fine-grained token management: https://github.com/settings/personal-access-tokens/new.
+That is all. You do not need GitHub for setup or everyday posting, and Ashlee does not need any account to submit an announcement.
 
-## Everyday publishing
+## Everyday use
 
-Open the guide, tap the lock icon beside Trip updates, choose your name, enter a title, type the announcement, enter your four-digit PIN, and tap Publish update. The private server creates a public issue whose title begins [Trip Update]. The existing GitHub workflow publishes the new feed and timestamps the update; visitors can tap Refresh or reopen the guide. No traveler needs to clear browsing history, cookies or the app cache.
+Tap the discreet lock icon beside **Trip updates** in the guide, select Rob or Ashlee, enter a title and message, type your four-digit PIN, then **Publish update**.
 
-This is deliberately simple and accepts the limited security of four-digit phone-derived PINs. The server still throttles incorrect PIN attempts (five per hour per organizer) and successful posting (fifteen per hour per organizer). Keep posts limited to non-sensitive public information and the GitHub credential scoped to this one repository.
+The new entry is saved to the private Sheet, but only its public title, message and publication timestamp are returned through the Script's **read-only** update feed. The public guide combines those direct updates with the earlier GitHub-based trip updates, so nothing previously published disappears. The guide checks for new announcements when opened, returned to, and every three minutes; visitors can also tap **Refresh**. No browser cache clearing is needed.
 
-**Activation is still required.** These files prepare the modal and private publishing service but do not create Google Apps Script deployments or set secrets automatically. Until activation, the lock icon truthfully displays the setup notice; the ordinary Trip Updates section remains functional.
+## Notes
 
-If the browser prevents the embedded form from opening, the exact same secure publishing page can be opened directly via its /exec URL (still no GitHub login).
+- Only two Script Properties and one code file are needed. The `publisher/Index.html` source file in GitHub is retained for maintainers, but **do not create it separately in Apps Script**: the HTML form is already embedded inside Code.gs.
+- The Google Sheet remains private; the web app exposes only the public updates through its JSONP endpoint. PIN checks and rate limits happen server-side, not in the webpage.
+- This is intentionally low-friction PIN-only authentication. Four digits (especially phone-number digits) are guessable; keep posts to non-sensitive trip information.
+- The initial GitHub-backed announcements stay available. The Apps Script bridge does not need to create GitHub issues or rebuild the website for each new organizer post.
+- If the browser blocks the modal's embedded Google frame, the deployed /exec URL opens the same form directly in another browser tab.
+- Until the owner finishes deployment and shares the /exec URL, the lock icon shows setup instructions instead of an active posting form.

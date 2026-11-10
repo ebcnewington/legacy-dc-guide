@@ -61,11 +61,13 @@ To post, open https://github.com/ebcnewington/legacy-dc-guide/issues/new?templat
 GitHub Actions redeploys the guide when an authorized issue changes and builds a static feed with scripts/build_updates.py. This prevents GitHub API rate limiting for travelers. Changes appear after the publishing workflow completes.
 
 
-## Organizer update publishing (activation required)
+## Organizer update publishing — simpler setup (one script file)
 
-The Trip Updates feed now displays each post's **publication date/time** (plus a revised date if later edited), a prominent **Refresh** button, and **Last refreshed: X minutes ago**, calculated from the last successful feed retrieval on that visitor's device.
+The Trip updates lock icon opens a PIN-only modal for Rob and Ashlee. New updates are stored in a private Google Sheet and served by a read-only public feed. No GitHub access token, Google Forms, or second HTML file is required.
 
-A discreet lock icon next to the updates heading can open an embedded secure editor for Rob and Ashlee without a GitHub login. It is **visible at all times**; before the private publisher backend is configured, tapping it explains that organizer sign-in has not been activated and links to the one-time setup instructions. The public repository stores neither PINs nor credentials. The editor's backend source is in publisher/ and its one-time setup steps are in publisher/README.md. The organizer form now uses only a four-digit PIN; server-side checking and a small attempt limit prevent accidental misuse, but this is a convenience PIN rather than strong authentication. Posting creates a GitHub issue, which triggers the current publishing pipeline. The separate backend must be deployed under the owner's Google account, then enabled via data/publisher-config.json. Until enabled, the public updates feed and existing GitHub publishing remain operational.
+The guide now provides a **Copy setup code** button. The owner creates one Google Apps Script, pastes the copied Code.gs, adds two private PIN properties, runs initializePublisher, deploys the web app, and supplies its /exec URL for connection in data/publisher-config.json. Full instructions: publisher/README.md.
+
+The public guide combines the existing GitHub issue-based announcements with new direct organizer announcements without overwriting either source. Both sources are retrieved on opening, refreshing, and at the regular polling interval. **Until the private Apps Script is deployed, organizer posting is not activated**, but the existing trip guide and GitHub-backed updates remain working. PINs are intentionally only a lightweight access control; do not post confidential information.
 
 ## Automatic website releases (November 10)
 
@@ -73,6 +75,3 @@ Visitors **never need to clear browser history, cookies, or cache** to receive u
 
 **Limitations:** A website cannot modify a completely closed browser, nor retroactively make a previously loaded older JavaScript bundle run a new update-checker. Users already holding an older page in memory may need to close/reopen the guide or refresh it once to acquire the new update-checker; they still never need to delete browsing data. Newer releases automatically check on return. The update check requires a network connection; the installed guide remains available from offline cache.
 
-## November 10 — simpler PIN-only organizer modal
-
-The current publisher no longer requires an email address or one-time email verification. After the private Apps Script is deployed, the lock icon opens a single-step modal: select Rob or Ashlee, enter a title and update, type the four-digit PIN, and publish. See publisher/README.md for the streamlined three-property private setup. No actual PIN or GitHub access token should be committed to the public repository. This overrides earlier setup references to OTP.
