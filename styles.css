@@ -56,3 +56,10 @@ footer{background:var(--teal);color:white;text-align:center;padding:60px 0 37px;
 .publisher-header h2{font-size:1.08rem;color:white;margin:0}
 .publisher-close{border:0;color:white;background:transparent;font-size:1.6rem;width:34px;height:34px;line-height:1}
 .publisher-panel iframe{width:100%;height:min(77dvh,630px);border:0;background:#fff}
+
+/* Organizer setup status appears until private authentication is deployed */
+.publisher-setup{padding:22px 20px 28px;line-height:1.58}
+.publisher-setup h3{margin:0 0 10px;color:var(--teal);font-size:1.12rem}
+.publisher-setup p{margin:0 0 16px;color:#486260;font-size:.9rem}
+.publisher-setup a{font-weight:750;color:var(--teal);text-decoration:underline;text-underline-offset:3px;font-size:.85rem}
+.publisher-panel iframe[hidden],.publisher-setup[hidden]{display:none!important}

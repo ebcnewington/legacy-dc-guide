@@ -63,16 +63,26 @@ async function refreshTripUpdates(){
  finally{tripUpdatesBusy=false;if(button)button.disabled=false;updateRefreshIndicator();}
 }
 async function initPublisherAccess(){
+ const trigger=$("#organizer-open"),dialog=$("#publisher-dialog"),frame=$("#publisher-frame"),setup=$("#publisher-setup");
+ if(!trigger||!dialog||!frame||!setup)return;
+ let publisherUrl="";
+ trigger.hidden=false;
+ trigger.onclick=()=>{
+  if(publisherUrl){setup.hidden=true;frame.hidden=false;frame.src=publisherUrl;}
+  else{frame.hidden=true;setup.hidden=false;}
+  dialog.showModal();
+ };
+ $("#publisher-close").onclick=()=>dialog.close();
+ dialog.onclick=e=>{if(e.target===dialog)dialog.close()};
+ dialog.addEventListener("close",()=>{
+  if(!frame.hidden){frame.src="about:blank";refreshTripUpdates()}
+ });
  try{
-  const r=await fetch('data/publisher-config.json',{cache:'no-store'});if(!r.ok)return;
-  const c=await r.json(),u=c.appUrl||'';
-  if(c.status!=='live'||!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(u))return;
-  const b=$('#organizer-open'),d=$('#publisher-dialog'),frame=$('#publisher-frame');
-  b.hidden=false;b.onclick=()=>{frame.src=u;d.showModal()};
-  $('#publisher-close').onclick=()=>d.close();
-  d.onclick=e=>{if(e.target===d)d.close()};
-  d.addEventListener('close',()=>{frame.src='about:blank';refreshTripUpdates()});
- }catch(e){console.warn('Publisher unavailable',e)}
+  const r=await fetch("data/publisher-config.json",{cache:"no-store"});
+  if(!r.ok)return;
+  const c=await r.json(),u=c.appUrl||"";
+  if(c.status==="live"&&/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(u))publisherUrl=u;
+ }catch(e){console.warn("Publisher configuration unavailable",e)}
 }
 function itemSection(e){
  const warning=e.tentative?'<span class="chip-warn">Estimated</span>':"";
@@ -332,7 +342,7 @@ async function init(){
   window.setInterval(()=>{if(!document.hidden)refreshTripUpdates()},180000);
   window.setInterval(updateRefreshIndicator,20000);
  }catch(e){console.error(e);$("#trip-status").textContent="Trip information is temporarily unavailable. Check your connection and reload."}
- route();if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+ route();if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
 }
 document.addEventListener("DOMContentLoaded",init);
 })();

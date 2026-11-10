@@ -48,6 +48,8 @@ jobs:
       - name: Validate guide and trivia assets
         run: |
           node --check app.js
+          node --check update-check.js
+          python -m py_compile scripts/stamp_release.py
           node --check api/worker.js
           cp google-apps-script/Code.gs /tmp/ebc-trivia-appscript.js
           node --check /tmp/ebc-trivia-appscript.js
@@ -118,6 +120,14 @@ jobs:
           print("Verified uniform 0.25-inch pure-white margin on every page")
           print(f"PDF: {len(pdf.pages)} half-sheet pages with 3 right-hand Notes pages; Apple icon 180x180 verified")
           PYPDF
+      - name: Stamp Pages release for automatic client refresh
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          python scripts/stamp_release.py
+          python -m json.tool data/site-version.json > /dev/null
+          grep -q 'guide-version' update-check.js
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload website

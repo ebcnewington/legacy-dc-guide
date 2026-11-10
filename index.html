@@ -5,10 +5,11 @@
 <meta name="theme-color" content="#044F56"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Legacy DC Guide">
 <meta name="description" content="November 9–12, 2026 Washington Legacy Tour — Emmanuel Baptist Church. Schedule, hotels, sights, maps, FAQs and trivia.">
+<meta name="ebc-build-id" content="__EBC_BUILD_ID__">
 <link rel="apple-touch-icon" sizes="180x180" href="https://ebcnewington.github.io/legacy-dc-guide/apple-touch-icon-capitol-2026.png"><link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://ebcnewington.github.io/legacy-dc-guide/apple-touch-icon-capitol-2026.png"><link rel="icon" sizes="192x192" href="./assets/icon-192.png?v=20261108c" type="image/png"><link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css"><title>Washington Legacy Tour · Nov 9–12, 2026</title>
+<link rel="stylesheet" href="styles.css?v=__EBC_BUILD_ID__"><title>Washington Legacy Tour · Nov 9–12, 2026</title>
 </head><body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
 <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
@@ -46,7 +47,7 @@
 <a class="action-card" href="#essentials"><span class="action-icon"><svg><use href="#i-info"/></svg></span><span class="action-copy"><b>Travel essentials</b><small>Hotels, contacts &amp; FAQ</small></span><svg class="action-arrow"><use href="#i-arrow"/></svg></a>
 <a class="action-card" href="#trivia"><span class="action-icon"><svg><use href="#i-quiz"/></svg></span><span class="action-copy"><b>DC trivia challenge</b><small>90 fascinating questions</small></span><svg class="action-arrow"><use href="#i-arrow"/></svg></a>
 </div>
-<div class="updates-heading"><h2 class="section-title">Trip updates</h2><button type="button" id="organizer-open" class="organizer-trigger" title="Organizer access" aria-label="Organizer access" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button></div><div class="updates-toolbar"><button type="button" id="refresh-updates" class="updates-refresh">↻ Refresh</button><span id="updates-status" role="status">Not refreshed yet</span></div><div id="announcements" class="announcement-list" aria-live="polite"></div><div id="trip-reminders" class="trip-reminders"></div>
+<div class="updates-heading"><h2 class="section-title">Trip updates</h2><button type="button" id="organizer-open" class="organizer-trigger" title="Organizer access" aria-label="Organizer access"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button></div><div class="updates-toolbar"><button type="button" id="refresh-updates" class="updates-refresh">↻ Refresh</button><span id="updates-status" role="status">Not refreshed yet</span></div><div id="announcements" class="announcement-list" aria-live="polite"></div><div id="trip-reminders" class="trip-reminders"></div>
 <h2 class="section-title">Next on the schedule</h2><div class="panel" id="next-event"></div>
 </div></section>
 <section id="itinerary" class="view" hidden><div class="section-hero"><div class="section-hero-inner"><h1>Daily itinerary</h1><p>November 9–12, 2026</p></div></div><div class="container">
@@ -68,6 +69,7 @@
 <a href="#home" data-tab="home"><svg><use href="#i-home"/></svg><span>Home</span></a><a href="#itinerary" data-tab="itinerary"><svg><use href="#i-calendar"/></svg><span>Schedule</span></a><a href="#places" data-tab="places"><svg><use href="#i-map"/></svg><span>Places</span></a><a href="#essentials" data-tab="essentials"><svg><use href="#i-info"/></svg><span>Details</span></a><a href="#trivia" data-tab="trivia"><svg><use href="#i-quiz"/></svg><span>Trivia</span></a>
 </nav>
 <dialog id="place-dialog" class="place-dialog" aria-labelledby="place-dialog-title"><div class="dialog-inside"><button id="dialog-close" aria-label="Close landmark details" type="button" class="dialog-close"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5 19 19M19 5 5 19"/></svg></button><div id="dialog-body"></div></div></dialog>
-<dialog id="publisher-dialog" class="publisher-dialog" aria-label="Organizer update editor"><div class="publisher-panel"><div class="publisher-header"><h2>Organizer updates</h2><button type="button" id="publisher-close" class="publisher-close" aria-label="Close organizer editor">×</button></div><iframe id="publisher-frame" title="Secure trip updates editor" referrerpolicy="no-referrer" loading="lazy"></iframe></div></dialog>
-<script src="app.js" defer></script>
+<dialog id="publisher-dialog" class="publisher-dialog" aria-label="Organizer update editor"><div class="publisher-panel"><div class="publisher-header"><h2>Organizer updates</h2><button type="button" id="publisher-close" class="publisher-close" aria-label="Close organizer editor">×</button></div><div id="publisher-setup" class="publisher-setup"><h3>Organizer sign-in not yet activated</h3><p>The publishing service has been prepared, but the private login needs to be connected before Rob or Ashlee can post directly from the guide.</p><a href="https://github.com/ebcnewington/legacy-dc-guide/blob/main/publisher/README.md" target="_blank" rel="noopener noreferrer">View private setup instructions</a></div><iframe id="publisher-frame" title="Secure trip updates editor" referrerpolicy="no-referrer" loading="lazy" hidden></iframe></div></dialog>
+<script src="update-check.js?v=__EBC_BUILD_ID__" defer></script>
+<script src="app.js?v=__EBC_BUILD_ID__" defer></script>
 </body></html>

@@ -86,3 +86,12 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Add a hidden-by-default organizer entry and responsive editor dialog.
 - [x] Add independently deployable Google Apps Script publisher with separate PIN+email-OTP logins, throttling and GitHub issue creation.
 - [ ] Account owner must privately set Rob and Ashlee's initial PINs, email addresses and narrow GitHub token, deploy Apps Script, and enable data/publisher-config.json; verify both login flows.
+
+## November 10 — Organizer visibility and automatic updates
+
+- [x] Make the organizer lock button persistently visible on the Trip Updates heading.
+- [x] Show a setup-required message rather than falsely presenting an operational organizer login while the private Apps Script publisher remains unconfigured.
+- [x] Add deployment-specific release metadata, CSS/JS version query strings, and a lightweight client-side update checker.
+- [x] Detect new releases on opening, foreground return, connectivity restoration and periodically; auto-navigate once to a cache-busted URL without clearing visitor data.
+- [x] Precache update checker in service worker v10, retain offline fallback, preserve hash and local data.
+- [ ] Privately configure and deploy organizer publishing, then verify Rob and Ashlee login, two-factor email codes, and a posting test.
