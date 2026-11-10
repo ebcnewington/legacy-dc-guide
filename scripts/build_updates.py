@@ -59,6 +59,7 @@ def main():
             "title": issue["title"][len(PREFIX):].strip()[:160] or "Trip update",
             "message": message,
             "created_at": issue.get("created_at"),
+            "updated_at": issue.get("updated_at"),
         })
         if len(updates) >= 30:
             break

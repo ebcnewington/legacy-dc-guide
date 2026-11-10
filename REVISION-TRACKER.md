@@ -76,3 +76,13 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Trusted GitHub issue publishing template with automatic GitHub Pages rebuild for new, edited and closed updates.
 - [x] Avoid calling GitHub's rate-limited issues API from travelers' browsers.
 - [x] Service-worker cache v8 includes the updates JSON.
+
+
+## November 10 — Trip Update refresh + organizer-access preparation
+
+- [x] Show published and, if applicable, revised timestamps on update cards.
+- [x] Put Refresh at the top of Trip Updates with a relative "Last refreshed" indicator updated every 20 seconds.
+- [x] Retain previously saved update content and indicate offline/error states without falsely claiming a new successful refresh.
+- [x] Add a hidden-by-default organizer entry and responsive editor dialog.
+- [x] Add independently deployable Google Apps Script publisher with separate PIN+email-OTP logins, throttling and GitHub issue creation.
+- [ ] Account owner must privately set Rob and Ashlee's initial PINs, email addresses and narrow GitHub token, deploy Apps Script, and enable data/publisher-config.json; verify both login flows.

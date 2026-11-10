@@ -54,6 +54,7 @@ jobs:
           node api/test-worker.mjs
           python -m json.tool data/guide.json > /dev/null
           python -m json.tool data/updates.json > /dev/null
+          python -m json.tool data/publisher-config.json > /dev/null
           python -m py_compile scripts/build_updates.py
           python -m json.tool data/trivia.json > /dev/null
           python -m json.tool data/trivia-extra.json > /dev/null

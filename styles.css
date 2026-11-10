@@ -37,3 +37,22 @@ footer{background:var(--teal);color:white;text-align:center;padding:60px 0 37px;
 .updates-empty{border:1px solid var(--line);border-radius:10px;padding:17px 20px;background:var(--paper);color:#526a69;font-size:.86rem}
 .trip-reminders{margin-top:21px;display:grid;gap:12px}
 .trip-reminders h3{font-size:.95rem;margin:0 0 2px}
+
+/* Trip updates: elapsed refresh time and organizer editor */
+.updates-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.updates-heading .section-title{margin-bottom:12px}
+.updates-toolbar{justify-content:flex-start;gap:12px;margin:0 0 16px}
+.updates-refresh{min-height:38px}
+#updates-status{font-size:.74rem;font-variant-numeric:tabular-nums}
+.notice-meta{font-size:.74rem;margin-bottom:8px}
+.organizer-trigger{border:0;background:none;color:#65807b;padding:8px;margin-top:7px;opacity:.75;border-radius:8px}
+.organizer-trigger[hidden]{display:none!important}
+.organizer-trigger:hover,.organizer-trigger:focus-visible{opacity:1;background:#eaf4f0}
+.organizer-trigger svg{height:18px;width:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.publisher-dialog{border:0;padding:0;width:min(96vw,600px);max-height:calc(100dvh - 20px);border-radius:16px;box-shadow:0 24px 70px #072c3260}
+.publisher-dialog::backdrop{background:#05292fbb}
+.publisher-panel{display:flex;flex-direction:column;max-height:calc(100dvh - 20px);background:#fff}
+.publisher-header{padding:14px 19px;background:var(--teal);color:white;display:flex;justify-content:space-between;align-items:center}
+.publisher-header h2{font-size:1.08rem;color:white;margin:0}
+.publisher-close{border:0;color:white;background:transparent;font-size:1.6rem;width:34px;height:34px;line-height:1}
+.publisher-panel iframe{width:100%;height:min(77dvh,630px);border:0;background:#fff}

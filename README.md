@@ -59,3 +59,10 @@ Trip updates come from trusted GitHub issues; the existing announcements remain 
 To post, open https://github.com/ebcnewington/legacy-dc-guide/issues/new?template=trip-update.md while signed into GitHub as an authorized repository collaborator or organization member. Keep the [Trip Update] prefix and write a descriptive title and the announcement. Edit the issue to revise; close the issue to remove. Connected ChatGPT can also create or update these issues. Notices are public, so avoid sensitive participant information.
 
 GitHub Actions redeploys the guide when an authorized issue changes and builds a static feed with scripts/build_updates.py. This prevents GitHub API rate limiting for travelers. Changes appear after the publishing workflow completes.
+
+
+## Organizer update publishing (activation required)
+
+The Trip Updates feed now displays each post's **publication date/time** (plus a revised date if later edited), a prominent **Refresh** button, and **Last refreshed: X minutes ago**, calculated from the last successful feed retrieval on that visitor's device.
+
+A discreet lock icon next to the updates heading can open an embedded secure editor for Rob and Ashlee without a GitHub login. It is intentionally **hidden until a private publisher backend is configured**. The public repository stores neither PINs nor credentials. The editor's backend source is in publisher/ and its one-time setup steps are in publisher/README.md. PIN authentication always requires an additional email verification code; phone-derived PINs alone are insecure. Posting creates a GitHub issue, which triggers the current publishing pipeline. The separate backend must be deployed under the owner's Google account, then enabled via data/publisher-config.json. Until enabled, the public updates feed and existing GitHub publishing remain operational.

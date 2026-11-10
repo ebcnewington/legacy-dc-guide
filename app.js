@@ -1,5 +1,5 @@
 (()=>{"use strict";
-let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false;
+let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false,tripUpdatesLastRefresh=0,tripUpdatesError="";
 const deviceToken=getOrMakeDeviceToken();
 function getOrMakeDeviceToken(){let v=null;try{v=localStorage.getItem("ebc_trivia_device_token_1")}catch{}if(v&&/^[a-f0-9-]{36}$/i.test(v))return v;v=crypto.randomUUID();try{localStorage.setItem("ebc_trivia_device_token_1",v)}catch{}return v}
 const $=sel=>document.querySelector(sel);
@@ -21,7 +21,7 @@ function route(){
  window.scrollTo({top:0,behavior:"instant"});
 }
 function announce(){
- const live=tripUpdates.map(i=>'<article class="notice notice-live"><div class="notice-meta">Posted '+esc(formatTripTime(i.created_at))+'</div><strong>'+esc(i.title||"Update")+'</strong><p class="notice-message">'+esc(i.message||"")+'</p></article>').join("");
+ const live=tripUpdates.map(i=>'<article class="notice notice-live"><div class="notice-meta"><time datetime="'+esc(i.created_at||"")+'">Published '+esc(formatTripTime(i.created_at))+'</time>'+(i.updated_at&&new Date(i.updated_at).getTime()-new Date(i.created_at).getTime()>60000?' · Revised '+esc(formatTripTime(i.updated_at)):'')+'</div><strong>'+esc(i.title||"Update")+'</strong><p class="notice-message">'+esc(i.message||"")+'</p></article>').join("");
  $("#announcements").innerHTML=live||'<div class="updates-empty">No new updates from trip leadership.</div>';
  const reminders=G?.announcements||[];
  $("#trip-reminders").innerHTML=reminders.length?'<h3>Trip reminders</h3>'+reminders.map(i=>'<div class="notice"><strong>'+esc(i.title||"Reminder")+'</strong>'+paragraphs(i.message)+'</div>').join(""):"";
@@ -29,31 +29,50 @@ function announce(){
 function formatTripTime(s){
  const d=new Date(s);
  if(!Number.isFinite(d.getTime()))return "recently";
- return new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(d)+" ET";
+ return new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZoneName:"short"}).format(d);
 }
-async function refreshTripUpdates(silent=false){
+function ageSinceRefresh(){
+ if(!tripUpdatesLastRefresh)return 'Not refreshed yet';
+ const secs=Math.max(0,Math.floor((Date.now()-tripUpdatesLastRefresh)/1000));
+ if(secs<40)return 'Last refreshed: just now';
+ if(secs<60)return 'Last refreshed: less than a minute ago';
+ const minutes=Math.floor(secs/60);
+ if(minutes<60)return 'Last refreshed: '+minutes+' minute'+(minutes===1?'':'s')+' ago';
+ const hours=Math.floor(minutes/60);
+ if(hours<24)return 'Last refreshed: '+hours+' hour'+(hours===1?'':'s')+' ago';
+ const days=Math.floor(hours/24);
+ return 'Last refreshed: '+days+' day'+(days===1?'':'s')+' ago';
+}
+function updateRefreshIndicator(){
+ const s=$('#updates-status');if(s)s.textContent=tripUpdatesBusy?'Checking for updates…':ageSinceRefresh()+(tripUpdatesError?' · '+tripUpdatesError:'');
+}
+async function refreshTripUpdates(){
  if(tripUpdatesBusy)return;
  tripUpdatesBusy=true;
- const button=$("#refresh-updates"),status=$("#updates-status");
- if(button)button.disabled=true;
- if(status&&!silent)status.textContent="Checking for updates…";
+ const button=$('#refresh-updates');if(button)button.disabled=true;
+ updateRefreshIndicator();
  try{
-  const r=await fetch("data/updates.json",{cache:"no-store"});
-  if(!r.ok)throw Error("Trip updates unavailable: "+r.status);
-  const payload=await r.json();
-  if(!Array.isArray(payload.updates))throw Error("Trip updates format invalid");
-  tripUpdates=payload.updates.filter(i=>i&&typeof i.message==="string").slice(0,30);
-  putLS("ebc_trip_updates_v1",tripUpdates);
-  announce();
-  if(status)status.textContent="Last checked "+new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour:"numeric",minute:"2-digit"}).format(new Date())+" ET";
- }catch(e){
-  console.warn("Trip updates could not refresh:",e);
-  if(status)status.textContent=tripUpdates.length?"Offline — showing last saved updates.":"Could not check for new updates. Try again.";
-  announce();
- }finally{
-  tripUpdatesBusy=false;
-  if(button)button.disabled=false;
- }
+  const r=await fetch('data/updates.json',{cache:'no-store'});
+  if(!r.ok)throw Error('Trip updates unavailable: '+r.status);
+  const data=await r.json();if(!Array.isArray(data.updates))throw Error('Invalid update feed');
+  tripUpdates=data.updates.filter(i=>i&&typeof i.message==='string').slice(0,30);
+  putLS('ebc_trip_updates_v1',tripUpdates);
+  tripUpdatesLastRefresh=Date.now();putLS('ebc_trip_updates_refreshed_v1',tripUpdatesLastRefresh);
+  tripUpdatesError='';announce();
+ }catch(e){console.warn('Could not refresh trip updates',e);tripUpdatesError='Unable to check';announce();}
+ finally{tripUpdatesBusy=false;if(button)button.disabled=false;updateRefreshIndicator();}
+}
+async function initPublisherAccess(){
+ try{
+  const r=await fetch('data/publisher-config.json',{cache:'no-store'});if(!r.ok)return;
+  const c=await r.json(),u=c.appUrl||'';
+  if(c.status!=='live'||!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(u))return;
+  const b=$('#organizer-open'),d=$('#publisher-dialog'),frame=$('#publisher-frame');
+  b.hidden=false;b.onclick=()=>{frame.src=u;d.showModal()};
+  $('#publisher-close').onclick=()=>d.close();
+  d.onclick=e=>{if(e.target===d)d.close()};
+  d.addEventListener('close',()=>{frame.src='about:blank';refreshTripUpdates()});
+ }catch(e){console.warn('Publisher unavailable',e)}
 }
 function itemSection(e){
  const warning=e.tentative?'<span class="chip-warn">Estimated</span>':"";
@@ -305,12 +324,13 @@ async function init(){
   $("#date-display").textContent=G.meta?.subtitle||"November 9–12, 2026";
   $("#welcome").textContent=G.meta?.welcome||"Welcome aboard!";
   $("#trip-status").textContent=G.meta?.status||"";
-  tripUpdates=getLS("ebc_trip_updates_v1",[]);
+  tripUpdates=getLS("ebc_trip_updates_v1",[]);tripUpdatesLastRefresh=Number(getLS('ebc_trip_updates_refreshed_v1',0))||0;
   announce();schedule();places();essentials();loadTrivia();
   $("#refresh-updates").addEventListener("click",()=>refreshTripUpdates());
-  refreshTripUpdates();
+  updateRefreshIndicator();refreshTripUpdates();initPublisherAccess();
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshTripUpdates(true)});
-  window.setInterval(()=>{if(!document.hidden)refreshTripUpdates(true)},180000);
+  window.setInterval(()=>{if(!document.hidden)refreshTripUpdates()},180000);
+  window.setInterval(updateRefreshIndicator,20000);
  }catch(e){console.error(e);$("#trip-status").textContent="Trip information is temporarily unavailable. Check your connection and reload."}
  route();if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 }
