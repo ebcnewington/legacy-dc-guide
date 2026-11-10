@@ -38,34 +38,9 @@ footer{background:var(--teal);color:white;text-align:center;padding:60px 0 37px;
 .trip-reminders{margin-top:21px;display:grid;gap:12px}
 .trip-reminders h3{font-size:.95rem;margin:0 0 2px}
 
-/* Trip updates: elapsed refresh time and organizer editor */
-.updates-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.updates-heading .section-title{margin-bottom:12px}
+
+/* Trip updates: visible refresh control and time since last check */
 .updates-toolbar{justify-content:flex-start;gap:12px;margin:0 0 16px}
 .updates-refresh{min-height:38px}
 #updates-status{font-size:.74rem;font-variant-numeric:tabular-nums}
 .notice-meta{font-size:.74rem;margin-bottom:8px}
-.organizer-trigger{border:0;background:none;color:#65807b;padding:8px;margin-top:7px;opacity:.75;border-radius:8px}
-.organizer-trigger[hidden]{display:none!important}
-.organizer-trigger:hover,.organizer-trigger:focus-visible{opacity:1;background:#eaf4f0}
-.organizer-trigger svg{height:18px;width:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
-.publisher-dialog{border:0;padding:0;width:min(96vw,600px);max-height:calc(100dvh - 20px);border-radius:16px;box-shadow:0 24px 70px #072c3260}
-.publisher-dialog::backdrop{background:#05292fbb}
-.publisher-panel{display:flex;flex-direction:column;max-height:calc(100dvh - 20px);background:#fff}
-.publisher-header{padding:14px 19px;background:var(--teal);color:white;display:flex;justify-content:space-between;align-items:center}
-.publisher-header h2{font-size:1.08rem;color:white;margin:0}
-.publisher-close{border:0;color:white;background:transparent;font-size:1.6rem;width:34px;height:34px;line-height:1}
-.publisher-panel iframe{width:100%;height:min(77dvh,630px);border:0;background:#fff}
-
-/* Organizer setup status appears until private authentication is deployed */
-.publisher-setup{padding:22px 20px 28px;line-height:1.58}
-.publisher-setup h3{margin:0 0 10px;color:var(--teal);font-size:1.12rem}
-.publisher-setup p{margin:0 0 16px;color:#486260;font-size:.9rem}
-.publisher-setup a{font-weight:750;color:var(--teal);text-decoration:underline;text-underline-offset:3px;font-size:.85rem}
-.publisher-panel iframe[hidden],.publisher-setup[hidden]{display:none!important}
-
-/* One-click copy for the simplified organizer setup */
-.publisher-copy{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--teal);border:1px solid var(--teal);border-radius:10px;color:white;padding:11px 16px;font-weight:800;font-size:.88rem;cursor:pointer;margin:0 0 12px}
-.publisher-copy:hover,.publisher-copy:focus-visible{background:#08626a}
-.publisher-copy:disabled{opacity:.6;cursor:wait}
-.publisher-copy-status{font-size:.78rem!important;color:#276452!important;font-weight:700;min-height:18px;margin:0 0 10px!important}

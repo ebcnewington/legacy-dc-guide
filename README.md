@@ -54,20 +54,12 @@ The website now provides a dedicated root-level `apple-touch-icon.png` featuring
 
 ## Publishing live trip updates
 
-Trip updates come from trusted GitHub issues; the existing announcements remain as Trip reminders in data/guide.json. Travelers need no GitHub accounts. The guide reads data/updates.json on opening, returning to the app, every three minutes while visible, and when Check now is tapped. Previously loaded notices are cached for offline access.
+Trip updates come from trusted GitHub issues; the existing announcements remain as Trip reminders in data/guide.json. Travelers need no GitHub accounts. The guide reads data/updates.json on opening, returning to the app, every three minutes while visible, and when Refresh is tapped. Previously loaded notices are cached for offline access.
 
-To post, open https://github.com/ebcnewington/legacy-dc-guide/issues/new?template=trip-update.md while signed into GitHub as an authorized repository collaborator or organization member. Keep the [Trip Update] prefix and write a descriptive title and the announcement. Edit the issue to revise; close the issue to remove. Connected ChatGPT can also create or update these issues. Notices are public, so avoid sensitive participant information.
+To publish a new announcement, send the title and message to ChatGPT in the Ministry Tools Development project and ask it to publish the Legacy Tour Trip Update. ChatGPT uses the connected GitHub integration to create or revise a public `[Trip Update]` issue; the existing GitHub Actions workflow then rebuilds the public feed. The owner can also use the issue template directly. Never post confidential traveler information.
 
 GitHub Actions redeploys the guide when an authorized issue changes and builds a static feed with scripts/build_updates.py. This prevents GitHub API rate limiting for travelers. Changes appear after the publishing workflow completes.
 
-
-## Organizer update publishing — simpler setup (one script file)
-
-The Trip updates lock icon opens a PIN-only modal for Rob and Ashlee. New updates are stored in a private Google Sheet and served by a read-only public feed. No GitHub access token, Google Forms, or second HTML file is required.
-
-The guide now provides a **Copy setup code** button. The owner creates one Google Apps Script, pastes the copied Code.gs, adds two private PIN properties, runs initializePublisher, deploys the web app, and supplies its /exec URL for connection in data/publisher-config.json. Full instructions: publisher/README.md.
-
-The public guide combines the existing GitHub issue-based announcements with new direct organizer announcements without overwriting either source. Both sources are retrieved on opening, refreshing, and at the regular polling interval. **Until the private Apps Script is deployed, organizer posting is not activated**, but the existing trip guide and GitHub-backed updates remain working. PINs are intentionally only a lightweight access control; do not post confidential information.
 
 ## Automatic website releases (November 10)
 
@@ -75,3 +67,7 @@ Visitors **never need to clear browser history, cookies, or cache** to receive u
 
 **Limitations:** A website cannot modify a completely closed browser, nor retroactively make a previously loaded older JavaScript bundle run a new update-checker. Users already holding an older page in memory may need to close/reopen the guide or refresh it once to acquire the new update-checker; they still never need to delete browsing data. Newer releases automatically check on return. The update check requires a network connection; the installed guide remains available from offline cache.
 
+
+## Publishing approach (November 10 — current)
+
+**There is no in-guide organizer login or standalone publisher.** All organizer-only PIN, modal, Google Apps Script and Google Sheet publisher experiments have been intentionally removed at the owner's request. To update the feed, simply ask ChatGPT to publish a Trip Update to the connected `ebcnewington/legacy-dc-guide` GitHub repository. Existing announcements and the live refresh UI remain unchanged. For issue-tracked publication, use the `.github/ISSUE_TEMPLATE/trip-update.md` template or create an issue with the `[Trip Update]` prefix. Every new or edited authorized issue triggers GitHub Pages deployment; visitors do not need to clear caches or data.

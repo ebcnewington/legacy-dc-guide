@@ -111,3 +111,11 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Add a Copy setup code action to the visible organizer modal.
 - [x] Keep separate server-side four-digit PINs for Rob and Ashlee; no email code or GitHub login.
 - [ ] Owner creates/deploys the one-file Apps Script and supplies its /exec URL. Both private PINs must be entered in Google Script Properties by the owner. No access is live until verified.
+
+## November 10 — Roll back organizer publisher; keep dynamic updates (CURRENT)
+
+- [x] Remove lock icon, PIN controls, setup modal, and copy-code button from live guide.
+- [x] Remove Apps Script publisher integration, external feed merge, private publisher config and publisher source files from repository.
+- [x] Preserve existing GitHub issue-driven Trip Updates feed, timestamps, manual Refresh and relative last-refresh indicator.
+- [x] Preserve automated Pages deployment, deployment-specific release ID, and online auto-update mechanism with SW cache v12.
+- [x] Owner now publishes notices by asking ChatGPT to write a trusted public `[Trip Update]` GitHub issue. Earlier publisher-specific checklist items are retired/superseded, not outstanding tasks.

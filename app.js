@@ -1,5 +1,5 @@
 (()=>{"use strict";
-let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false,tripUpdatesLastRefresh=0,tripUpdatesError="",publisherServiceUrl="";
+let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false,tripUpdatesLastRefresh=0,tripUpdatesError="";
 const deviceToken=getOrMakeDeviceToken();
 function getOrMakeDeviceToken(){let v=null;try{v=localStorage.getItem("ebc_trivia_device_token_1")}catch{}if(v&&/^[a-f0-9-]{36}$/i.test(v))return v;v=crypto.randomUUID();try{localStorage.setItem("ebc_trivia_device_token_1",v)}catch{}return v}
 const $=sel=>document.querySelector(sel);
@@ -46,112 +46,29 @@ function ageSinceRefresh(){
 function updateRefreshIndicator(){
  const s=$('#updates-status');if(s)s.textContent=tripUpdatesBusy?'Checking for updates…':ageSinceRefresh()+(tripUpdatesError?' · '+tripUpdatesError:'');
 }
-function loadPublicPublisherFeed(){
- return new Promise((resolve,reject)=>{
-  if(!publisherServiceUrl){resolve({updates:[]});return}
-  const cb="__ebcPubCb_"+crypto.randomUUID().replace(/-/g,"");
-  const el=document.createElement("script");
-  let finished=false;
-  const timer=window.setTimeout(()=>finish(new Error("Publisher feed timed out")),10000);
-  function finish(err,data){
-   if(finished)return;
-   finished=true;window.clearTimeout(timer);
-   try{delete window[cb]}catch(e){window[cb]=undefined}
-   el.remove();
-   if(err)reject(err);else resolve(data);
-  }
-  window[cb]=result=>finish(null,result);
-  el.onerror=()=>finish(new Error("Could not read the latest organizer updates"));
-  const url=new URL(publisherServiceUrl);
-  url.searchParams.set("action","updates");
-  url.searchParams.set("callback",cb);
-  url.searchParams.set("_",String(Date.now()));
-  el.src=url.href;document.head.appendChild(el);
- });
-}
 async function refreshTripUpdates(){
  if(tripUpdatesBusy)return;
  tripUpdatesBusy=true;
  const button=$("#refresh-updates");if(button)button.disabled=true;
  updateRefreshIndicator();
- let gh=getLS("ebc_trip_updates_github_v1",[]);
- let organizer=getLS("ebc_trip_updates_organizer_v1",[]);
- let fetched=false,errors=[];
  try{
-  try{
-   const r=await fetch("data/updates.json",{cache:"no-store"});
-   if(!r.ok)throw Error("GitHub updates unavailable: "+r.status);
-   const feed=await r.json();
-   if(!Array.isArray(feed.updates))throw Error("Invalid published updates");
-   gh=feed.updates.filter(i=>i&&typeof i.message==="string").slice(0,30);
-   putLS("ebc_trip_updates_github_v1",gh);
-   fetched=true;
-  }catch(ex){console.warn("Published feed unavailable",ex);errors.push("published feed offline")}
-  if(publisherServiceUrl){
-   try{
-    const feed=await loadPublicPublisherFeed();
-    if(!feed||!Array.isArray(feed.updates)||feed.error)throw Error("Invalid organizer feed");
-    organizer=feed.updates.filter(i=>i&&typeof i.message==="string").slice(0,30);
-    putLS("ebc_trip_updates_organizer_v1",organizer);
-    fetched=true;
-   }catch(ex){console.warn("Organizer feed unavailable",ex);errors.push("organizer updates offline")}
-  }else organizer=[];
-  const combined=[...organizer,...gh];
-  if(combined.length||fetched){
-   tripUpdates=combined.sort((a,b)=>(Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0)).slice(0,50);
-   putLS("ebc_trip_updates_v1",tripUpdates);
-   announce();
-  }
-  if(fetched){
-   tripUpdatesLastRefresh=Date.now();
-   putLS("ebc_trip_updates_refreshed_v1",tripUpdatesLastRefresh);
-  }
-  tripUpdatesError=errors.length?errors.join(" · "):"";
+  const r=await fetch("data/updates.json",{cache:"no-store"});
+  if(!r.ok)throw Error("Trip updates unavailable: "+r.status);
+  const feed=await r.json();
+  if(!Array.isArray(feed.updates))throw Error("Invalid trip update feed");
+  tripUpdates=feed.updates.filter(i=>i&&typeof i.message==="string").slice(0,30);
+  putLS("ebc_trip_updates_v1",tripUpdates);
+  tripUpdatesLastRefresh=Date.now();
+  putLS("ebc_trip_updates_refreshed_v1",tripUpdatesLastRefresh);
+  tripUpdatesError="";
+  announce();
+ }catch(ex){
+  console.warn("Trip updates could not refresh",ex);
+  tripUpdatesError=tripUpdates.length?"Offline — showing saved updates":"Unable to check for updates";
+  announce();
  }finally{
   tripUpdatesBusy=false;if(button)button.disabled=false;updateRefreshIndicator();
  }
-}
-async function initPublisherAccess(){
- const trigger=$("#organizer-open"),dialog=$("#publisher-dialog"),frame=$("#publisher-frame"),setup=$("#publisher-setup");
- if(!trigger||!dialog||!frame||!setup)return;
- let publisherUrl="";
- trigger.hidden=false;
- const copy=$("#copy-publisher"),copyStatus=$("#copy-publisher-status");
- if(copy){
-  copy.onclick=async()=>{
-   copy.disabled=true;if(copyStatus)copyStatus.textContent="Copying setup code…";
-   try{
-    const response=await fetch("publisher/Code.gs",{cache:"no-store"});
-    if(!response.ok)throw Error("Setup source is unavailable");
-    const source=await response.text();
-    if(!source.includes("function initializePublisher()"))throw Error("Unexpected setup code");
-    if(!navigator.clipboard?.writeText)throw Error("Clipboard access unavailable");
-    await navigator.clipboard.writeText(source);
-    if(copyStatus)copyStatus.textContent="Copied! Paste it into Code.gs in your new Google Apps Script project.";
-   }catch(error){
-    console.warn("Could not copy publisher setup code",error);
-    if(copyStatus)copyStatus.textContent="Copying is unavailable here. Open the detailed instructions to access the source file.";
-   }finally{copy.disabled=false}
-  };
- }
- trigger.onclick=()=>{
-  if(publisherUrl){setup.hidden=true;frame.hidden=false;frame.src=publisherUrl;}
-  else{frame.hidden=true;setup.hidden=false;}
-  dialog.showModal();
- };
- $("#publisher-close").onclick=()=>dialog.close();
- dialog.onclick=e=>{if(e.target===dialog)dialog.close()};
- dialog.addEventListener("close",()=>{
-  if(!frame.hidden){frame.src="about:blank";refreshTripUpdates()}
- });
- try{
-  const r=await fetch("data/publisher-config.json",{cache:"no-store"});
-  if(!r.ok)return;
-  const c=await r.json(),u=c.appUrl||"";
-  if(c.status==="live"&&/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(u)){
-   publisherUrl=u;publisherServiceUrl=u;
-  }
- }catch(ex){console.warn("Publisher configuration unavailable",ex)}
 }
 function itemSection(e){
  const warning=e.tentative?'<span class="chip-warn">Estimated</span>':"";
@@ -406,7 +323,7 @@ async function init(){
   tripUpdates=getLS("ebc_trip_updates_v1",[]);tripUpdatesLastRefresh=Number(getLS('ebc_trip_updates_refreshed_v1',0))||0;
   announce();schedule();places();essentials();loadTrivia();
   $("#refresh-updates").addEventListener("click",()=>refreshTripUpdates());
-  updateRefreshIndicator();await initPublisherAccess();refreshTripUpdates();
+  updateRefreshIndicator();refreshTripUpdates();
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshTripUpdates(true)});
   window.setInterval(()=>{if(!document.hidden)refreshTripUpdates()},180000);
   window.setInterval(updateRefreshIndicator,20000);
