@@ -67,3 +67,12 @@ Monday’s itinerary and National Harbor map share page 3. Tuesday, Wednesday an
 ### Map supplement · print revision
 
 The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-photo header, Montserrat type and quarter-inch white borders. The dining information sits beside the National Harbor map. The original map artwork remains at its original scale, with lossless compression. Continue editing the existing supplement file.
+
+
+## November 10 — Dynamic trip updates
+
+- [x] Live, timestamped updates from data/updates.json, with Check now, foreground refresh, three-minute polling and offline last-seen cache.
+- [x] Previous notices preserved under Trip reminders.
+- [x] Trusted GitHub issue publishing template with automatic GitHub Pages rebuild for new, edited and closed updates.
+- [x] Avoid calling GitHub's rate-limited issues API from travelers' browsers.
+- [x] Service-worker cache v8 includes the updates JSON.

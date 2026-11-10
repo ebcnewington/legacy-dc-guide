@@ -98,3 +98,10 @@ Monday’s itinerary and National Harbor map share page 3. Tuesday, Wednesday an
 ### Map supplement · print revision
 
 The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-photo header, Montserrat type and quarter-inch white borders. The dining information sits beside the National Harbor map. The original map artwork remains at its original scale, with lossless compression. Continue editing the existing supplement file.
+
+
+### November 10 · Dynamic trip updates
+
+The home view loads data/updates.json automatically, including every three minutes while visible. Existing static messages are shown under Trip reminders. A Check now button refreshes the live feed and recent messages are cached for offline access.
+
+Trusted repository collaborators can post updates through https://github.com/ebcnewington/legacy-dc-guide/issues/new?template=trip-update.md, keeping the [Trip Update] prefix. New, edited and closed issues trigger the Pages deployment workflow. scripts/build_updates.py fetches authorized issues and builds the static public feed in the deployed artifact. The browser itself makes no GitHub API calls, avoiding rate limits. No real trip notice was added during infrastructure development; verify the first posted notice through Actions and the deployed feed.

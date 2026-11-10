@@ -50,3 +50,12 @@ The permanent twelve-item revision checklist is maintained in `REVISION-TRACKER.
 ## iPhone home-screen installation
 
 The website now provides a dedicated root-level `apple-touch-icon.png` featuring the U.S. Capitol photograph. If your old iPhone shortcut displays a black **W**, remove that old **Home Screen shortcut** (this doesn't delete the website or its data), open the online guide in **Safari**, tap **Share → Add to Home Screen**, and add it again. iOS may cache an old icon until the shortcut is recreated. The close button on place details uses a clean SVG and keyboard-only focus outline.
+
+
+## Publishing live trip updates
+
+Trip updates come from trusted GitHub issues; the existing announcements remain as Trip reminders in data/guide.json. Travelers need no GitHub accounts. The guide reads data/updates.json on opening, returning to the app, every three minutes while visible, and when Check now is tapped. Previously loaded notices are cached for offline access.
+
+To post, open https://github.com/ebcnewington/legacy-dc-guide/issues/new?template=trip-update.md while signed into GitHub as an authorized repository collaborator or organization member. Keep the [Trip Update] prefix and write a descriptive title and the announcement. Edit the issue to revise; close the issue to remove. Connected ChatGPT can also create or update these issues. Notices are public, so avoid sensitive participant information.
+
+GitHub Actions redeploys the guide when an authorized issue changes and builds a static feed with scripts/build_updates.py. This prevents GitHub API rate limiting for travelers. Changes appear after the publishing workflow completes.

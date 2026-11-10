@@ -3,8 +3,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  issues:
+    types: [opened, edited, reopened, closed, deleted]
 permissions:
   contents: read
+  issues: read
   pages: write
   id-token: write
 concurrency:
@@ -12,6 +15,10 @@ concurrency:
   cancel-in-progress: true
 jobs:
   deploy:
+    if: >-
+      github.event_name != 'issues' ||
+      github.event.issue.user.login == 'wearethebrowns' ||
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -19,6 +26,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Generate public trip updates
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/build_updates.py
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -41,6 +53,8 @@ jobs:
           node --check /tmp/ebc-trivia-appscript.js
           node api/test-worker.mjs
           python -m json.tool data/guide.json > /dev/null
+          python -m json.tool data/updates.json > /dev/null
+          python -m py_compile scripts/build_updates.py
           python -m json.tool data/trivia.json > /dev/null
           python -m json.tool data/trivia-extra.json > /dev/null
           python - <<'PYSQL'

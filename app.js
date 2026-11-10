@@ -1,5 +1,5 @@
 (()=>{"use strict";
-let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}};
+let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false;
 const deviceToken=getOrMakeDeviceToken();
 function getOrMakeDeviceToken(){let v=null;try{v=localStorage.getItem("ebc_trivia_device_token_1")}catch{}if(v&&/^[a-f0-9-]{36}$/i.test(v))return v;v=crypto.randomUUID();try{localStorage.setItem("ebc_trivia_device_token_1",v)}catch{}return v}
 const $=sel=>document.querySelector(sel);
@@ -21,8 +21,39 @@ function route(){
  window.scrollTo({top:0,behavior:"instant"});
 }
 function announce(){
- const list=G.announcements||[];
- $("#announcements").innerHTML=list.length?list.map(i=>'<div class="notice"><strong>'+esc(i.title||"Update")+'</strong>'+paragraphs(i.message)+'</div>').join(""):sec("Nothing new","All travel updates will appear here.");
+ const live=tripUpdates.map(i=>'<article class="notice notice-live"><div class="notice-meta">Posted '+esc(formatTripTime(i.created_at))+'</div><strong>'+esc(i.title||"Update")+'</strong><p class="notice-message">'+esc(i.message||"")+'</p></article>').join("");
+ $("#announcements").innerHTML=live||'<div class="updates-empty">No new updates from trip leadership.</div>';
+ const reminders=G?.announcements||[];
+ $("#trip-reminders").innerHTML=reminders.length?'<h3>Trip reminders</h3>'+reminders.map(i=>'<div class="notice"><strong>'+esc(i.title||"Reminder")+'</strong>'+paragraphs(i.message)+'</div>').join(""):"";
+}
+function formatTripTime(s){
+ const d=new Date(s);
+ if(!Number.isFinite(d.getTime()))return "recently";
+ return new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(d)+" ET";
+}
+async function refreshTripUpdates(silent=false){
+ if(tripUpdatesBusy)return;
+ tripUpdatesBusy=true;
+ const button=$("#refresh-updates"),status=$("#updates-status");
+ if(button)button.disabled=true;
+ if(status&&!silent)status.textContent="Checking for updates…";
+ try{
+  const r=await fetch("data/updates.json",{cache:"no-store"});
+  if(!r.ok)throw Error("Trip updates unavailable: "+r.status);
+  const payload=await r.json();
+  if(!Array.isArray(payload.updates))throw Error("Trip updates format invalid");
+  tripUpdates=payload.updates.filter(i=>i&&typeof i.message==="string").slice(0,30);
+  putLS("ebc_trip_updates_v1",tripUpdates);
+  announce();
+  if(status)status.textContent="Last checked "+new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour:"numeric",minute:"2-digit"}).format(new Date())+" ET";
+ }catch(e){
+  console.warn("Trip updates could not refresh:",e);
+  if(status)status.textContent=tripUpdates.length?"Offline — showing last saved updates.":"Could not check for new updates. Try again.";
+  announce();
+ }finally{
+  tripUpdatesBusy=false;
+  if(button)button.disabled=false;
+ }
 }
 function itemSection(e){
  const warning=e.tentative?'<span class="chip-warn">Estimated</span>':"";
@@ -274,7 +305,12 @@ async function init(){
   $("#date-display").textContent=G.meta?.subtitle||"November 9–12, 2026";
   $("#welcome").textContent=G.meta?.welcome||"Welcome aboard!";
   $("#trip-status").textContent=G.meta?.status||"";
+  tripUpdates=getLS("ebc_trip_updates_v1",[]);
   announce();schedule();places();essentials();loadTrivia();
+  $("#refresh-updates").addEventListener("click",()=>refreshTripUpdates());
+  refreshTripUpdates();
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshTripUpdates(true)});
+  window.setInterval(()=>{if(!document.hidden)refreshTripUpdates(true)},180000);
  }catch(e){console.error(e);$("#trip-status").textContent="Trip information is temporarily unavailable. Check your connection and reload."}
  route();if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 }
