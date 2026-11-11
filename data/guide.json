@@ -17,8 +17,8 @@
       "message": "Monday bus departure: 10:00 a.m. from Emmanuel Baptist Church; park in the rear lot. Dress in layers and carry a photo ID. Tuesday evening's monument tour may be chilly."
     },
     {
-      "title": "Wednesday pickup location not yet final",
-      "message": "The 300 block of L’Enfant Plaza SW has been identified as a possible pickup location. It is NOT confirmed. Follow Ashlee and Pastor Rob's day-of instructions."
+      "title": "Wednesday 3:00 PM pickup · location not yet final",
+      "message": "Wednesday's pickup is scheduled for 3:00 PM. The 300 block of L’Enfant Plaza SW has been identified as a possible location, but it is NOT confirmed. Follow Ashlee and Pastor Rob's day-of instructions."
     }
   ],
   "itinerary": [
@@ -162,9 +162,10 @@
         {
           "time": "3:00 PM",
           "title": "Depart for hotel break",
-          "description": "Return to National Harbor for rest and dinner on your own.",
+          "description": "Return to National Harbor for rest and dinner on your own. The 3:00 PM pickup is tentatively planned for the 300 block of L’Enfant Plaza SW; the location is NOT confirmed. Follow trip leaders’ instructions.",
           "type": "transport",
-          "printDescription": "Rest and have dinner on your own in National Harbor."
+          "printDescription": "Rest and have dinner on your own in National Harbor.",
+          "location": "Possible pickup: 300 block of L’Enfant Plaza SW (unconfirmed)"
         },
         {
           "time": "5:30 PM",
@@ -581,10 +582,10 @@
       "notes": "Monday 10:00 a.m. departure; two rest stops each way. Rear parking lot available. A restroom is on the bus."
     },
     "possiblePickup": {
-      "title": "Possible Wednesday bus pickup",
-      "name": "L’Enfant Plaza SW — 300 block",
+      "title": "Possible Wednesday bus pickup · 3:00 PM",
+      "name": "3:00 PM — L’Enfant Plaza SW, 300 block",
       "address": "300 block L’Enfant Plaza SW, Washington, DC",
-      "notes": "POSSIBLE LOCATION ONLY; not confirmed by the bus company. South of Independence Avenue SW and north of Frontage Road SW. Do not use this as a meeting location unless trip leaders confirm."
+      "notes": "The pickup is scheduled for 3:00 PM Wednesday. POSSIBLE LOCATION ONLY; the 300 block of L’Enfant Plaza SW has NOT been confirmed by the bus company. South of Independence Avenue SW and north of Frontage Road SW. Do not use this as a meeting location unless trip leaders confirm."
     },
     "tips": [
       {
@@ -641,7 +642,7 @@
         },
         {
           "q": "Where is the Wednesday bus pickup?",
-          "a": "The 300 block of L’Enfant Plaza SW is a likely location, south of Independence Avenue SW and north of Frontage Road SW, but it is NOT confirmed. Follow the leader's day-of instructions."
+          "a": "Wednesday's pickup is scheduled for 3:00 PM. The 300 block of L’Enfant Plaza SW, south of Independence Avenue SW and north of Frontage Road SW, is a possible location, but it is NOT confirmed. Follow your trip leaders' day-of instructions."
         },
         {
           "q": "Are meals included?",
@@ -693,9 +694,9 @@
       "description": "Visitor center, official tools, tours, and accessible information."
     },
     {
-      "label": "Possible Wednesday bus pickup",
+      "label": "Possible Wednesday 3:00 PM bus pickup",
       "url": "https://www.google.com/maps/search/?api=1&query=300%20block%20L%27Enfant%20Plaza%20SW%20Washington%20DC",
-      "description": "300 block of L’Enfant Plaza SW; not confirmed as a pickup location."
+      "description": "Pickup scheduled for 3:00 PM Wednesday; 300 block of L’Enfant Plaza SW is a possible, unconfirmed location."
     }
   ],
   "resources": [

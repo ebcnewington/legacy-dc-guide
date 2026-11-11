@@ -119,3 +119,10 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Preserve existing GitHub issue-driven Trip Updates feed, timestamps, manual Refresh and relative last-refresh indicator.
 - [x] Preserve automated Pages deployment, deployment-specific release ID, and online auto-update mechanism with SW cache v12.
 - [x] Owner now publishes notices by asking ChatGPT to write a trusted public `[Trip Update]` GitHub issue. Earlier publisher-specific checklist items are retired/superseded, not outstanding tasks.
+
+## November 11 — Schedule expand controls and Wednesday pickup time
+
+- [x] Render header-only schedule items as nonexpandable cards with no + icon; preserve the existing layout and expansion for entries with descriptions, details, links, or destination information.
+- [x] Include 3:00 PM with the tentative Wednesday pickup location in the itinerary, Trip reminders, essentials, FAQ and map listing. Preserve the unconfirmed-location warning.
+- [x] Align the print booklet's Wednesday pickup note with the 3:00 PM time.
+- [x] Increment service-worker cache to v13 so the corrected guide is picked up by returning visitors.

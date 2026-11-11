@@ -323,7 +323,7 @@ def itinerary():
             day_item(event)
         if day["date"]=="2026-11-11":
             text_card("Wednesday pickup · NOT CONFIRMED",
-                      "The 300 block of L’Enfant Plaza SW is a possible pickup. Go there only if your trip leaders confirm.",True)
+                      "3:00 p.m. pickup: the 300 block of L’Enfant Plaza SW is a possible location. Go there only if your trip leaders confirm.",True)
         if index==0:
             check_space(145)
         if index==0 or H-52-top>=150:

@@ -72,8 +72,13 @@ async function refreshTripUpdates(){
 }
 function itemSection(e){
  const warning=e.tentative?'<span class="chip-warn">Estimated</span>':"";
- const s=[e.description,e.summary,e.notes,e.walking&&"Walking: "+e.walking,e.accessibility&&"Accessibility: "+e.accessibility].filter(Boolean).map(paragraphs).join("");
- return '<details class="event"><summary><span><span class="time">'+esc(e.time||"Time to be announced")+'</span><strong>'+esc(e.title||"Activity")+warning+'</strong>'+(e.location?'<small>'+esc(e.location)+'</small>':"")+'</span></summary><div class="event-body">'+s+links(e)+(e.placeId?link("#places","Explore destination","map"):"")+'</div></details>';
+ const text=[e.description,e.summary,e.notes,e.walking&&"Walking: "+e.walking,e.accessibility&&"Accessibility: "+e.accessibility].filter(value=>typeof value==="string"&&value.trim()).map(paragraphs).join("");
+ const hasLinks=Boolean(e.address||e.phone||safeURL(e.website)||safeURL(e.mapUrl));
+ const body=text+(hasLinks?links(e):"")+(e.placeId?link("#places","Explore destination","map"):"");
+ const heading='<span><span class="time">'+esc(e.time||"Time to be announced")+'</span><strong>'+esc(e.title||"Activity")+warning+'</strong>'+(e.location?'<small>'+esc(e.location)+'</small>':"")+'</span>';
+ // Header-only items are not interactive and should not show an expand/collapse icon.
+ if(!body)return '<div class="event event-static"><div class="event-summary">'+heading+'</div></div>';
+ return '<details class="event"><summary>'+heading+'</summary><div class="event-body">'+body+'</div></details>';
 }
 function schedule(){
  const days=G.itinerary||[];
