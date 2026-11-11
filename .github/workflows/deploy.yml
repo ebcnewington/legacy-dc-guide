@@ -74,6 +74,13 @@ jobs:
           guide=json.loads(Path("data/guide.json").read_text())
           trivia=json.loads(Path("data/trivia.json").read_text())["questions"] + json.loads(Path("data/trivia-extra.json").read_text())["questions"]
           ids={p["id"] for p in guide["places"]}
+          assert len(guide["places"])==13, "Expected all 13 destination cards"
+          for place in guide["places"]:
+              photo=place.get("photo") or {}
+              assert photo.get("src","").startswith("https://upload.wikimedia.org/wikipedia/commons/thumb/"), place["id"]
+              assert "720px-" in photo["src"] and "480px-" in photo.get("srcset",""), place["id"]
+              assert photo.get("alt") and photo.get("credit"), place["id"]
+              assert photo.get("source","").startswith("https://commons.wikimedia.org/wiki/File:"), place["id"]
           assert len(guide["itinerary"]) == 4, "Four trip days required"
           assert len(trivia)>=90, "Question bank unexpectedly small"
           assert len({q["id"] for q in trivia}) == len(trivia), "Duplicate trivia IDs"

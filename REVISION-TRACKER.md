@@ -126,3 +126,11 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Include 3:00 PM with the tentative Wednesday pickup location in the itinerary, Trip reminders, essentials, FAQ and map listing. Preserve the unconfirmed-location warning.
 - [x] Align the print booklet's Wednesday pickup note with the 3:00 PM time.
 - [x] Increment service-worker cache to v13 so the corrected guide is picked up by returning visitors.
+
+## November 11 — Photo headers and schedule alignment
+
+- [x] Add photo-cover headers for all 13 location cards, using curated Wikimedia Commons images with accessible alt text and linked photographer credits.
+- [x] Limit network image requests through 480/720px responsive thumbnails, lazy loading and async decoding; keep a teal fallback if the external photo cannot load.
+- [x] Remove the yellow left border from the day's main itinerary heading.
+- [x] Center timeline dots on the gray line using one responsive CSS inset variable instead of independent offsets.
+- [x] Increase service-worker cache version to v14, preserving all trip updates, trivia, PDF and guide deployment behavior.

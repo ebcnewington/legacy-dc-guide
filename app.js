@@ -123,7 +123,15 @@ function places(){
  $("#place-filters").innerHTML=filters.map(([k,v])=>'<button type="button" class="filter-chip" data-filter="'+k+'" aria-pressed="'+(k===placeFilter)+'">'+v+'</button>').join("");
  document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{placeFilter=b.dataset.filter;places()});
  const filtered=(G.places||[]).map((p,i)=>({p,i})).filter(({p})=>placeFilter==="all"||placeGroup(p)===placeFilter);
- $("#places-grid").innerHTML=filtered.map(({p,i})=>'<article class="place-card"><div class="place-card-cover">'+ico(p.audio?.length?"headphones":"pin")+'<span class="place-number">'+String(i+1).padStart(2,"0")+'</span></div><div class="place-card-body"><p class="tag">'+esc(p.tag||"Featured site")+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary||"")+'</p>'+(p.audio?.length?'<p class="audio-note">'+ico("headphones")+'Narrated tour available</p>':"")+'<button type="button" class="detail-button" data-place="'+i+'">Details &amp; directions</button></div></article>').join("");
+ $("#places-grid").innerHTML=filtered.map(({p,i})=>{
+  const photo=p.photo;
+  const image=photo?.src?'<img class="place-photo" src="'+esc(safeURL(photo.src))+'" srcset="'+esc(photo.srcset||"")+'" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) 45vw, 32vw" width="720" height="450" loading="lazy" decoding="async" alt="'+esc(photo.alt||"")+'" style="object-position:'+esc(photo.position||"center")+'">':"";
+  const credit=photo?.source?'<a class="place-photo-credit" href="'+esc(safeURL(photo.source))+'" target="_blank" rel="noopener noreferrer" title="View original photograph and licensing details">Photo: '+esc(photo.credit||"Wikimedia Commons")+'</a>':"";
+  return '<article class="place-card"><div class="place-card-cover">'+image+'<span class="place-cover-icon">'+ico(p.audio?.length?"headphones":"pin")+'</span><span class="place-number">'+String(i+1).padStart(2,"0")+'</span>'+credit+'</div><div class="place-card-body"><p class="tag">'+esc(p.tag||"Featured site")+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary||"")+'</p>'+(p.audio?.length?'<p class="audio-note">'+ico("headphones")+'Narrated tour available</p>':"")+'<button type="button" class="detail-button" data-place="'+i+'">Details &amp; directions</button></div></article>';
+ }).join("");
+ // An unavailable image leaves the existing teal cover visible, not a broken-image glyph.
+ $("#places-grid").querySelectorAll(".place-photo").forEach(image=>image.addEventListener("error",()=>{image.hidden=true}));
+
  document.querySelectorAll("[data-place]").forEach(b=>b.onclick=()=>showPlace(G.places[Number(b.dataset.place)]));
 }
 function showPlace(p){

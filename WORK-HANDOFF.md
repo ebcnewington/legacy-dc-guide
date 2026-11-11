@@ -144,3 +144,9 @@ The existing static GitHub issue-driven Trip Updates feed must remain functional
 The schedule's `itemSection` now checks for meaningful body content (description, notes, accessibility/walking text, link actions, or destination link). A header-only entry renders as a static `div.event-static`, preserving the card's styling while omitting the + toggle and keyboard expand affordance; entries with body content remain native `details`. The associated CSS shares summary layout between the two card types.
 
 Wednesday's scheduled 3:00 PM pickup is now displayed consistently next to the tentative 300 block of L’Enfant Plaza SW location in the guide data, reminder, FAQ, essentials and map listing. **The location is NOT confirmed** and travelers must follow trip leaders. The printable booklet's tentative pickup note also includes 3:00 PM. Service worker cache v13. Trip Updates via ChatGPT/GitHub remain unchanged and no organizer-login feature has been restored.
+
+### November 11 · Places imagery and timeline precision
+
+The `places()` cards now render individual photos sourced through Wikimedia Commons 480px/720px thumbnail URLs, with native lazy-load/decode, descriptive alt text, and a credit link back to each Wikimedia Commons file page for attribution/licensing. Photos are **not** fetched at full resolution or included in the PDF. Image sourcing/positioning belongs to `data/guide.json` `places[].photo`. The teal cover stays visible if a photo fails; click handlers for Details & directions are preserved. See README for performance notes.
+
+The yellow left-hand border on the itinerary's day header has been removed; timeline dots use CSS `--timeline-inset` and translateX(-50%) to center on the gray line across desktop/mobile. SW cache v14; automated site version stamping remains unchanged.
