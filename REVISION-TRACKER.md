@@ -134,3 +134,10 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Remove the yellow left border from the day's main itinerary heading.
 - [x] Center timeline dots on the gray line using one responsive CSS inset variable instead of independent offsets.
 - [x] Increase service-worker cache version to v14, preserving all trip updates, trivia, PDF and guide deployment behavior.
+
+## November 11 — Confirmed pickup announcement
+
+- [x] Post user-supplied 3:00 PM pickup announcement as GitHub issue #2, with original map link.
+- [x] Remove outdated tentative pickup details and show Air & Space Museum, Jefferson Dr SW, right-hand entrance walkway as confirmed pickup.
+- [x] Update itinerary, Essentials, FAQ, map reference, reminders, and booklet.
+- [x] Avoid unnecessary apt updates in workflow after recent GitHub runner DNS outage; SW v15.

@@ -37,10 +37,16 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: requirements.txt
-      - name: Install PDF graphics prerequisites
+      - name: Verify PDF graphics prerequisites
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y libcairo2-dev pkg-config
+          # Hosted Ubuntu runners generally already have Cairo headers.
+          # Avoid slow network-dependent apt updates unless dependencies are missing.
+          if command -v pkg-config >/dev/null 2>&1 && pkg-config --exists cairo && test -f /usr/include/cairo/cairo.h; then
+            echo "Cairo development libraries already installed."
+          else
+            sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 update -qq
+            sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 install -y libcairo2-dev pkg-config
+          fi
       - name: Install booklet and image dependencies
         run: python -m pip install -r requirements.txt
       - name: Build Capitol imagery, icons and half-sheet PDF

@@ -322,8 +322,8 @@ def itinerary():
         for event in day["items"]:
             day_item(event)
         if day["date"]=="2026-11-11":
-            text_card("Wednesday pickup · NOT CONFIRMED",
-                      "3:00 p.m. pickup: the 300 block of L’Enfant Plaza SW is a possible location. Go there only if your trip leaders confirm.",True)
+            text_card("Wednesday 3:00 p.m. pickup · CONFIRMED",
+                      "Hotel-break pickup: meet at the Air & Space Museum on the large walkway to the right of its entrance, along Jefferson Dr SW.",True)
         if index==0:
             check_space(145)
         if index==0 or H-52-top>=150:

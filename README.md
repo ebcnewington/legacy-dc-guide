@@ -77,3 +77,7 @@ Visitors **never need to clear browser history, cookies, or cache** to receive u
 All 13 **Places** cards use distinctive, individually sourced destination photography in their header area. Source photographs are linked through the Wikimedia Commons thumbnail CDN at **480 and 720 pixels** wide, chosen responsively with `srcset` / `sizes` rather than downloading multi-megabyte originals. Photos use lazy loading and asynchronous decoding, retain the teal gradient when unavailable, and include a discreet photographer credit linked to the source file and full licensing information. The source/credit metadata is stored alongside each place in `data/guide.json`. The image files are not bundled into the PDF.
 
 The itinerary day heading no longer has a decorative yellow left border. Its timeline dots use one shared `--timeline-inset` variable and a 50% transform to center each marker on the gray vertical line at desktop and mobile sizes. The service worker has been bumped to v14.
+
+## November 11 — confirmed 3:00 PM hotel-break pickup
+
+The tentative L’Enfant Plaza bus pickup has been superseded. Wednesday's **3:00 PM hotel-break pickup** is confirmed at the **Air & Space Museum**, on the **large walkway to the right of the entrance, along Jefferson Dr SW**. User-provided map: https://clr.cm/wbWW. Only travelers returning to the hotels before the Capitol visit need to use this pickup. The itinerary, Essentials, FAQs, map, reminder and printed booklet note have been updated. GitHub issue #2 contains the original trip announcement. Service-worker cache v15.

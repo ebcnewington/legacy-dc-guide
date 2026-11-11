@@ -150,3 +150,7 @@ Wednesday's scheduled 3:00 PM pickup is now displayed consistently next to the t
 The `places()` cards now render individual photos sourced through Wikimedia Commons 480px/720px thumbnail URLs, with native lazy-load/decode, descriptive alt text, and a credit link back to each Wikimedia Commons file page for attribution/licensing. Photos are **not** fetched at full resolution or included in the PDF. Image sourcing/positioning belongs to `data/guide.json` `places[].photo`. The teal cover stays visible if a photo fails; click handlers for Details & directions are preserved. See README for performance notes.
 
 The yellow left-hand border on the itinerary's day header has been removed; timeline dots use CSS `--timeline-inset` and translateX(-50%) to center on the gray line across desktop/mobile. SW cache v14; automated site version stamping remains unchanged.
+
+### November 11 · Confirmed 3:00 PM hotel-break pickup (supersedes previous tentative directions)
+
+The organizer confirmed the 3:00 PM hotel-break pickup in front of the Air & Space Museum on the large walkway to the right of the entrance, along Jefferson Dr SW. Map: https://clr.cm/wbWW. This **replaces the previous tentative L’Enfant Plaza pickup** in itinerary, Essentials, FAQ, reminder, map, and booklet. Issue #2 posts the complete user-supplied update. No changes to evening Capitol departure. The prior photo-header deployment run 43034326558 failed due to external Ubuntu apt DNS, so workflow now skips network-dependent apt when Cairo development headers exist. SW v15.

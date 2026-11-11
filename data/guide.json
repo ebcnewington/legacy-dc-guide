@@ -17,8 +17,8 @@
       "message": "Monday bus departure: 10:00 a.m. from Emmanuel Baptist Church; park in the rear lot. Dress in layers and carry a photo ID. Tuesday evening's monument tour may be chilly."
     },
     {
-      "title": "Wednesday 3:00 PM pickup · location not yet final",
-      "message": "Wednesday's pickup is scheduled for 3:00 PM. The 300 block of L’Enfant Plaza SW has been identified as a possible location, but it is NOT confirmed. Follow Ashlee and Pastor Rob's day-of instructions."
+      "title": "Wednesday 3:00 PM pickup — CONFIRMED",
+      "message": "Our 3:00 PM pickup for those returning to the hotels before visiting the Capitol is in front of the Air & Space Museum, on the large walkway to the right of the entrance along Jefferson Dr SW. Map: https://clr.cm/wbWW"
     }
   ],
   "itinerary": [
@@ -161,11 +161,13 @@
         },
         {
           "time": "3:00 PM",
-          "title": "Depart for hotel break",
-          "description": "Return to National Harbor for rest and dinner on your own. The 3:00 PM pickup is tentatively planned for the 300 block of L’Enfant Plaza SW; the location is NOT confirmed. Follow trip leaders’ instructions.",
+          "title": "3:00 PM pickup for hotel break",
+          "description": "For those returning to the hotels before the Capitol visit: meet at 3:00 PM in front of the Air & Space Museum, on the large walkway to the right of the entrance along Jefferson Dr SW. The pickup location is confirmed. See the map link.",
           "type": "transport",
-          "printDescription": "Rest and have dinner on your own in National Harbor.",
-          "location": "Possible pickup: 300 block of L’Enfant Plaza SW (unconfirmed)"
+          "printDescription": "Optional hotel-break pickup at 3:00 p.m. by the Air & Space Museum on Jefferson Dr SW.",
+          "location": "Air & Space Museum — large walkway right of entrance (Jefferson Dr SW)",
+          "address": "National Air and Space Museum, Jefferson Dr SW, Washington, DC",
+          "mapUrl": "https://clr.cm/wbWW"
         },
         {
           "time": "5:30 PM",
@@ -686,10 +688,11 @@
       "notes": "Monday 10:00 a.m. departure; two rest stops each way. Rear parking lot available. A restroom is on the bus."
     },
     "possiblePickup": {
-      "title": "Possible Wednesday bus pickup · 3:00 PM",
-      "name": "3:00 PM — L’Enfant Plaza SW, 300 block",
-      "address": "300 block L’Enfant Plaza SW, Washington, DC",
-      "notes": "The pickup is scheduled for 3:00 PM Wednesday. POSSIBLE LOCATION ONLY; the 300 block of L’Enfant Plaza SW has NOT been confirmed by the bus company. South of Independence Avenue SW and north of Frontage Road SW. Do not use this as a meeting location unless trip leaders confirm."
+      "title": "Confirmed Wednesday bus pickup · 3:00 PM",
+      "name": "Air & Space Museum — right-hand entrance walkway",
+      "address": "National Air and Space Museum, Jefferson Dr SW, Washington, DC",
+      "notes": "CONFIRMED for Wednesday, November 11, at 3:00 PM: Travelers who want to return to the hotels before the Capitol visit should meet in front of the Air & Space Museum on the large walkway to the right of the entrance along Jefferson Dr SW.",
+      "mapUrl": "https://clr.cm/wbWW"
     },
     "tips": [
       {
@@ -746,7 +749,7 @@
         },
         {
           "q": "Where is the Wednesday bus pickup?",
-          "a": "Wednesday's pickup is scheduled for 3:00 PM. The 300 block of L’Enfant Plaza SW, south of Independence Avenue SW and north of Frontage Road SW, is a possible location, but it is NOT confirmed. Follow your trip leaders' day-of instructions."
+          "a": "The Wednesday, November 11, 3:00 PM pickup for those returning to the hotels before the Capitol visit is CONFIRMED at the Air & Space Museum, on the large walkway to the right of the entrance along Jefferson Dr SW. Map: https://clr.cm/wbWW"
         },
         {
           "q": "Are meals included?",
@@ -770,7 +773,7 @@
         },
         {
           "q": "What if I get separated from the group?",
-          "a": "Call Ashlee or Pastor Rob, follow the announced bus meeting place and time, and stay with your assigned smaller group when applicable. Do not assume a possible pickup location is confirmed.",
+          "a": "Call Ashlee or Pastor Rob and follow the latest Trip Updates. For Wednesday's confirmed 3:00 PM hotel-break pickup, meet at the Air & Space Museum, on the large walkway to the right of the entrance along Jefferson Dr SW.",
           "printAnswer": "Call Ashlee or Pastor Rob (page 2). Follow the meeting place and time announced by your leader."
         }
       ]
@@ -798,9 +801,9 @@
       "description": "Visitor center, official tools, tours, and accessible information."
     },
     {
-      "label": "Possible Wednesday 3:00 PM bus pickup",
-      "url": "https://www.google.com/maps/search/?api=1&query=300%20block%20L%27Enfant%20Plaza%20SW%20Washington%20DC",
-      "description": "Pickup scheduled for 3:00 PM Wednesday; 300 block of L’Enfant Plaza SW is a possible, unconfirmed location."
+      "label": "Confirmed Wednesday 3:00 PM hotel-break pickup",
+      "url": "https://clr.cm/wbWW",
+      "description": "Air & Space Museum, large walkway to the right of the entrance along Jefferson Dr SW. For travelers returning to the hotels before the Capitol visit."
     }
   ],
   "resources": [
