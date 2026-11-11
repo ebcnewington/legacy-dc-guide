@@ -40,6 +40,14 @@ def allowed(issue):
             and issue.get("state") == "open")
 
 
+def issue_expiry(body):
+    """Optional UTC expiry in a private issue-body comment."""
+    match = re.search(r"<!--\s*expires_at:\s*(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)\b[^>]*-->", body or "", flags=re.IGNORECASE)
+    if not match:
+        return None
+    return datetime.fromisoformat(match.group(1).replace("Z", "+00:00"))
+
+
 def clean_body(body):
     body = re.sub(r"<!--.*?-->", "", body or "", flags=re.DOTALL)
     body = re.sub(r"^\s*###\s+Update message\s*\n+", "", body, flags=re.IGNORECASE)
@@ -51,6 +59,9 @@ def main():
     for issue in fetch_issues():
         if not allowed(issue):
             continue
+        expiry = issue_expiry(issue.get("body"))
+        if expiry and expiry <= datetime.now(timezone.utc):
+            continue
         message = clean_body(issue.get("body"))
         if not message:
             continue
@@ -60,6 +71,7 @@ def main():
             "message": message,
             "created_at": issue.get("created_at"),
             "updated_at": issue.get("updated_at"),
+            "expires_at": expiry.isoformat().replace("+00:00", "Z") if expiry else None,
         })
         if len(updates) >= 30:
             break

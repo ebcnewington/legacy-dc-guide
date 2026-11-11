@@ -141,3 +141,12 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Remove outdated tentative pickup details and show Air & Space Museum, Jefferson Dr SW, right-hand entrance walkway as confirmed pickup.
 - [x] Update itinerary, Essentials, FAQ, map reference, reminders, and booklet.
 - [x] Avoid unnecessary apt updates in workflow after recent GitHub runner DNS outage; SW v15.
+
+## November 11 — Capitol Worship announcement (until 7:00 PM EST)
+
+- [x] Post the organizer's Capitol Worship reminder as GitHub issue #3, including ID/security, optional tips for bus driver Todd, and the 5:30 PM meeting in front of AC.
+- [x] Close prior 3:00 PM pickup update issue #2 and remove its now-stale static Trip reminder.
+- [x] Add optional `expires_at` metadata to issue-driven updates; the builder omits already expired posts.
+- [x] Have the guide hide expiring updates automatically at the deadline, including saved offline copies.
+- [x] Expiry for issue #3: 2026-11-12T00:00:00Z, i.e. Wednesday Nov 11 at 7:00 PM Eastern.
+- [x] Increment service-worker cache to v16.

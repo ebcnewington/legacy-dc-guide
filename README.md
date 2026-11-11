@@ -81,3 +81,7 @@ The itinerary day heading no longer has a decorative yellow left border. Its tim
 ## November 11 — confirmed 3:00 PM hotel-break pickup
 
 The tentative L’Enfant Plaza bus pickup has been superseded. Wednesday's **3:00 PM hotel-break pickup** is confirmed at the **Air & Space Museum**, on the **large walkway to the right of the entrance, along Jefferson Dr SW**. User-provided map: https://clr.cm/wbWW. Only travelers returning to the hotels before the Capitol visit need to use this pickup. The itinerary, Essentials, FAQs, map, reminder and printed booklet note have been updated. GitHub issue #2 contains the original trip announcement. Service-worker cache v15.
+
+## November 11 — time-limited updates
+
+Active `[Trip Update]` issues may carry `<!-- expires_at: YYYY-MM-DDTHH:MM:SSZ -->` in their body. `scripts/build_updates.py` omits already expired issues and emits `expires_at` for future expirations. The app renders only currently active notices and schedules a browser timer to remove them at their precise expiration, even while offline or left open. This does **not require** the issue to be closed at the cutoff, though issue closure remains good housekeeping. Existing posts without expiration are unaffected. Issue #3 contains the Capitol Worship notice, set to expire at **2026-11-12T00:00:00Z (7:00 PM EST November 11)**. Previous 3:00 PM pickup issue #2 was closed and its stale static Trip reminder removed; itinerary and confirmed map remain for reference. Service worker v16.

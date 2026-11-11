@@ -1,5 +1,5 @@
 (()=>{"use strict";
-let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false,tripUpdatesLastRefresh=0,tripUpdatesError="";
+let G=null,Q=null,communityStats=null,triviaService={apiBaseUrl:"",status:"not-configured"},dayIndex=0,placeFilter="all",game={started:false,ended:false,asked:[],score:0,answered:0,correct:null,current:null,selection:null,ratings:{}},tripUpdates=[],tripUpdatesBusy=false,tripUpdatesLastRefresh=0,tripUpdatesError="",tripUpdateExpiryTimer=null;
 const deviceToken=getOrMakeDeviceToken();
 function getOrMakeDeviceToken(){let v=null;try{v=localStorage.getItem("ebc_trivia_device_token_1")}catch{}if(v&&/^[a-f0-9-]{36}$/i.test(v))return v;v=crypto.randomUUID();try{localStorage.setItem("ebc_trivia_device_token_1",v)}catch{}return v}
 const $=sel=>document.querySelector(sel);
@@ -21,7 +21,19 @@ function route(){
  window.scrollTo({top:0,behavior:"instant"});
 }
 function announce(){
- const live=tripUpdates.map(i=>'<article class="notice notice-live"><div class="notice-meta"><time datetime="'+esc(i.created_at||"")+'">Published '+esc(formatTripTime(i.created_at))+'</time>'+(i.updated_at&&new Date(i.updated_at).getTime()-new Date(i.created_at).getTime()>60000?' · Revised '+esc(formatTripTime(i.updated_at)):'')+'</div><strong>'+esc(i.title||"Update")+'</strong><p class="notice-message">'+esc(i.message||"")+'</p></article>').join("");
+ // Expired notices disappear even from offline cached content and an already-open guide.
+ if(tripUpdateExpiryTimer!==null){clearTimeout(tripUpdateExpiryTimer);tripUpdateExpiryTimer=null;}
+ const now=Date.now();
+ const active=tripUpdates.filter(i=>{
+  if(!i.expires_at)return true;
+  const expires=Date.parse(i.expires_at);
+  return Number.isFinite(expires)&&expires>now;
+ });
+ const nextExpiry=Math.min(...active.map(i=>i.expires_at?Date.parse(i.expires_at):Infinity));
+ if(Number.isFinite(nextExpiry)){
+  tripUpdateExpiryTimer=window.setTimeout(()=>{tripUpdateExpiryTimer=null;announce()},Math.max(0,nextExpiry-Date.now()+20));
+ }
+ const live=active.map(i=>'<article class="notice notice-live"><div class="notice-meta"><time datetime="'+esc(i.created_at||"")+'">Published '+esc(formatTripTime(i.created_at))+'</time>'+(i.updated_at&&new Date(i.updated_at).getTime()-new Date(i.created_at).getTime()>60000?' · Revised '+esc(formatTripTime(i.updated_at)):'')+'</div><strong>'+esc(i.title||"Update")+'</strong><p class="notice-message">'+esc(i.message||"")+'</p></article>').join("");
  $("#announcements").innerHTML=live||'<div class="updates-empty">No new updates from trip leadership.</div>';
  const reminders=G?.announcements||[];
  $("#trip-reminders").innerHTML=reminders.length?'<h3>Trip reminders</h3>'+reminders.map(i=>'<div class="notice"><strong>'+esc(i.title||"Reminder")+'</strong>'+paragraphs(i.message)+'</div>').join(""):"";
