@@ -11,12 +11,7 @@
     "heroFocus": "center 45%",
     "status": "Schedule subject to changes. Check with Ashlee or Pastor Rob for the latest bus meeting instructions."
   },
-  "announcements": [
-    {
-      "title": "Please read before departure",
-      "message": "Monday bus departure: 10:00 a.m. from Emmanuel Baptist Church; park in the rear lot. Dress in layers and carry a photo ID. Tuesday evening's monument tour may be chilly."
-    }
-  ],
+  "announcements": [],
   "itinerary": [
     {
       "date": "2026-11-09",

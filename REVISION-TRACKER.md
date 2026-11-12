@@ -150,3 +150,9 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Have the guide hide expiring updates automatically at the deadline, including saved offline copies.
 - [x] Expiry for issue #3: 2026-11-12T00:00:00Z, i.e. Wednesday Nov 11 at 7:00 PM Eastern.
 - [x] Increment service-worker cache to v16.
+
+## November 12 — Retire initial departure reminder
+
+- [x] Remove `Please read before departure` reminder from static Trip reminders; preserve schedule and other content.
+- [x] Retain the conditional section heading and Trip Updates functionality.
+- [x] Bump service-worker cache to v17.

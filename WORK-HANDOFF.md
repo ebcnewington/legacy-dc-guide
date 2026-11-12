@@ -158,3 +158,7 @@ The organizer confirmed the 3:00 PM hotel-break pickup in front of the Air & Spa
 ### November 11 · Sunset Caprirol Worship update at 7:00 PM EST
 
 The owner asked for a new Capitol Worship reminder active **now until 7:00 PM on Wednesday, November 11, 2026 Eastern**. Saved in GitHub Trip Update issue #3 with expiry comment `<!-- expires_at: 2026-11-12T00:00:00Z -->`. Prior 3:00 PM pickup issue #2 was closed and its duplicate static `data/guide.json` announcement removed (the actual itinerary/pickup location remains). `scripts/build_updates.py` parses the expiration, emits `expires_at` in the static feed, and excludes expired notices at build time. `app.js` excludes expired updates from display (including offline cache) and sets a timer to hide an active update when it expires without requiring a refresh or another GitHub deployment. Service-worker cache v16. Avoid reopening #2 or leaving issue #3 as an indefinite live notice. The new issue includes reminders to bring IDs for Capitol security, cash tips for driver Todd tomorrow, and the 5:30 PM AC Hotel meeting.
+
+### November 12 · Clear outdated departure reminder
+
+Removed the static `Please read before departure` entry from `data/guide.json` `announcements`. The Trip reminders header now hides automatically when there are no static announcements. Itinerary details and the separately managed issue-backed Trip Updates feed remain unchanged. Incremented service worker cache to v17; automatic release stamping remains enabled.
