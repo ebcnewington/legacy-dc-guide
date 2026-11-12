@@ -190,3 +190,9 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Load first three visible cards eagerly and later cards lazily; preserve teal fallback and image credit.
 - [x] Require successful creation of all 26 local images in GitHub Actions before deployment.
 - [x] Increment service worker to v21 for returning users.
+
+## November 12 — Resolve Wikimedia HTTP 400 thumbnail-size restrictions
+
+- [x] Diagnose source host error from GitHub Actions log: some arbitrary 720px Wikimedia derivatives return HTTP 400 despite valid source images.
+- [x] Retry source downloads at canonical/common 960px, 800px, 640px, 480px and 330px widths before original-file fallback.
+- [x] Do not exceed 13 MB per original download; avoid retrying permanent 400/403/404 statuses at the same URL.

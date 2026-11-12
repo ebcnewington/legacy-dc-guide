@@ -48,10 +48,20 @@ def source_urls(photo: dict) -> list[str]:
     thumb = photo.get("remote_src") or ""
     if not thumb.startswith("https://upload.wikimedia.org/wikipedia/commons/thumb/"):
         raise ValueError(f"Missing Commons thumbnail source: {thumb}")
-    result = [
-        thumb,
-        thumb.replace("https://upload.wikimedia.org", "https://thumb.wikimedia.org", 1),
-    ]
+    # Some Commons images reject ad-hoc 720px sizes with HTTP 400.
+    # Prefer the original supplied URL, then Commons' commonly pre-rendered
+    # sizes: 960, 800, 640, 480 and 330. The 960px default preview is
+    # available for most files, including the 25 MB Washington Monument shot.
+    head, tail = thumb.rsplit("/", 1)
+    if not re.match(r"^[0-9]+px-", tail):
+        raise ValueError(f"Invalid Commons thumbnail URL: {thumb}")
+    name = re.sub(r"^[0-9]+px-", "", tail)
+    result = []
+    for width in (720, 960, 800, 640, 480, 330):
+        sized = f"{head}/{width}px-{name}"
+        result.append(sized)
+        # Alternative Commons thumbnail host is useful on some CDNs.
+        result.append(sized.replace("https://upload.wikimedia.org", "https://thumb.wikimedia.org", 1))
     origin = original_url(thumb)
     if origin:
         result.append(origin)
@@ -78,6 +88,11 @@ def get_image(session: requests.Session, photo: dict, name: str) -> Image.Image:
                 return image
             except (requests.RequestException, OSError, ValueError, UnidentifiedImageError) as exc:
                 errors.append(f"{url} ({type(exc).__name__}: {str(exc)[:120]})")
+                # A Commons HTTP 400 means a prohibited thumb width, not a
+                # transient server failure; try a pre-rendered size immediately.
+                permanent = isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code in (400, 403, 404)
+                if permanent:
+                    break
                 if attempt == 1:
                     time.sleep(0.8)
     raise RuntimeError(f"Unable to prepare location photo '{name}': " + " | ".join(errors))
