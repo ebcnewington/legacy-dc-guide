@@ -10,7 +10,7 @@ const placePhotoURL=s=>typeof s==="string"&&/^assets\/places\/[a-z0-9-]+-(480|72
 const addressUrl=s=>s?"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s):"";
 const phoneUrl=s=>s?"tel:"+String(s).replace(/[^\d+]/g,""):"";
 const link=(href,label,icon="link")=>href?'<a class="action-link" href="'+esc(href)+'"'+(href.startsWith("http")?' target="_blank" rel="noopener noreferrer"':"")+'>'+ico(icon)+esc(label)+'</a>':"";
-const links=o=>'<div class="link-row">'+(o.address?link(addressUrl(o.address),"Directions","pin"):"")+(o.website?link(safeURL(o.website),"Website"):"")+(o.phone?link(phoneUrl(o.phone),"Call "+o.phone,"phone"):"")+(o.mapUrl?link(safeURL(o.mapUrl),"Visitor map","map"):"")+'</div>';
+const links=(o,extra="")=>'<div class="link-row">'+(o.address?link(addressUrl(o.address),"Directions","pin"):"")+(o.website?link(safeURL(o.website),"Website"):"")+(o.phone?link(phoneUrl(o.phone),"Call "+o.phone,"phone"):"")+(o.mapUrl?link(safeURL(o.mapUrl),"Visitor map","map"):"")+extra+'</div>';
 const sec=(name,body,cls="")=>'<section class="essential-card '+cls+'"><h3>'+esc(name)+'</h3>'+body+'</section>';
 const paragraphs=s=>s?'<p>'+esc(s)+'</p>':"";
 const getLS=(k,fallback)=>{try{return JSON.parse(localStorage.getItem(k))??fallback}catch{return fallback}};
@@ -87,7 +87,8 @@ function itemSection(e){
  const warning=e.tentative?'<span class="chip-warn">Estimated</span>':"";
  const text=[e.description,e.summary,e.notes,e.walking&&"Walking: "+e.walking,e.accessibility&&"Accessibility: "+e.accessibility].filter(value=>typeof value==="string"&&value.trim()).map(paragraphs).join("");
  const hasLinks=Boolean(e.address||e.phone||safeURL(e.website)||safeURL(e.mapUrl));
- const body=text+(hasLinks?links(e):"")+(e.placeId?link("#places","Explore destination","map"):"");
+ const extra=e.placeId?link("#places","Explore destination","map"):"";
+ const body=text+((hasLinks||extra)?links(e,extra):"");
  const heading='<span><span class="time">'+esc(e.time||"Time to be announced")+'</span><strong>'+esc(e.title||"Activity")+warning+'</strong>'+(e.location?'<small>'+esc(e.location)+'</small>':"")+'</span>';
  // Header-only items are not interactive and should not show an expand/collapse icon.
  if(!body)return '<div class="event event-static"><div class="event-summary">'+heading+'</div></div>';
@@ -140,7 +141,7 @@ function places(){
   const photo=p.photo;
   const image=photo?.src?'<img class="place-photo" src="'+esc(placePhotoURL(photo.src))+'" srcset="'+esc(photo.srcset||"")+'" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) 45vw, 32vw" width="720" height="405" loading="'+(cardIndex<3?"eager":"lazy")+'" decoding="async" alt="'+esc(photo.alt||"")+'" style="object-position:'+esc(photo.position||"center")+'">':"";
   const credit=photo?.source?'<a class="place-photo-credit" href="'+esc(safeURL(photo.source))+'" target="_blank" rel="noopener noreferrer" title="View original photograph and licensing details">Photo: '+esc(photo.credit||"Wikimedia Commons")+'</a>':"";
-  return '<article class="place-card"><div class="place-card-cover">'+image+'<span class="place-cover-icon">'+ico(p.audio?.length?"headphones":"pin")+'</span><span class="place-number">'+String(i+1).padStart(2,"0")+'</span>'+credit+'</div><div class="place-card-body"><p class="tag">'+esc(p.tag||"Featured site")+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary||"")+'</p>'+(p.audio?.length?'<p class="audio-note">'+ico("headphones")+'Narrated tour available</p>':"")+'<button type="button" class="detail-button" data-place="'+i+'">Details &amp; directions</button></div></article>';
+  return '<article class="place-card"><div class="place-card-cover">'+image+'<span class="place-cover-icon">'+ico(p.audio?.length?"headphones":"pin")+'</span><span class="place-number">'+String(i+1).padStart(2,"0")+'</span>'+credit+'</div><div class="place-card-body"><p class="tag">'+esc(p.tag||"Featured site")+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary||"")+'</p>'+(p.audio?.length?'<p class="audio-note">'+ico("headphones")+'Narrated tour available</p>':"")+'<div class="place-card-actions"><button type="button" class="detail-button" data-place="'+i+'">Details &amp; directions</button></div></div></article>';
  }).join("");
  // Optimized card photos are served by this same GitHub Pages site.
  // If an asset fails, show the branded teal background rather than a broken image.
@@ -160,7 +161,7 @@ function showPlace(p){
  let body='<p class="tag">'+esc(p.tag||"Destination")+'</p><h2 id="place-dialog-title" tabindex="-1">'+esc(p.name)+'</h2>'+paragraphs(p.summary)+paragraphs(p.detail)+links(p);
  const attributes=[["Food & dining",p.dining],["Restrooms",p.restrooms],["Accessibility",p.accessibility],["Helpful map",p.mapUrl?null:null]].filter(([_,v])=>v);
  body+=attributes.map(([t,v])=>'<div class="detail-section"><h3>'+esc(t)+'</h3>'+paragraphs(v)+'</div>').join("");
- if(p.audio?.length)body+='<div class="detail-section"><h3>'+ico("headphones")+' Audio tours &amp; listening guides</h3>'+p.audio.map(a=>'<div class="audio-item"><h4>'+esc(a.title)+'</h4><p>'+esc(a.description||"")+'</p><p class="tag">'+esc(a.cost||"Check provider")+'</p>'+link(safeURL(a.url),"Open listening guide","headphones")+'</div>').join("")+'</div>';
+ if(p.audio?.length)body+='<div class="detail-section"><h3>'+ico("headphones")+' Audio tours &amp; listening guides</h3>'+p.audio.map(a=>'<div class="audio-item"><h4>'+esc(a.title)+'</h4><p>'+esc(a.description||"")+'</p><p class="tag">'+esc(a.cost||"Check provider")+'</p>'+'<div class="link-row">'+link(safeURL(a.url),"Open listening guide","headphones")+'</div></div>').join("")+'</div>';
  $("#dialog-body").innerHTML=body;$("#place-dialog").showModal();$("#place-dialog-title")?.focus({preventScroll:true});
 }
 function essentials(){

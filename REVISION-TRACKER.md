@@ -196,3 +196,11 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Diagnose source host error from GitHub Actions log: some arbitrary 720px Wikimedia derivatives return HTTP 400 despite valid source images.
 - [x] Retry source downloads at canonical/common 960px, 800px, 640px, 480px and 330px widths before original-file fallback.
 - [x] Do not exceed 13 MB per original download; avoid retrying permanent 400/403/404 statuses at the same URL.
+
+## November 12 — Consistent buttons in Schedule, Places and Details
+
+- [x] Standardize action-link row spacing across itinerary entries, Places detail dialogs, and Travel Essentials/Details.
+- [x] Place **Explore destination** inside the same flex row as other schedule buttons to prevent touching/overlap.
+- [x] Apply uniform margin around audio-guide buttons in location detail dialogs.
+- [x] Give Places cards a consistent 16px top gap above **Details & directions**, maintaining card side/bottom padding and full button width.
+- [x] Increment service-worker cache to v22; retain existing guide and deployment behavior.
