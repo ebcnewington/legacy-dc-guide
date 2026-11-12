@@ -181,3 +181,12 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Preserve gesture exclusions, reduced-motion support, time-limited Trip Updates, and site state.
 - [x] Increment service-worker cache to v20; add style/layout invariants to validation.
 - [ ] Verify photo loading and pull interaction on physical iPhone Safari / installed web app after deployment.
+
+## November 12 — Self-hosted destination photo repair
+
+- [x] Preserve all 13 location sources, alt descriptions and attribution while changing runtime image URLs to local WebP assets.
+- [x] Add Pillow-based optimized asset generator with two sizes (480 and 720 pixels) and strict content validation.
+- [x] Update image URL sanitizer to accept only safe local `assets/places/` paths, along with external trusted sources.
+- [x] Load first three visible cards eagerly and later cards lazily; preserve teal fallback and image credit.
+- [x] Require successful creation of all 26 local images in GitHub Actions before deployment.
+- [x] Increment service worker to v21 for returning users.

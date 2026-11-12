@@ -241,12 +241,13 @@
       "dining": "Options in the supplied companion include Silver Diner, Succotash, McCormick & Schmick's, and Grace's Mandarin. Check each restaurant's hours before visiting.",
       "restrooms": "Hotel guest facilities and public restrooms around the waterfront (verify access).",
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/National_Harbor_Aerial420.jpg/720px-National_Harbor_Aerial420.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/National_Harbor_Aerial420.jpg/480px-National_Harbor_Aerial420.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/National_Harbor_Aerial420.jpg/720px-National_Harbor_Aerial420.jpg 720w",
+        "src": "assets/places/national-harbor-720.webp",
+        "srcset": "assets/places/national-harbor-480.webp 480w, assets/places/national-harbor-720.webp 720w",
         "credit": "Duane Lempke",
         "source": "https://commons.wikimedia.org/wiki/File:National_Harbor_Aerial420.jpg",
         "alt": "Aerial view of the National Harbor waterfront and Capital Wheel",
-        "position": "50% 52%"
+        "position": "50% 52%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/National_Harbor_Aerial420.jpg/720px-National_Harbor_Aerial420.jpg"
       }
     },
     {
@@ -272,12 +273,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Mount_Vernon_-_George_Washington-house.jpg/720px-Mount_Vernon_-_George_Washington-house.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Mount_Vernon_-_George_Washington-house.jpg/480px-Mount_Vernon_-_George_Washington-house.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Mount_Vernon_-_George_Washington-house.jpg/720px-Mount_Vernon_-_George_Washington-house.jpg 720w",
+        "src": "assets/places/mount-vernon-720.webp",
+        "srcset": "assets/places/mount-vernon-480.webp 480w, assets/places/mount-vernon-720.webp 720w",
         "credit": "Jackbauerinvc",
         "source": "https://commons.wikimedia.org/wiki/File:Mount_Vernon_-_George_Washington-house.jpg",
         "alt": "George Washington's Mount Vernon mansion viewed from its lawn",
-        "position": "50% 55%"
+        "position": "50% 55%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Mount_Vernon_-_George_Washington-house.jpg/720px-Mount_Vernon_-_George_Washington-house.jpg"
       }
     },
     {
@@ -302,12 +304,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/National_Mall_-_Washington_Monument_%2855256066551%29.jpg/720px-National_Mall_-_Washington_Monument_%2855256066551%29.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/National_Mall_-_Washington_Monument_%2855256066551%29.jpg/480px-National_Mall_-_Washington_Monument_%2855256066551%29.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/National_Mall_-_Washington_Monument_%2855256066551%29.jpg/720px-National_Mall_-_Washington_Monument_%2855256066551%29.jpg 720w",
+        "src": "assets/places/washington-monument-720.webp",
+        "srcset": "assets/places/washington-monument-480.webp 480w, assets/places/washington-monument-720.webp 720w",
         "credit": "ajay_suresh",
         "source": "https://commons.wikimedia.org/wiki/File:National_Mall_-_Washington_Monument_%2855256066551%29.jpg",
         "alt": "Washington Monument rising above the National Mall",
-        "position": "50% 39%"
+        "position": "50% 39%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/National_Mall_-_Washington_Monument_%2855256066551%29.jpg/720px-National_Mall_-_Washington_Monument_%2855256066551%29.jpg"
       }
     },
     {
@@ -331,12 +334,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fountains_of_the_WW2_Memorial.jpg/720px-Fountains_of_the_WW2_Memorial.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fountains_of_the_WW2_Memorial.jpg/480px-Fountains_of_the_WW2_Memorial.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fountains_of_the_WW2_Memorial.jpg/720px-Fountains_of_the_WW2_Memorial.jpg 720w",
+        "src": "assets/places/wwii-720.webp",
+        "srcset": "assets/places/wwii-480.webp 480w, assets/places/wwii-720.webp 720w",
         "credit": "KyariKatari",
         "source": "https://commons.wikimedia.org/wiki/File:Fountains_of_the_WW2_Memorial.jpg",
         "alt": "Fountains at the National World War II Memorial",
-        "position": "50% 57%"
+        "position": "50% 57%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fountains_of_the_WW2_Memorial.jpg/720px-Fountains_of_the_WW2_Memorial.jpg"
       }
     },
     {
@@ -368,12 +372,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lincoln_Memorial_%28Front%29.jpg/720px-Lincoln_Memorial_%28Front%29.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lincoln_Memorial_%28Front%29.jpg/480px-Lincoln_Memorial_%28Front%29.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lincoln_Memorial_%28Front%29.jpg/720px-Lincoln_Memorial_%28Front%29.jpg 720w",
+        "src": "assets/places/lincoln-720.webp",
+        "srcset": "assets/places/lincoln-480.webp 480w, assets/places/lincoln-720.webp 720w",
         "credit": "William Meletzke",
         "source": "https://commons.wikimedia.org/wiki/File:Lincoln_Memorial_%28Front%29.jpg",
         "alt": "Lincoln Memorial columns and front steps",
-        "position": "50% 47%"
+        "position": "50% 47%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lincoln_Memorial_%28Front%29.jpg/720px-Lincoln_Memorial_%28Front%29.jpg"
       }
     },
     {
@@ -397,12 +402,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Vietnam_Veterans_Memorial_wall.jpg/720px-Vietnam_Veterans_Memorial_wall.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Vietnam_Veterans_Memorial_wall.jpg/480px-Vietnam_Veterans_Memorial_wall.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Vietnam_Veterans_Memorial_wall.jpg/720px-Vietnam_Veterans_Memorial_wall.jpg 720w",
+        "src": "assets/places/vietnam-720.webp",
+        "srcset": "assets/places/vietnam-480.webp 480w, assets/places/vietnam-720.webp 720w",
         "credit": "DestinationFearFan",
         "source": "https://commons.wikimedia.org/wiki/File:Vietnam_Veterans_Memorial_wall.jpg",
         "alt": "Granite walls of the Vietnam Veterans Memorial",
-        "position": "50% 55%"
+        "position": "50% 55%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Vietnam_Veterans_Memorial_wall.jpg/720px-Vietnam_Veterans_Memorial_wall.jpg"
       }
     },
     {
@@ -426,12 +432,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg/720px-Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg/480px-Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg/720px-Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg 720w",
+        "src": "assets/places/korea-720.webp",
+        "srcset": "assets/places/korea-480.webp 480w, assets/places/korea-720.webp 720w",
         "credit": "U.S. Navy / Seth Rossman",
         "source": "https://commons.wikimedia.org/wiki/File:Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg",
         "alt": "Korean War Veterans Memorial inscription",
-        "position": "50% 50%"
+        "position": "50% 50%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg/720px-Korean_War_Veterans_Memorial_Our_Nation_Honors.jpg"
       }
     },
     {
@@ -456,12 +463,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/USA-Thomas_Jefferson_Memorial.jpg/720px-USA-Thomas_Jefferson_Memorial.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/USA-Thomas_Jefferson_Memorial.jpg/480px-USA-Thomas_Jefferson_Memorial.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/USA-Thomas_Jefferson_Memorial.jpg/720px-USA-Thomas_Jefferson_Memorial.jpg 720w",
+        "src": "assets/places/jefferson-720.webp",
+        "srcset": "assets/places/jefferson-480.webp 480w, assets/places/jefferson-720.webp 720w",
         "credit": "Ingfbruno",
         "source": "https://commons.wikimedia.org/wiki/File:USA-Thomas_Jefferson_Memorial.jpg",
         "alt": "Thomas Jefferson Memorial and its circular colonnade",
-        "position": "50% 48%"
+        "position": "50% 48%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/USA-Thomas_Jefferson_Memorial.jpg/720px-USA-Thomas_Jefferson_Memorial.jpg"
       }
     },
     {
@@ -485,12 +493,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lincoln_Memorial_Reflecting_Pool_20240601.jpg/720px-Lincoln_Memorial_Reflecting_Pool_20240601.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lincoln_Memorial_Reflecting_Pool_20240601.jpg/480px-Lincoln_Memorial_Reflecting_Pool_20240601.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lincoln_Memorial_Reflecting_Pool_20240601.jpg/720px-Lincoln_Memorial_Reflecting_Pool_20240601.jpg 720w",
+        "src": "assets/places/reflecting-pool-720.webp",
+        "srcset": "assets/places/reflecting-pool-480.webp 480w, assets/places/reflecting-pool-720.webp 720w",
         "credit": "颐园居",
         "source": "https://commons.wikimedia.org/wiki/File:Lincoln_Memorial_Reflecting_Pool_20240601.jpg",
         "alt": "Lincoln Memorial Reflecting Pool in Washington, DC",
-        "position": "50% 50%"
+        "position": "50% 50%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lincoln_Memorial_Reflecting_Pool_20240601.jpg/720px-Lincoln_Memorial_Reflecting_Pool_20240601.jpg"
       }
     },
     {
@@ -524,12 +533,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Museum_of_the_Bible_01.jpg/720px-Museum_of_the_Bible_01.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Museum_of_the_Bible_01.jpg/480px-Museum_of_the_Bible_01.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Museum_of_the_Bible_01.jpg/720px-Museum_of_the_Bible_01.jpg 720w",
+        "src": "assets/places/museum-bible-720.webp",
+        "srcset": "assets/places/museum-bible-480.webp 480w, assets/places/museum-bible-720.webp 720w",
         "credit": "Farragutful",
         "source": "https://commons.wikimedia.org/wiki/File:Museum_of_the_Bible_01.jpg",
         "alt": "Exterior of the Museum of the Bible in Washington, DC",
-        "position": "50% 42%"
+        "position": "50% 42%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Museum_of_the_Bible_01.jpg/720px-Museum_of_the_Bible_01.jpg"
       }
     },
     {
@@ -570,12 +580,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/NationalMall.jpg/720px-NationalMall.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/NationalMall.jpg/480px-NationalMall.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/NationalMall.jpg/720px-NationalMall.jpg 720w",
+        "src": "assets/places/national-mall-720.webp",
+        "srcset": "assets/places/national-mall-480.webp 480w, assets/places/national-mall-720.webp 720w",
         "credit": "Duane Lempke",
         "source": "https://commons.wikimedia.org/wiki/File:NationalMall.jpg",
         "alt": "Aerial panorama of the National Mall and United States Capitol",
-        "position": "50% 52%"
+        "position": "50% 52%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/NationalMall.jpg/720px-NationalMall.jpg"
       }
     },
     {
@@ -598,12 +609,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg/720px-Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg/480px-Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg/720px-Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg 720w",
+        "src": "assets/places/capitol-720.webp",
+        "srcset": "assets/places/capitol-480.webp 480w, assets/places/capitol-720.webp 720w",
         "credit": "Architect of the Capitol",
         "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg",
         "alt": "West front of the U.S. Capitol",
-        "position": "50% 45%"
+        "position": "50% 45%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg/720px-Flickr_-_USCapitol_-_The_West_Front_of_the_U.S._Capitol_%28cropped%29.jpg"
       }
     },
     {
@@ -627,12 +639,13 @@
         }
       ],
       "photo": {
-        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Arlington_National_Cemetery_Rows.jpg/720px-Arlington_National_Cemetery_Rows.jpg",
-        "srcset": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Arlington_National_Cemetery_Rows.jpg/480px-Arlington_National_Cemetery_Rows.jpg 480w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Arlington_National_Cemetery_Rows.jpg/720px-Arlington_National_Cemetery_Rows.jpg 720w",
+        "src": "assets/places/arlington-720.webp",
+        "srcset": "assets/places/arlington-480.webp 480w, assets/places/arlington-720.webp 720w",
         "credit": "Joeyp3413",
         "source": "https://commons.wikimedia.org/wiki/File:Arlington_National_Cemetery_Rows.jpg",
         "alt": "Rows of headstones at Arlington National Cemetery",
-        "position": "50% 50%"
+        "position": "50% 50%",
+        "remote_src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Arlington_National_Cemetery_Rows.jpg/720px-Arlington_National_Cemetery_Rows.jpg"
       }
     }
   ],

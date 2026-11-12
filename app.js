@@ -6,6 +6,7 @@ const $=sel=>document.querySelector(sel);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ico=name=>'<svg class="icon" aria-hidden="true"><use href="#i-'+esc(name)+'"/></svg>';
 const safeURL=s=>{try{let u=new URL(s);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return ""}};
+const placePhotoURL=s=>typeof s==="string"&&/^assets\/places\/[a-z0-9-]+-(480|720)\.webp$/.test(s)?s:safeURL(s);
 const addressUrl=s=>s?"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s):"";
 const phoneUrl=s=>s?"tel:"+String(s).replace(/[^\d+]/g,""):"";
 const link=(href,label,icon="link")=>href?'<a class="action-link" href="'+esc(href)+'"'+(href.startsWith("http")?' target="_blank" rel="noopener noreferrer"':"")+'>'+ico(icon)+esc(label)+'</a>':"";
@@ -135,26 +136,22 @@ function places(){
  $("#place-filters").innerHTML=filters.map(([k,v])=>'<button type="button" class="filter-chip" data-filter="'+k+'" aria-pressed="'+(k===placeFilter)+'">'+v+'</button>').join("");
  document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{placeFilter=b.dataset.filter;places()});
  const filtered=(G.places||[]).map((p,i)=>({p,i})).filter(({p})=>placeFilter==="all"||placeGroup(p)===placeFilter);
- $("#places-grid").innerHTML=filtered.map(({p,i})=>{
+ $("#places-grid").innerHTML=filtered.map(({p,i},cardIndex)=>{
   const photo=p.photo;
-  const image=photo?.src?'<img class="place-photo" src="'+esc(safeURL(photo.src))+'" srcset="'+esc(photo.srcset||"")+'" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) 45vw, 32vw" width="720" height="450" loading="lazy" decoding="async" alt="'+esc(photo.alt||"")+'" style="object-position:'+esc(photo.position||"center")+'">':"";
+  const image=photo?.src?'<img class="place-photo" src="'+esc(placePhotoURL(photo.src))+'" srcset="'+esc(photo.srcset||"")+'" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) 45vw, 32vw" width="720" height="405" loading="'+(cardIndex<3?"eager":"lazy")+'" decoding="async" alt="'+esc(photo.alt||"")+'" style="object-position:'+esc(photo.position||"center")+'">':"";
   const credit=photo?.source?'<a class="place-photo-credit" href="'+esc(safeURL(photo.source))+'" target="_blank" rel="noopener noreferrer" title="View original photograph and licensing details">Photo: '+esc(photo.credit||"Wikimedia Commons")+'</a>':"";
   return '<article class="place-card"><div class="place-card-cover">'+image+'<span class="place-cover-icon">'+ico(p.audio?.length?"headphones":"pin")+'</span><span class="place-number">'+String(i+1).padStart(2,"0")+'</span>'+credit+'</div><div class="place-card-body"><p class="tag">'+esc(p.tag||"Featured site")+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary||"")+'</p>'+(p.audio?.length?'<p class="audio-note">'+ico("headphones")+'Narrated tour available</p>':"")+'<button type="button" class="detail-button" data-place="'+i+'">Details &amp; directions</button></div></article>';
  }).join("");
- // Wikimedia uses two public thumbnail hosts. Retry on the alternate CDN before
- // showing the existing branded fallback; never download original multi-MB files.
+ // Optimized card photos are served by this same GitHub Pages site.
+ // If an asset fails, show the branded teal background rather than a broken image.
  $("#places-grid").querySelectorAll(".place-photo").forEach(image=>{
-  image.addEventListener("error",()=>{
-   const current=image.currentSrc||image.src;
-   if(image.dataset.cdnRetry!=="1"&&current.startsWith("https://upload.wikimedia.org/wikipedia/commons/thumb/")){
-    image.dataset.cdnRetry="1";
-    image.removeAttribute("srcset");
-    image.src=current.replace("https://upload.wikimedia.org/","https://thumb.wikimedia.org/");
-    return;
-   }
+  const fallback=()=>{
    image.hidden=true;
    image.closest(".place-card-cover")?.querySelector(".place-photo-credit")?.setAttribute("hidden","");
-  });
+   console.warn("Local place image unavailable:",image.getAttribute("src"));
+  };
+  image.addEventListener("error",fallback,{once:true});
+  if(image.complete&&image.naturalWidth===0)fallback();
  });
 
  document.querySelectorAll("[data-place]").forEach(b=>b.onclick=()=>showPlace(G.places[Number(b.dataset.place)]));
