@@ -90,3 +90,18 @@ test("a multi-touch gesture and upward swipe never refresh",async()=>{
  await new Promise(resolve=>setImmediate(resolve));
  assert.equal(h.calls,0);
 });
+
+test("the indicator uses an axis-aligned SVG, not a font glyph",()=>{
+ const h=harness();
+ assert.match(h.indicator.html,/class="pull-refresh-svg"/);
+ assert.match(h.indicator.html,/cx="16" cy="16" r="12"/);
+ assert.doesNotMatch(h.indicator.html,/[↻]/);
+});
+test("photo headers and refresh status maintain positive stacking and fixed centered layout",()=>{
+ const css=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
+ assert.match(css,/\.place-photo\{[^}]*z-index:0\}/);
+ assert.match(css,/\.place-card-cover:after\{[^}]*z-index:1;/);
+ assert.match(css,/\.place-photo-credit\{[^}]*z-index:2;/);
+ assert.match(css,/\.pull-refresh-indicator\{[^}]*width:194px;height:82px/);
+ assert.match(css,/\.pull-refresh-svg\{[^}]*width:34px;height:34px/);
+});

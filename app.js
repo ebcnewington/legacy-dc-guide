@@ -141,8 +141,21 @@ function places(){
   const credit=photo?.source?'<a class="place-photo-credit" href="'+esc(safeURL(photo.source))+'" target="_blank" rel="noopener noreferrer" title="View original photograph and licensing details">Photo: '+esc(photo.credit||"Wikimedia Commons")+'</a>':"";
   return '<article class="place-card"><div class="place-card-cover">'+image+'<span class="place-cover-icon">'+ico(p.audio?.length?"headphones":"pin")+'</span><span class="place-number">'+String(i+1).padStart(2,"0")+'</span>'+credit+'</div><div class="place-card-body"><p class="tag">'+esc(p.tag||"Featured site")+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary||"")+'</p>'+(p.audio?.length?'<p class="audio-note">'+ico("headphones")+'Narrated tour available</p>':"")+'<button type="button" class="detail-button" data-place="'+i+'">Details &amp; directions</button></div></article>';
  }).join("");
- // An unavailable image leaves the existing teal cover visible, not a broken-image glyph.
- $("#places-grid").querySelectorAll(".place-photo").forEach(image=>image.addEventListener("error",()=>{image.hidden=true}));
+ // Wikimedia uses two public thumbnail hosts. Retry on the alternate CDN before
+ // showing the existing branded fallback; never download original multi-MB files.
+ $("#places-grid").querySelectorAll(".place-photo").forEach(image=>{
+  image.addEventListener("error",()=>{
+   const current=image.currentSrc||image.src;
+   if(image.dataset.cdnRetry!=="1"&&current.startsWith("https://upload.wikimedia.org/wikipedia/commons/thumb/")){
+    image.dataset.cdnRetry="1";
+    image.removeAttribute("srcset");
+    image.src=current.replace("https://upload.wikimedia.org/","https://thumb.wikimedia.org/");
+    return;
+   }
+   image.hidden=true;
+   image.closest(".place-card-cover")?.querySelector(".place-photo-credit")?.setAttribute("hidden","");
+  });
+ });
 
  document.querySelectorAll("[data-place]").forEach(b=>b.onclick=()=>showPlace(G.places[Number(b.dataset.place)]));
 }

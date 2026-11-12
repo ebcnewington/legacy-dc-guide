@@ -30,7 +30,7 @@
   function reset(){
     tracking=false;pulling=false;blocked=false;drag=0;
     if(indicator&&!busy){
-      indicator.classList.remove("is-pulling","is-ready","is-complete");
+      indicator.classList.remove("is-pulling","is-ready","is-complete","is-error");
       indicator.style.removeProperty("--pull-shift");
       indicator.setAttribute("aria-hidden","true");
     }
@@ -59,13 +59,13 @@
     indicator.classList.add("is-pulling");
     indicator.classList.toggle("is-ready",drag>=THRESHOLD);
     indicator.setAttribute("aria-hidden","false");
-    indicator.style.setProperty("--pull-shift",Math.round(drag*0.7)+"px");
+    indicator.style.setProperty("--pull-shift",Math.round(Math.min(114,drag*1.1))+"px");
     label.textContent=drag>=THRESHOLD?"Release to refresh":"Pull to refresh";
   }
   async function runRefresh(){
     if(busy)return;
     busy=true;
-    indicator.classList.remove("is-pulling","is-ready","is-complete");
+    indicator.classList.remove("is-pulling","is-ready","is-complete","is-error");
     indicator.classList.add("is-refreshing");
     indicator.style.removeProperty("--pull-shift");
     label.textContent="Refreshing guide…";
@@ -79,6 +79,7 @@
     }
     indicator.classList.remove("is-refreshing");
     indicator.classList.add("is-complete");
+    indicator.classList.toggle("is-error",!ok);
     label.textContent=ok?"Guide is up to date":"Couldn’t refresh — try again";
     hideTimer=window.setTimeout(()=>{
       busy=false;hideTimer=null;reset();
@@ -99,7 +100,7 @@
     indicator.setAttribute("role","status");
     indicator.setAttribute("aria-live","polite");
     indicator.setAttribute("aria-hidden","true");
-    indicator.innerHTML='<span class="pull-refresh-mark" aria-hidden="true">↻</span><span class="pull-refresh-label">Pull to refresh</span>';
+    indicator.innerHTML='<span class="pull-refresh-symbol" aria-hidden="true"><svg class="pull-refresh-svg" viewBox="0 0 32 32" focusable="false"><circle class="pull-refresh-track" cx="16" cy="16" r="12"/><path class="pull-refresh-arrow" d="M16 8v16m-5-5 5 5 5-5"/><circle class="pull-refresh-spinner" cx="16" cy="16" r="12"/><path class="pull-refresh-check" d="m10.5 16 3.5 3.5 7-7"/></svg></span><span class="pull-refresh-label">Pull to refresh</span>';
     doc.body.appendChild(indicator);
     label=indicator.querySelector(".pull-refresh-label");
     doc.documentElement.classList.add("pull-refresh-enabled");

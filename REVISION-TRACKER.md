@@ -172,3 +172,12 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Include accessibility feedback, safe-area positioning, and reduced-motion support.
 - [x] Precache new gesture script in service worker v19; validate JavaScript and add Node gesture unit tests in CI.
 - [ ] Validate gesture feel on iPhone Safari and installed Home Screen app after deployment.
+
+## November 12 — Repair missing place photos and center refresh animation
+
+- [x] Fix card layering so images paint above the teal background, gradients stay above photographs, and icons/credit stay legible.
+- [x] Keep all 13 distinct, credited, thumbnail-sized Wikimedia images and add fallback to the alternate Commons thumbnail CDN.
+- [x] Replace font-based refresh glyph with geometrically centered SVG circle/arrow/spinner/check inside a fixed-size, symmetrically centered status card.
+- [x] Preserve gesture exclusions, reduced-motion support, time-limited Trip Updates, and site state.
+- [x] Increment service-worker cache to v20; add style/layout invariants to validation.
+- [ ] Verify photo loading and pull interaction on physical iPhone Safari / installed web app after deployment.
