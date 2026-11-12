@@ -35,8 +35,6 @@ function announce(){
  }
  const live=active.map(i=>'<article class="notice notice-live"><div class="notice-meta"><time datetime="'+esc(i.created_at||"")+'">Published '+esc(formatTripTime(i.created_at))+'</time>'+(i.updated_at&&new Date(i.updated_at).getTime()-new Date(i.created_at).getTime()>60000?' · Revised '+esc(formatTripTime(i.updated_at)):'')+'</div><strong>'+esc(i.title||"Update")+'</strong><p class="notice-message">'+esc(i.message||"")+'</p></article>').join("");
  $("#announcements").innerHTML=live||'<div class="updates-empty">No new updates from trip leadership.</div>';
- const reminders=G?.announcements||[];
- $("#trip-reminders").innerHTML=reminders.length?'<h3>Trip reminders</h3>'+reminders.map(i=>'<div class="notice"><strong>'+esc(i.title||"Reminder")+'</strong>'+paragraphs(i.message)+'</div>').join(""):"";
 }
 function formatTripTime(s){
  const d=new Date(s);

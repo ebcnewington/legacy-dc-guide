@@ -156,3 +156,9 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Remove `Please read before departure` reminder from static Trip reminders; preserve schedule and other content.
 - [x] Retain the conditional section heading and Trip Updates functionality.
 - [x] Bump service-worker cache to v17.
+
+## November 12 — Remove Trip reminders section (CURRENT)
+
+- [x] Remove the entire old Trip reminders container, rendering logic, related CSS and empty static data source.
+- [x] Preserve the newer Trip updates section, including timed expiration, manual refresh and offline last-seen updates.
+- [x] Increment service-worker version to v18 for normal visitor refresh without manual cache clearing.

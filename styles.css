@@ -35,8 +35,6 @@ footer{background:var(--teal);color:white;text-align:center;padding:60px 0 37px;
 .notice-meta{font-size:.71rem;color:#526a69;font-weight:750;letter-spacing:.02em;margin-bottom:5px}
 .notice-message{white-space:pre-wrap;overflow-wrap:anywhere}
 .updates-empty{border:1px solid var(--line);border-radius:10px;padding:17px 20px;background:var(--paper);color:#526a69;font-size:.86rem}
-.trip-reminders{margin-top:21px;display:grid;gap:12px}
-.trip-reminders h3{font-size:.95rem;margin:0 0 2px}
 
 
 /* Trip updates: visible refresh control and time since last check */

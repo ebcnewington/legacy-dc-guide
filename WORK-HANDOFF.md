@@ -162,3 +162,7 @@ The owner asked for a new Capitol Worship reminder active **now until 7:00 PM on
 ### November 12 · Clear outdated departure reminder
 
 Removed the static `Please read before departure` entry from `data/guide.json` `announcements`. The Trip reminders header now hides automatically when there are no static announcements. Itinerary details and the separately managed issue-backed Trip Updates feed remain unchanged. Incremented service worker cache to v17; automatic release stamping remains enabled.
+
+### November 12 · Retire static Trip reminders section entirely (CURRENT)
+
+At the owner's direction, **remove the entire Trip reminders section**, not just its contents. The home screen now contains only **Trip updates** and its publication/refresh/expiry features. The old `<div id="trip-reminders">`, renderer in `announce()`, related CSS, and `announcements` array from `data/guide.json` were removed. Earlier historical documentation about Trip reminders is superseded. All other home screen, itinerary, trivia, PDF and GitHub issue publishing features are preserved. Service worker v18.
