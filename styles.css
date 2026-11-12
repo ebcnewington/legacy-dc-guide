@@ -42,3 +42,33 @@ footer{background:var(--teal);color:white;text-align:center;padding:60px 0 37px;
 .updates-refresh{min-height:38px}
 #updates-status{font-size:.74rem;font-variant-numeric:tabular-nums}
 .notice-meta{font-size:.74rem;margin-bottom:8px}
+
+/* Touch-only pull-to-refresh. Only enabled when the gesture handler is available.
+   Use the brand's teal/white styling and respect device safe-area insets. */
+html.pull-refresh-enabled,html.pull-refresh-enabled body{overscroll-behavior-y:contain}
+.pull-refresh-indicator{
+ position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;z-index:100;
+ display:inline-flex;align-items:center;justify-content:center;gap:10px;
+ max-width:calc(100vw - 24px);width:max-content;min-height:42px;
+ padding:8px 16px;border-radius:999px;border:1px solid #c5deda;
+ background:#fff;color:var(--teal);box-shadow:0 8px 28px #08363e32;
+ font-size:.78rem;font-weight:800;line-height:1.3;white-space:nowrap;
+ pointer-events:none;opacity:0;
+ transform:translate3d(-50%,calc(-120% + var(--pull-shift,0px)),0);
+ transition:transform .2s ease,opacity .2s ease;will-change:transform
+}
+.pull-refresh-indicator.is-pulling{opacity:1;transition:none}
+.pull-refresh-indicator.is-refreshing,.pull-refresh-indicator.is-complete{
+ opacity:1;transform:translate3d(-50%,0,0)
+}
+.pull-refresh-mark{display:inline-flex;align-items:center;justify-content:center;
+ width:24px;height:24px;border-radius:50%;background:#eaf4f1;color:var(--teal);
+ font-size:1.6rem;line-height:1;transition:transform .12s ease
+}
+.pull-refresh-indicator.is-ready .pull-refresh-mark{transform:rotate(90deg);background:var(--teal);color:#fff}
+.pull-refresh-indicator.is-refreshing .pull-refresh-mark{animation:ebc-pull-spin .8s linear infinite}
+@keyframes ebc-pull-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+ .pull-refresh-indicator,.pull-refresh-mark{transition:none}
+ .pull-refresh-indicator.is-refreshing .pull-refresh-mark{animation:none}
+}

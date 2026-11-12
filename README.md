@@ -89,3 +89,9 @@ Active `[Trip Update]` issues may carry `<!-- expires_at: YYYY-MM-DDTHH:MM:SSZ -
 ## November 12 — Trip Updates only
 
 The legacy **Trip reminders** section has been removed from the home screen and its rendering/data paths. The current **Trip updates** component remains in place with issue-driven publishing, expiry-aware notices, last-refresh status, refresh button, and offline-safe cached updates. Do not restore the retired static announcements component unless requested. Service worker v18.
+
+## November 12 — Mobile pull to refresh
+
+The live guide now supports a custom **pull-to-refresh** gesture for touch-capable devices, including iPhone Home Screen installations. Pull downward while already at the **top of a page**, then release when the branded indicator says “Release to refresh.” The gesture reuses the existing Trip Updates refresh request plus the site's deploy-version checker (which automatically reloads only if a new release exists). It does not reset current trivia progress or alter itinerary/places state unless an actual new deployment needs loading.
+
+The handler is defined in `pull-refresh.js`. It activates only on a one-finger downward gesture starting at the page top, excludes active controls/dialogs and nested scrollers, and does not intercept horizontal or upward navigation. A responsive floating status indicator shows pulling, refreshing and success/failure states; reduced-motion preferences are honored. On compatible touch browsers the root overscroll behavior is contained to avoid competing with a browser-native refresh. The existing **Refresh** button remains accessible as a fallback in all browsers. JavaScript gesture tests live in `tests/pull-refresh.test.mjs` and run during CI validation. Service worker v19 precaches the gesture script. Real-device Safari and installed-PWA feel should be verified after deployment.

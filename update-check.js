@@ -32,6 +32,8 @@
       /* Stay on the current guide if offline or a transient network error occurs. */
     }finally{checking=false}
   }
+  // Optional explicit check used by pull-to-refresh; remains safe if an update is unavailable.
+  window.__ebcCheckForRelease=checkForRelease;
   window.addEventListener("pageshow",checkForRelease);
   window.addEventListener("focus",checkForRelease);
   window.addEventListener("online",checkForRelease);

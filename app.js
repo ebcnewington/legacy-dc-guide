@@ -57,7 +57,7 @@ function updateRefreshIndicator(){
  const s=$('#updates-status');if(s)s.textContent=tripUpdatesBusy?'Checking for updates…':ageSinceRefresh()+(tripUpdatesError?' · '+tripUpdatesError:'');
 }
 async function refreshTripUpdates(){
- if(tripUpdatesBusy)return;
+ if(tripUpdatesBusy)return false;
  tripUpdatesBusy=true;
  const button=$("#refresh-updates");if(button)button.disabled=true;
  updateRefreshIndicator();
@@ -72,10 +72,12 @@ async function refreshTripUpdates(){
   putLS("ebc_trip_updates_refreshed_v1",tripUpdatesLastRefresh);
   tripUpdatesError="";
   announce();
+  return true;
  }catch(ex){
   console.warn("Trip updates could not refresh",ex);
   tripUpdatesError=tripUpdates.length?"Offline — showing saved updates":"Unable to check for updates";
   announce();
+  return false;
  }finally{
   tripUpdatesBusy=false;if(button)button.disabled=false;updateRefreshIndicator();
  }
@@ -353,5 +355,12 @@ async function init(){
  }catch(e){console.error(e);$("#trip-status").textContent="Trip information is temporarily unavailable. Check your connection and reload."}
  route();if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
 }
+// Reuse the established update feed and release/version detection, without resetting trivia.
+window.__ebcRefreshGuide=async()=>{
+ const checks=[refreshTripUpdates()];
+ if(typeof window.__ebcCheckForRelease==="function")checks.push(window.__ebcCheckForRelease());
+ const results=await Promise.allSettled(checks);
+ return results[0].status==="fulfilled"&&results[0].value===true;
+};
 document.addEventListener("DOMContentLoaded",init);
 })();

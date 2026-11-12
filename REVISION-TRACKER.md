@@ -162,3 +162,13 @@ The separate three-sheet 11×17 supplement now uses the booklet’s Capitol-phot
 - [x] Remove the entire old Trip reminders container, rendering logic, related CSS and empty static data source.
 - [x] Preserve the newer Trip updates section, including timed expiration, manual refresh and offline last-seen updates.
 - [x] Increment service-worker version to v18 for normal visitor refresh without manual cache clearing.
+
+## November 12 — Pull-to-refresh interaction
+
+- [x] Implement a native-feeling mobile pull gesture that triggers only from the top of the document on a deliberate single-finger downward swipe.
+- [x] Add a compact branded status pill with drag feedback, release threshold, progress state and refresh result.
+- [x] Reuse Trip Updates refresh and cached site-release detection; do not clear cookies/browser data or reset trivia except when a newer release is loaded.
+- [x] Preserve scrolling, horizontal gestures, nested scrollers, controls/dialogs and desktop Refresh button behavior.
+- [x] Include accessibility feedback, safe-area positioning, and reduced-motion support.
+- [x] Precache new gesture script in service worker v19; validate JavaScript and add Node gesture unit tests in CI.
+- [ ] Validate gesture feel on iPhone Safari and installed Home Screen app after deployment.
